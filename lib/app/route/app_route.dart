@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:todo_or_not_todo/features/features.dart';
 
+import '../consts.dart';
 import 'app_routes_enum.dart';
 
 class AppRoute {
@@ -46,13 +47,18 @@ class AppRoute {
           ),
         ),
         GoRoute(
-          name: Routes.taskDetails.name,
-          path: '/${Routes.taskDetails.name}',
-          builder: (BuildContext context, GoRouterState state) => BlocProvider(
-            create: (context) => TasksDetailsBloc(),
-            child: const TasksDetailsScreen(),
-          ),
-        ),
+            name: Routes.taskDetails.name,
+            path: '/${Routes.taskDetails.name}',
+            builder: (BuildContext context, GoRouterState state) {
+              final queryId = state.uri.queryParameters[queryIdText];
+              final id = int.tryParse(queryId!)!;
+              return BlocProvider(
+                create: (context) => TasksDetailsBloc(),
+                child: TasksDetailsScreen(
+                  id: id,
+                ),
+              );
+            }),
       ],
       initialLocation: '/${Routes.tasks.name}',
     );
