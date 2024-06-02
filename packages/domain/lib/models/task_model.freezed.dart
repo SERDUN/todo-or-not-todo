@@ -17,12 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TaskModel {
   int get id => throw _privateConstructorUsedError;
-  int get position => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
-  DateTime get deadline => throw _privateConstructorUsedError;
-  String get priority => throw _privateConstructorUsedError;
+  int? get position => throw _privateConstructorUsedError;
+  TaskStatus? get status => throw _privateConstructorUsedError;
+  DateTime? get deadline => throw _privateConstructorUsedError;
+  TaskPriority? get priority => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskModelCopyWith<TaskModel> get copyWith =>
@@ -36,12 +36,12 @@ abstract class $TaskModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int position,
       String title,
       String content,
-      String status,
-      DateTime deadline,
-      String priority});
+      int? position,
+      TaskStatus? status,
+      DateTime? deadline,
+      TaskPriority? priority});
 }
 
 /// @nodoc
@@ -58,21 +58,17 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
   @override
   $Res call({
     Object? id = null,
-    Object? position = null,
     Object? title = null,
     Object? content = null,
-    Object? status = null,
-    Object? deadline = null,
-    Object? priority = null,
+    Object? position = freezed,
+    Object? status = freezed,
+    Object? deadline = freezed,
+    Object? priority = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
               as int,
       title: null == title
           ? _value.title
@@ -82,18 +78,22 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
+      position: freezed == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as int?,
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      deadline: null == deadline
+              as TaskStatus?,
+      deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      priority: null == priority
+              as DateTime?,
+      priority: freezed == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TaskPriority?,
     ) as $Val);
   }
 }
@@ -108,12 +108,12 @@ abstract class _$$TaskModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      int position,
       String title,
       String content,
-      String status,
-      DateTime deadline,
-      String priority});
+      int? position,
+      TaskStatus? status,
+      DateTime? deadline,
+      TaskPriority? priority});
 }
 
 /// @nodoc
@@ -128,21 +128,17 @@ class __$$TaskModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? position = null,
     Object? title = null,
     Object? content = null,
-    Object? status = null,
-    Object? deadline = null,
-    Object? priority = null,
+    Object? position = freezed,
+    Object? status = freezed,
+    Object? deadline = freezed,
+    Object? priority = freezed,
   }) {
     return _then(_$TaskModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
               as int,
       title: null == title
           ? _value.title
@@ -152,18 +148,22 @@ class __$$TaskModelImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
+      position: freezed == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as int?,
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      deadline: null == deadline
+              as TaskStatus?,
+      deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      priority: null == priority
+              as DateTime?,
+      priority: freezed == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TaskPriority?,
     ));
   }
 }
@@ -173,31 +173,31 @@ class __$$TaskModelImplCopyWithImpl<$Res>
 class _$TaskModelImpl implements _TaskModel {
   const _$TaskModelImpl(
       {required this.id,
-      required this.position,
       required this.title,
       required this.content,
-      required this.status,
-      required this.deadline,
-      required this.priority});
+      this.position,
+      this.status,
+      this.deadline,
+      this.priority});
 
   @override
   final int id;
-  @override
-  final int position;
   @override
   final String title;
   @override
   final String content;
   @override
-  final String status;
+  final int? position;
   @override
-  final DateTime deadline;
+  final TaskStatus? status;
   @override
-  final String priority;
+  final DateTime? deadline;
+  @override
+  final TaskPriority? priority;
 
   @override
   String toString() {
-    return 'TaskModel(id: $id, position: $position, title: $title, content: $content, status: $status, deadline: $deadline, priority: $priority)';
+    return 'TaskModel(id: $id, title: $title, content: $content, position: $position, status: $status, deadline: $deadline, priority: $priority)';
   }
 
   @override
@@ -206,10 +206,10 @@ class _$TaskModelImpl implements _TaskModel {
         (other.runtimeType == runtimeType &&
             other is _$TaskModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.position, position) ||
-                other.position == position) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.deadline, deadline) ||
                 other.deadline == deadline) &&
@@ -219,7 +219,7 @@ class _$TaskModelImpl implements _TaskModel {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, position, title, content, status, deadline, priority);
+      runtimeType, id, title, content, position, status, deadline, priority);
 
   @JsonKey(ignore: true)
   @override
@@ -231,27 +231,27 @@ class _$TaskModelImpl implements _TaskModel {
 abstract class _TaskModel implements TaskModel {
   const factory _TaskModel(
       {required final int id,
-      required final int position,
       required final String title,
       required final String content,
-      required final String status,
-      required final DateTime deadline,
-      required final String priority}) = _$TaskModelImpl;
+      final int? position,
+      final TaskStatus? status,
+      final DateTime? deadline,
+      final TaskPriority? priority}) = _$TaskModelImpl;
 
   @override
   int get id;
-  @override
-  int get position;
   @override
   String get title;
   @override
   String get content;
   @override
-  String get status;
+  int? get position;
   @override
-  DateTime get deadline;
+  TaskStatus? get status;
   @override
-  String get priority;
+  DateTime? get deadline;
+  @override
+  TaskPriority? get priority;
   @override
   @JsonKey(ignore: true)
   _$$TaskModelImplCopyWith<_$TaskModelImpl> get copyWith =>
