@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/l10n/l10n.dart';
 
 import '../../auth.dart';
@@ -104,10 +106,7 @@ class SignInScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleMedium!.copyWith(),
                         ),
                         TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              _pushToSignUpScreen(context);
-                            },
+                          recognizer: TapGestureRecognizer()..onTap = () => _pushToSignUpScreen(context),
                           text: context.l10n.signUpText,
                           style: Theme.of(context).textTheme.titleMedium!.copyWith(
                                 color: Theme.of(context).colorScheme.primary,
@@ -134,7 +133,6 @@ class SignInScreen extends StatelessWidget {
       },
     );
   }
-}
 
-// TODO(Kovalchuck): Implement the function
-void _pushToSignUpScreen(BuildContext context) {}
+  void _pushToSignUpScreen(BuildContext context) => context.goNamed(Routes.signUp.name);
+}
