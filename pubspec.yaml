@@ -27,8 +27,7 @@ dependencies:
   google_fonts: ^6.2.1
   path_provider: ^2.1.2
   provider: ^6.1.2
-  logging: ^1.2.0
-  logging_appenders: ^1.2.0+1
+  logger: ^2.3.0
 
   domain:
     path: ./packages/domain
