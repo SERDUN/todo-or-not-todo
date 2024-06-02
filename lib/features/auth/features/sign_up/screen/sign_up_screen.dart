@@ -114,7 +114,7 @@ class SignUpScreen extends StatelessWidget {
       },
       listener: (context, state) {
         if (state.status == SignUpStatus.success) {
-          // Handle success
+          context.goNamed(Routes.main.name);
         }
         if (state.status == SignUpStatus.error) {
           final snackBar = SnackBar(

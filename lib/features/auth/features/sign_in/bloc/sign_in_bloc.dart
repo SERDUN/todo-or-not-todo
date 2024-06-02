@@ -23,6 +23,7 @@ class SignInBloc extends Cubit<SignInState> {
     emit(state.copyWith(status: SignInStatus.loading));
     if (email.isNotEmpty && password.isNotEmpty) {
       try {
+        await loginUseCase.execute(email, password);
         emit(state.copyWith(status: SignInStatus.success));
       } catch (e) {
         emit(state.copyWith(

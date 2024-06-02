@@ -23,6 +23,7 @@ class SignUpBloc extends Cubit<SignUpState> {
       if (email.isNotEmpty && password.isNotEmpty) {
         emit(state.copyWith(status: SignUpStatus.loading));
         try {
+          await registerUseCase.execute(email, password);
           emit(state.copyWith(status: SignUpStatus.success));
         } catch (e) {
           emit(state.copyWith(
