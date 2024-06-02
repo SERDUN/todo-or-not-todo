@@ -5,7 +5,6 @@ enum TasksStatus {
   loading,
   error,
   success,
-  connectApiSuccess,
 }
 
 @freezed
