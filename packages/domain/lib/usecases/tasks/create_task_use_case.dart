@@ -12,7 +12,7 @@ class CreateTaskUseCaseImpl implements CreateTaskUseCase {
   final TaskRepository taskRepository;
 
   @override
-  Future<TaskModel> call(TaskModel task) async {
+  Future<TaskModel> execute(TaskModel task) async {
     return taskRepository.createTask(task);
   }
 }

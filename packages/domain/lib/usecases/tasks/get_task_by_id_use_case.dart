@@ -12,7 +12,7 @@ class GetTaskByIdUseCaseImpl implements GetTaskByIdUseCase {
   final TaskRepository taskRepository;
 
   @override
-  Future<TaskModel> call(String id) async {
+  Future<TaskModel> execute(String id) async {
     return taskRepository.getTaskById(id);
   }
 }
