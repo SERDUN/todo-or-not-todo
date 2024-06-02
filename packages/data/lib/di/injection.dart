@@ -1,7 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:http/http.dart' as http;
 
-import '../datasources/_http_clients/http_clients.dart';
+import '../datasources/datasources.dart';
 
 @InjectableInit.microPackage()
 void initMicroPackage() {}
@@ -9,5 +9,12 @@ void initMicroPackage() {}
 @module
 abstract class RegisterModule {
   @LazySingleton()
-  HttpClient apiClient() => HttpClient(http.Client(), baseUrl: '');
+  Dio githubClient() {
+    final option = BaseOptions(baseUrl: 'https://us-central1-todo-or-not-todo-5b704.cloudfunctions.net/api/v1');
+
+    return Dio(option)
+      ..interceptors.addAll([
+        LoggingInterceptor(),
+      ]);
+  }
 }
