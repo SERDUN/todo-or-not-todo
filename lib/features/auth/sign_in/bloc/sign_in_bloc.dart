@@ -14,7 +14,7 @@ class SignInBloc extends Cubit<SignInState> {
           obscureText: true,
         ));
 
-  /// TODO: Implement the function
+  // TODO(Kovalchuck): Implement the function
   Future<void> signIn(String email, String password) async {
     emit(state.copyWith(status: SignInStatus.loading));
     if (email.isNotEmpty && password.isNotEmpty) {

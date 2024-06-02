@@ -13,7 +13,7 @@ class SignUpBloc extends Cubit<SignUpState> {
           obscureText: true,
         ));
 
-  /// TODO: Implement the function
+  // TODO(Kovalchuck): TODO: Implement the function
   void signUp(String email, String password) async {
     if (state.isPasswordValid && state.isEmailValid) {
       if (email.isNotEmpty && password.isNotEmpty) {

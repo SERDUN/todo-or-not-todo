@@ -136,5 +136,5 @@ class SignInScreen extends StatelessWidget {
   }
 }
 
-/// TODO: Implement the function
+// TODO(Kovalchuck): Implement the function
 void _pushToSignUpScreen(BuildContext context) {}
