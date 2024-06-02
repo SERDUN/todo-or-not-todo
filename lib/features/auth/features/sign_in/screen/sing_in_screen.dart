@@ -7,7 +7,10 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/l10n/l10n.dart';
 
-import '../../auth.dart';
+import '../../../consts.dart';
+import '../../../widgets/widgets.dart';
+
+import '../bloc/sign_in_bloc.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({
