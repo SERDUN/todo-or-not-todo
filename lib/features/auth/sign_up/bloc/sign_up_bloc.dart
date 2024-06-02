@@ -14,7 +14,7 @@ class SignUpBloc extends Cubit<SignUpState> {
         ));
 
   // TODO(Kovalchuck): TODO: Implement the function
-  void signUp(String email, String password) async {
+  Future<void> signUp(String email, String password) async {
     if (state.isPasswordValid && state.isEmailValid) {
       if (email.isNotEmpty && password.isNotEmpty) {
         emit(state.copyWith(status: SignUpStatus.loading));
