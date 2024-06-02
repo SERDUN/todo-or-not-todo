@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:domain/domain.dart';
 
 import 'package:todo_or_not_todo/features/features.dart';
 
@@ -14,6 +15,12 @@ class AppRoute {
 
   final GetIt serviceLocator;
 
+  // TODO(Serdun): Move to global state
+  Future<bool> _isUserAuthorized() async {
+    final isUserAuthorizedUseCase = serviceLocator.get<IsUserAuthorizedUseCase>();
+    return isUserAuthorizedUseCase.execute();
+  }
+
   GoRouter build(BuildContext context) {
     return GoRouter(
       routes: [
@@ -21,6 +28,13 @@ class AppRoute {
           name: Routes.main.name,
           path: '/${Routes.main.name}',
           builder: (BuildContext context, GoRouterState state) => Container(),
+          redirect: (context, state) async {
+            final isAuthorized = await _isUserAuthorized();
+            if (!isAuthorized) {
+              return '/${Routes.signIn.name}';
+            }
+            return null; // No redirect if authorized
+          },
         ),
         GoRoute(
           name: Routes.signIn.name,
@@ -45,20 +59,35 @@ class AppRoute {
             create: (context) => TasksBloc(),
             child: const TasksScreen(),
           ),
+          redirect: (context, state) async {
+            final isAuthorized = await _isUserAuthorized();
+            if (!isAuthorized) {
+              return '/${Routes.signIn.name}';
+            }
+            return null; // No redirect if authorized
+          },
         ),
         GoRoute(
-            name: Routes.taskDetails.name,
-            path: '/${Routes.taskDetails.name}',
-            builder: (BuildContext context, GoRouterState state) {
-              final queryId = state.uri.queryParameters[queryIdText];
-              final id = int.tryParse(queryId!)!;
-              return BlocProvider(
-                create: (context) => TasksDetailsBloc(),
-                child: TasksDetailsScreen(
-                  id: id,
-                ),
-              );
-            }),
+          name: Routes.taskDetails.name,
+          path: '/${Routes.taskDetails.name}',
+          builder: (BuildContext context, GoRouterState state) {
+            final queryId = state.uri.queryParameters[queryIdText];
+            final id = int.tryParse(queryId!)!;
+            return BlocProvider(
+              create: (context) => TasksDetailsBloc(),
+              child: TasksDetailsScreen(
+                id: id,
+              ),
+            );
+          },
+          redirect: (context, state) async {
+            final isAuthorized = await _isUserAuthorized();
+            if (!isAuthorized) {
+              return '/${Routes.signIn.name}';
+            }
+            return null; // No redirect if authorized
+          },
+        ),
       ],
       initialLocation: '/${Routes.tasks.name}',
     );

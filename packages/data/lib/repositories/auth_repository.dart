@@ -26,4 +26,10 @@ class AuthRepositoryImpl implements AuthRepository {
     await localKeysDatasource.saveToken(response.token);
     return Future.value();
   }
+
+  @override
+  Future<UserLoginStatus> getUserLoginStatus() async {
+    final token = await localKeysDatasource.getToken();
+    return Future.value(token != null && token.isNotEmpty ? UserLoginStatus.authorized : UserLoginStatus.notAuthorize);
+  }
 }
