@@ -37,9 +37,9 @@ class SignUpBloc extends Cubit<SignUpState> {
 
   void isPasswordValid(String password) {
     if (password.length < 8 ||
-        !password.contains(RegExp(r'[A-Z]')) ||
-        !password.contains(RegExp(r'[0-9]')) ||
-        !password.contains(RegExp(r'[a-z]'))) {
+        !password.contains(RegExp('[A-Z]')) ||
+        !password.contains(RegExp('[0-9]')) ||
+        !password.contains(RegExp('[a-z]'))) {
       emit(state.copyWith(isPasswordValid: false));
     } else {
       emit(state.copyWith(isPasswordValid: true));
