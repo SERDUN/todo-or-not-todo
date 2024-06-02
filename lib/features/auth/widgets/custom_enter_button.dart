@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../consts.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class CustomEnterButton extends StatelessWidget {
+  const CustomEnterButton({
     required this.onPressed,
     required this.text,
     required this.buttonSize,
