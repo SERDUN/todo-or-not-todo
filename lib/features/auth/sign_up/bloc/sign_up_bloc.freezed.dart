@@ -16,6 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignUpState {
+  bool get isEmailValid => throw _privateConstructorUsedError;
+  bool get isPasswordValid => throw _privateConstructorUsedError;
+  bool get obscureText => throw _privateConstructorUsedError;
   SignUpStatus get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +32,11 @@ abstract class $SignUpStateCopyWith<$Res> {
           SignUpState value, $Res Function(SignUpState) then) =
       _$SignUpStateCopyWithImpl<$Res, SignUpState>;
   @useResult
-  $Res call({SignUpStatus status});
+  $Res call(
+      {bool isEmailValid,
+      bool isPasswordValid,
+      bool obscureText,
+      SignUpStatus status});
 }
 
 /// @nodoc
@@ -45,9 +52,24 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isEmailValid = null,
+    Object? isPasswordValid = null,
+    Object? obscureText = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
+      isEmailValid: null == isEmailValid
+          ? _value.isEmailValid
+          : isEmailValid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPasswordValid: null == isPasswordValid
+          ? _value.isPasswordValid
+          : isPasswordValid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      obscureText: null == obscureText
+          ? _value.obscureText
+          : obscureText // ignore: cast_nullable_to_non_nullable
+              as bool,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -64,7 +86,11 @@ abstract class _$$SignUpStateImplCopyWith<$Res>
       __$$SignUpStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SignUpStatus status});
+  $Res call(
+      {bool isEmailValid,
+      bool isPasswordValid,
+      bool obscureText,
+      SignUpStatus status});
 }
 
 /// @nodoc
@@ -78,9 +104,24 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isEmailValid = null,
+    Object? isPasswordValid = null,
+    Object? obscureText = null,
     Object? status = null,
   }) {
     return _then(_$SignUpStateImpl(
+      isEmailValid: null == isEmailValid
+          ? _value.isEmailValid
+          : isEmailValid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPasswordValid: null == isPasswordValid
+          ? _value.isPasswordValid
+          : isPasswordValid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      obscureText: null == obscureText
+          ? _value.obscureText
+          : obscureText // ignore: cast_nullable_to_non_nullable
+              as bool,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -92,15 +133,25 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SignUpStateImpl implements _SignUpState {
-  const _$SignUpStateImpl({this.status = SignUpStatus.initial});
+  const _$SignUpStateImpl(
+      {required this.isEmailValid,
+      required this.isPasswordValid,
+      required this.obscureText,
+      this.status = SignUpStatus.initial});
 
+  @override
+  final bool isEmailValid;
+  @override
+  final bool isPasswordValid;
+  @override
+  final bool obscureText;
   @override
   @JsonKey()
   final SignUpStatus status;
 
   @override
   String toString() {
-    return 'SignUpState(status: $status)';
+    return 'SignUpState(isEmailValid: $isEmailValid, isPasswordValid: $isPasswordValid, obscureText: $obscureText, status: $status)';
   }
 
   @override
@@ -108,11 +159,18 @@ class _$SignUpStateImpl implements _SignUpState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignUpStateImpl &&
+            (identical(other.isEmailValid, isEmailValid) ||
+                other.isEmailValid == isEmailValid) &&
+            (identical(other.isPasswordValid, isPasswordValid) ||
+                other.isPasswordValid == isPasswordValid) &&
+            (identical(other.obscureText, obscureText) ||
+                other.obscureText == obscureText) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status);
+  int get hashCode => Object.hash(
+      runtimeType, isEmailValid, isPasswordValid, obscureText, status);
 
   @JsonKey(ignore: true)
   @override
@@ -122,8 +180,18 @@ class _$SignUpStateImpl implements _SignUpState {
 }
 
 abstract class _SignUpState implements SignUpState {
-  const factory _SignUpState({final SignUpStatus status}) = _$SignUpStateImpl;
+  const factory _SignUpState(
+      {required final bool isEmailValid,
+      required final bool isPasswordValid,
+      required final bool obscureText,
+      final SignUpStatus status}) = _$SignUpStateImpl;
 
+  @override
+  bool get isEmailValid;
+  @override
+  bool get isPasswordValid;
+  @override
+  bool get obscureText;
   @override
   SignUpStatus get status;
   @override
