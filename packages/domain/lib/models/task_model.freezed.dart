@@ -21,7 +21,7 @@ mixin _$TaskModel {
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
-  String get deadline => throw _privateConstructorUsedError;
+  DateTime get deadline => throw _privateConstructorUsedError;
   String get priority => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -40,7 +40,7 @@ abstract class $TaskModelCopyWith<$Res> {
       String title,
       String content,
       String status,
-      String deadline,
+      DateTime deadline,
       String priority});
 }
 
@@ -89,7 +89,7 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
       deadline: null == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       priority: null == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ abstract class _$$TaskModelImplCopyWith<$Res>
       String title,
       String content,
       String status,
-      String deadline,
+      DateTime deadline,
       String priority});
 }
 
@@ -159,7 +159,7 @@ class __$$TaskModelImplCopyWithImpl<$Res>
       deadline: null == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       priority: null == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
@@ -191,7 +191,7 @@ class _$TaskModelImpl implements _TaskModel {
   @override
   final String status;
   @override
-  final String deadline;
+  final DateTime deadline;
   @override
   final String priority;
 
@@ -235,7 +235,7 @@ abstract class _TaskModel implements TaskModel {
       required final String title,
       required final String content,
       required final String status,
-      required final String deadline,
+      required final DateTime deadline,
       required final String priority}) = _$TaskModelImpl;
 
   @override
@@ -249,7 +249,7 @@ abstract class _TaskModel implements TaskModel {
   @override
   String get status;
   @override
-  String get deadline;
+  DateTime get deadline;
   @override
   String get priority;
   @override

@@ -10,7 +10,7 @@ abstract class TaskModel with _$TaskModel {
     required String title,
     required String content,
     required String status,
-    required String deadline,
+    required DateTime deadline,
     required String priority,
   }) = _TaskModel;
 }
