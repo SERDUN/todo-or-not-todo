@@ -12,7 +12,7 @@ class GetAllTasksUseCaseImpl implements GetAllTasksUseCase {
   final TaskRepository taskRepository;
 
   @override
-  Future<List<TaskModel>> call() async {
+  Future<List<TaskModel>> execute() async {
     return taskRepository.getAllTasks();
   }
 }

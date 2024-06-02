@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../datasources/datasources.dart';
 
@@ -17,4 +18,7 @@ abstract class RegisterModule {
         LoggingInterceptor(),
       ]);
   }
+
+  @preResolve
+  Future<SharedPreferences> prefs() => SharedPreferences.getInstance();
 }

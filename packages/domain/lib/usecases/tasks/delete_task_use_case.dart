@@ -11,7 +11,7 @@ class DeleteTaskByIdUseCaseImpl implements DeleteTaskByIdUseCase {
   final TaskRepository taskRepository;
 
   @override
-  Future<void> call(String id) async {
+  Future<void> execute(String id) async {
     return taskRepository.deleteTaskById(id);
   }
 }
