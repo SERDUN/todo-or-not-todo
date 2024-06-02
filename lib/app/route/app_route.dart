@@ -25,7 +25,7 @@ class AppRoute {
           name: Routes.signIn.name,
           path: '/${Routes.signIn.name}',
           builder: (BuildContext context, GoRouterState state) => BlocProvider(
-            create: (context) => SignInBloc(),
+            create: (context) => SignInBloc(serviceLocator.get()),
             child: SignInScreen(),
           ),
         ),
@@ -33,7 +33,7 @@ class AppRoute {
           name: Routes.signUp.name,
           path: '/${Routes.signUp.name}',
           builder: (BuildContext context, GoRouterState state) => BlocProvider(
-            create: (context) => SignUpBloc(),
+            create: (context) => SignUpBloc(serviceLocator.get()),
             child: SignUpScreen(),
           ),
         ),

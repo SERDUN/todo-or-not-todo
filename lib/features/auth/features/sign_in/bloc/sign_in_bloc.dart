@@ -2,17 +2,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:domain/domain.dart';
+
 part 'sign_in_state.dart';
 
 part 'sign_in_bloc.freezed.dart';
 
 class SignInBloc extends Cubit<SignInState> {
-  SignInBloc()
+  SignInBloc(this.loginUseCase)
       : super(const SignInState(
           isEmailValid: true,
           isPasswordValid: true,
           obscureText: true,
         ));
+
+  final LoginUseCase loginUseCase;
 
   // TODO(Kovalchuck): Implement the function
   Future<void> signIn(String email, String password) async {

@@ -1,17 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:domain/domain.dart';
+
 part 'sign_up_state.dart';
 
 part 'sign_up_bloc.freezed.dart';
 
 class SignUpBloc extends Cubit<SignUpState> {
-  SignUpBloc()
+  SignUpBloc(this.registerUseCase)
       : super(const SignUpState(
           isEmailValid: true,
           isPasswordValid: true,
           obscureText: true,
         ));
+
+  final RegisterUseCase registerUseCase;
 
   // TODO(Kovalchuck): TODO: Implement the function
   Future<void> signUp(String email, String password) async {
