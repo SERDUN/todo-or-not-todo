@@ -5,3 +5,7 @@ abstract class LoginUseCase {
 abstract class RegisterUseCase {
   Future<void> execute(String number, String password);
 }
+
+abstract class IsUserAuthorizedUseCase {
+  Future<bool> execute();
+}
