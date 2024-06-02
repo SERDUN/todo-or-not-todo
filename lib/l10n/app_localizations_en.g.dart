@@ -156,4 +156,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get feature_end_turn_Label_guessed => 'Guessed';
+
+  @override
+  String get loginText => 'Login';
+
+  @override
+  String get emailLabel => 'E-mail';
+
+  @override
+  String get emailHint => 'example@example.com';
+
+  @override
+  String get emailError => 'Not correct e-mail';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get passwordError => 'Not correct password';
+
+  @override
+  String get doNotHaveAccountText => 'Do not have account';
+
+  @override
+  String get signUpText => 'Sign Up';
+
+  @override
+  String get errorMessage => 'Something went wrong';
+
+  @override
+  String get sendText => 'Send';
+
+  @override
+  String get yourEmail => 'Your email';
+
+  @override
+  String get createAccount => 'Create account';
+
+  @override
+  String get alreadyHaveAccountText => 'Already have account';
+
+  @override
+  String get forgotPassword => 'Forgot password';
 }
