@@ -507,8 +507,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  logging:
+  logger:
     dependency: "direct main"
+    description:
+      name: logger
+      sha256: af05cc8714f356fd1f3888fb6741cbe9fbe25cdb6eedbab80e1a6db21047d4a4
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
+  logging:
+    dependency: transitive
     description:
       name: logging
       sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
@@ -516,7 +524,7 @@ packages:
     source: hosted
     version: "1.2.0"
   logging_appenders:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: logging_appenders
       sha256: cc16fd4ecf92ae8b45294ad01849468475b65c4aadac57c2ed3e6cc3f91b557c
