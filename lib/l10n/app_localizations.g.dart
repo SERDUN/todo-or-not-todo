@@ -396,6 +396,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Guessed'**
   String get feature_end_turn_Label_guessed;
+
+  /// No description provided for @loginText.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get loginText;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'E-mail'**
+  String get emailLabel;
+
+  /// No description provided for @emailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'example@example.com'**
+  String get emailHint;
+
+  /// No description provided for @emailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Not correct e-mail'**
+  String get emailError;
+
+  /// No description provided for @passwordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordLabel;
+
+  /// No description provided for @passwordError.
+  ///
+  /// In en, this message translates to:
+  /// **'Not correct password'**
+  String get passwordError;
+
+  /// No description provided for @doNotHaveAccountText.
+  ///
+  /// In en, this message translates to:
+  /// **'Do not have account'**
+  String get doNotHaveAccountText;
+
+  /// No description provided for @signUpText.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUpText;
+
+  /// No description provided for @errorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get errorMessage;
+
+  /// No description provided for @sendText.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get sendText;
+
+  /// No description provided for @yourEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Your email'**
+  String get yourEmail;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get createAccount;
+
+  /// No description provided for @alreadyHaveAccountText.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have account'**
+  String get alreadyHaveAccountText;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password'**
+  String get forgotPassword;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

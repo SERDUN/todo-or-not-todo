@@ -52,5 +52,19 @@
     "game_settings_next_button": "Next",
     "feature_end_turn_Button_continue":"Continue",
     "feature_end_turn_Label_wrongly":"Wrongly",
-    "feature_end_turn_Label_guessed":"Guessed"
+    "feature_end_turn_Label_guessed":"Guessed",
+    "loginText": "Login",
+    "emailLabel": "E-mail",
+    "emailHint": "example@example.com",
+    "emailError": "Not correct e-mail",
+    "passwordLabel": "Password",
+    "passwordError": "Not correct password",
+    "doNotHaveAccountText": "Do not have account",
+    "signUpText": "Sign Up",
+    "errorMessage": "Something went wrong",
+    "sendText": "Send",
+    "yourEmail": "Your email",
+    "createAccount": "Create account",
+    "alreadyHaveAccountText": "Already have account",
+    "forgotPassword": "Forgot password"
 }
