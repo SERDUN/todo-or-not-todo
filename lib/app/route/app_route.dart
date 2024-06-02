@@ -45,6 +45,14 @@ class AppRoute {
             child: const TasksScreen(),
           ),
         ),
+        GoRoute(
+          name: Routes.taskDetails.name,
+          path: '/${Routes.taskDetails.name}',
+          builder: (BuildContext context, GoRouterState state) => BlocProvider(
+            create: (context) => TasksDetailsBloc(),
+            child: const TasksDetailsScreen(),
+          ),
+        ),
       ],
       initialLocation: '/${Routes.tasks.name}',
     );
