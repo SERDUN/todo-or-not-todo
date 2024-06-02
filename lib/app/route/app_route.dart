@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -52,20 +52,47 @@ class AppRoute {
             child: SignUpScreen(),
           ),
         ),
-        GoRoute(
-          name: Routes.tasks.name,
-          path: '/${Routes.tasks.name}',
-          builder: (BuildContext context, GoRouterState state) => BlocProvider(
-            create: (context) => TasksBloc(),
-            child: const TasksScreen(),
-          ),
-          redirect: (context, state) async {
-            final isAuthorized = await _isUserAuthorized();
-            if (!isAuthorized) {
-              return '/${Routes.signIn.name}';
-            }
-            return null; // No redirect if authorized
-          },
+        ShellRoute(
+          builder: (context, state, child) => child,
+          routes: [
+            StatefulShellRoute.indexedStack(
+              builder: (BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) {
+                return MainScreen(
+                  navigationShell: navigationShell,
+                  key: ValueKey(state.pageKey),
+                );
+              },
+              branches: <StatefulShellBranch>[
+                StatefulShellBranch(
+                  routes: <RouteBase>[
+                    GoRoute(
+                      name: Routes.tasks.name,
+                      path: '/${Routes.tasks.name}',
+                      builder: (BuildContext context, GoRouterState state) => BlocProvider(
+                        create: (context) => TasksBloc(),
+                        child: const TasksScreen(),
+                      ),
+                      redirect: (context, state) async {
+                        final isAuthorized = await _isUserAuthorized();
+                        if (!isAuthorized) {
+                          return '/${Routes.signIn.name}';
+                        }
+                        return null; // No redirect if authorized
+                      },
+                    )
+                  ],
+                ),
+                StatefulShellBranch(
+                  routes: <RouteBase>[
+                    GoRoute(
+                      path: '/profile',
+                      builder: (BuildContext context, GoRouterState state) => const ProfileScreen(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
         GoRoute(
           name: Routes.taskDetails.name,
