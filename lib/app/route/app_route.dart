@@ -37,8 +37,16 @@ class AppRoute {
             child: SignUpScreen(),
           ),
         ),
+        GoRoute(
+          name: Routes.tasks.name,
+          path: '/${Routes.tasks.name}',
+          builder: (BuildContext context, GoRouterState state) => BlocProvider(
+            create: (context) => TasksBloc(),
+            child: const TasksScreen(),
+          ),
+        ),
       ],
-      initialLocation: '/${Routes.signIn.name}',
+      initialLocation: '/${Routes.tasks.name}',
     );
   }
 }

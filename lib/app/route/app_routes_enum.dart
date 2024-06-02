@@ -1,7 +1,8 @@
 enum Routes {
   main('main'),
   signIn('sign-in'),
-  signUp('sign-up');
+  signUp('sign-up'),
+  tasks('tasks');
 
   const Routes(this.name);
 
