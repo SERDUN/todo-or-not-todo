@@ -86,9 +86,7 @@ class AppRoute {
                   routes: <RouteBase>[
                     GoRoute(
                       path: '/profile',
-                      builder: (BuildContext context, GoRouterState state) => Container(
-                        color: Colors.teal,
-                      ),
+                      builder: (BuildContext context, GoRouterState state) => const ProfileScreen(),
                     ),
                   ],
                 ),
