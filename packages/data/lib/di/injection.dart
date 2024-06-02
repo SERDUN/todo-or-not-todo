@@ -1,10 +1,13 @@
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:http/http.dart' as http;
 
-late GetIt di;
+import '../datasources/_http_clients/http_clients.dart';
 
 @InjectableInit.microPackage()
 void initMicroPackage() {}
 
 @module
-abstract class RegisterModule {}
+abstract class RegisterModule {
+  @LazySingleton()
+  HttpClient apiClient() => HttpClient(http.Client(), baseUrl: '');
+}
