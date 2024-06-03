@@ -47,7 +47,7 @@ class TasksRepositoryImpl implements TaskRepository {
 class TaskMapper {
   static TaskModel fromDTO(TodoDTO dto) {
     return TaskModel(
-      id: int.parse(dto.id),
+      id: dto.id,
       title: dto.title,
       content: dto.details,
       deadline: DateTime.parse(dto.createdAt),

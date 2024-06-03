@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:todo_or_not_todo/app/consts.dart';
+import 'package:todo_or_not_todo/extensions/extensions.dart';
 
 import '../../../app/route/route.dart';
 import '../../consts.dart';
@@ -17,14 +18,6 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  TasksBloc get _bloc => BlocProvider.of<TasksBloc>(context);
-
-  @override
-  void initState() {
-    _bloc.getTasks();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TasksBloc, TasksState>(
@@ -49,7 +42,7 @@ class _TasksScreenState extends State<TasksScreen> {
                         return GestureDetector(
                           onTap: () => _pushToTaskDetailsScreen(
                             context,
-                            id: task.id,
+                            id:1,
                           ),
                           child: Card(
                             margin: const EdgeInsets.symmetric(vertical: paddingVertical),
@@ -93,8 +86,14 @@ class _TasksScreenState extends State<TasksScreen> {
           ),
         );
       },
-      listener: (context, state) {},
+      listener: _listenState,
     );
+  }
+
+  void _listenState(BuildContext context, TasksState state) {
+    if (state.status == TasksStatus.error) {
+      context.showErrorSnackBar(state.exception.toString());
+    }
   }
 
   void _pushToTaskDetailsScreen(

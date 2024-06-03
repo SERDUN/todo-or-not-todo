@@ -16,7 +16,7 @@ class TasksDetailsBloc extends Cubit<TasksDetailsState> {
     emit(state.copyWith(status: TasksDetailsStatus.loading));
     try {
       emit(state.copyWith(
-        task: const TaskModel(title: 'Task 1', content: 'Content of Task 1', id: 1),
+        task: const TaskModel(title: 'Task 1', content: 'Content of Task 1', id: '1'),
       ));
       emit(state.copyWith(status: TasksDetailsStatus.success));
     } catch (e) {

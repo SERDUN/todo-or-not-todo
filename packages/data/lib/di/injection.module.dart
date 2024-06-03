@@ -7,8 +7,8 @@
 import 'dart:async' as _i2;
 
 import 'package:data/datasources/datasources.dart' as _i9;
-import 'package:data/datasources/local_keys_datasource.dart' as _i6;
-import 'package:data/datasources/remote_datasource.dart' as _i5;
+import 'package:data/datasources/local_keys_datasource.dart' as _i5;
+import 'package:data/datasources/remote_datasource.dart' as _i6;
 import 'package:data/di/injection.dart' as _i11;
 import 'package:data/repositories/auth_repository.dart' as _i10;
 import 'package:data/repositories/tasks_repository.dart' as _i8;
@@ -27,14 +27,17 @@ class DataPackageModule extends _i1.MicroPackageModule {
       preResolve: true,
     );
     gh.lazySingleton<_i4.Dio>(() => registerModule.githubClient());
-    gh.factory<_i5.RemoteDatasource>(() => _i5.RemoteDatasource(gh<_i4.Dio>()));
-    gh.factory<_i6.LocalKeysDatasource>(
-        () => _i6.LocalKeysDatasource(gh<_i3.SharedPreferences>()));
+    gh.factory<_i5.LocalKeysDatasource>(
+        () => _i5.LocalKeysDatasource(gh<_i3.SharedPreferences>()));
+    gh.factory<_i6.RemoteDatasource>(() => _i6.RemoteDatasource(
+          gh<_i4.Dio>(),
+          gh<_i5.LocalKeysDatasource>(),
+        ));
     gh.factory<_i7.TaskRepository>(
         () => _i8.TasksRepositoryImpl(gh<_i9.RemoteDatasource>()));
     gh.factory<_i7.AuthRepository>(() => _i10.AuthRepositoryImpl(
           gh<_i9.RemoteDatasource>(),
-          gh<_i6.LocalKeysDatasource>(),
+          gh<_i5.LocalKeysDatasource>(),
         ));
   }
 }

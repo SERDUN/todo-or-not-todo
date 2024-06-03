@@ -69,7 +69,7 @@ class AppRoute {
                       name: Routes.tasks.name,
                       path: '/${Routes.tasks.name}',
                       builder: (BuildContext context, GoRouterState state) => BlocProvider(
-                        create: (context) => TasksBloc(),
+                        create: (context) => TasksBloc(serviceLocator.get()),
                         child: const TasksScreen(),
                       ),
                       redirect: (context, state) async {
