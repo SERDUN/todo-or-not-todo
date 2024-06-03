@@ -3,7 +3,6 @@ part of 'sign_in_bloc.dart';
 enum SignInStatus {
   initial,
   loading,
-  error,
   success,
 }
 
@@ -13,7 +12,11 @@ class SignInState with _$SignInState {
     required bool isEmailValid,
     required bool isPasswordValid,
     required bool obscureText,
-    String? errorMessage,
+    Object? error,
     @Default(SignInStatus.initial) SignInStatus status,
   }) = _SignInState;
+
+  const SignInState._();
+
+  bool get isError => error != null;
 }

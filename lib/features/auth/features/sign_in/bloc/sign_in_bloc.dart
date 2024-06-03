@@ -26,10 +26,13 @@ class SignInBloc extends Cubit<SignInState> {
         await loginUseCase.execute(email, password);
         emit(state.copyWith(status: SignInStatus.success));
       } catch (e) {
-        emit(state.copyWith(
-          status: SignInStatus.error,
-        ));
+        emit(state.copyWith(error: e));
       }
+    } else {
+      emit(state.copyWith(
+        error: Exception('Inputs not valid'),
+        status: SignInStatus.success,
+      ));
     }
   }
 
@@ -45,9 +48,5 @@ class SignInBloc extends Cubit<SignInState> {
 
   void hidePassword() {
     emit(state.copyWith(obscureText: false));
-  }
-
-  void setInitialEnum() {
-    emit(state.copyWith(status: SignInStatus.error));
   }
 }

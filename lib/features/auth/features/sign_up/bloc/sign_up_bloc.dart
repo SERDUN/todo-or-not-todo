@@ -26,11 +26,14 @@ class SignUpBloc extends Cubit<SignUpState> {
           await registerUseCase.execute(email, password);
           emit(state.copyWith(status: SignUpStatus.success));
         } catch (e) {
-          emit(state.copyWith(
-            status: SignUpStatus.error,
-          ));
+          emit(state.copyWith(error: e));
         }
       }
+    } else {
+      emit(state.copyWith(
+        error: Exception('Inputs not valid'),
+        status: SignUpStatus.success,
+      ));
     }
   }
 

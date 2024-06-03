@@ -79,7 +79,7 @@ class SignUpScreen extends StatelessWidget {
         if (state.status == SignUpStatus.success) {
           context.goNamed(Routes.main.name);
         }
-        if (state.status == SignUpStatus.error) {
+        if (state.isError) {
           final snackBar = SnackBar(
             content: Text(context.l10n.errorMessage),
             backgroundColor: Theme.of(context).colorScheme.error,

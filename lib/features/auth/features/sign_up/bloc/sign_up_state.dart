@@ -3,7 +3,6 @@ part of 'sign_up_bloc.dart';
 enum SignUpStatus {
   initial,
   loading,
-  error,
   success,
 }
 
@@ -13,6 +12,11 @@ class SignUpState with _$SignUpState {
     required bool isEmailValid,
     required bool isPasswordValid,
     required bool obscureText,
+    Object? error,
     @Default(SignUpStatus.initial) SignUpStatus status,
   }) = _SignUpState;
+
+  const SignUpState._();
+
+  bool get isError => error != null;
 }

@@ -88,7 +88,7 @@ class SignInScreen extends StatelessWidget {
         if (state.status == SignInStatus.success) {
           context.goNamed(Routes.main.name);
         }
-        if (state.status == SignInStatus.error) {
+        if (state.isError) {
           final snackBar = SnackBar(
             content: Text(context.l10n.errorMessage),
             backgroundColor: Theme.of(context).colorScheme.error,

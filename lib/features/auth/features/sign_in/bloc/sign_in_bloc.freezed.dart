@@ -19,7 +19,7 @@ mixin _$SignInState {
   bool get isEmailValid => throw _privateConstructorUsedError;
   bool get isPasswordValid => throw _privateConstructorUsedError;
   bool get obscureText => throw _privateConstructorUsedError;
-  String? get errorMessage => throw _privateConstructorUsedError;
+  Object? get error => throw _privateConstructorUsedError;
   SignInStatus get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $SignInStateCopyWith<$Res> {
       {bool isEmailValid,
       bool isPasswordValid,
       bool obscureText,
-      String? errorMessage,
+      Object? error,
       SignInStatus status});
 }
 
@@ -57,7 +57,7 @@ class _$SignInStateCopyWithImpl<$Res, $Val extends SignInState>
     Object? isEmailValid = null,
     Object? isPasswordValid = null,
     Object? obscureText = null,
-    Object? errorMessage = freezed,
+    Object? error = freezed,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -73,10 +73,7 @@ class _$SignInStateCopyWithImpl<$Res, $Val extends SignInState>
           ? _value.obscureText
           : obscureText // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+      error: freezed == error ? _value.error : error,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -97,7 +94,7 @@ abstract class _$$SignInStateImplCopyWith<$Res>
       {bool isEmailValid,
       bool isPasswordValid,
       bool obscureText,
-      String? errorMessage,
+      Object? error,
       SignInStatus status});
 }
 
@@ -115,7 +112,7 @@ class __$$SignInStateImplCopyWithImpl<$Res>
     Object? isEmailValid = null,
     Object? isPasswordValid = null,
     Object? obscureText = null,
-    Object? errorMessage = freezed,
+    Object? error = freezed,
     Object? status = null,
   }) {
     return _then(_$SignInStateImpl(
@@ -131,10 +128,7 @@ class __$$SignInStateImplCopyWithImpl<$Res>
           ? _value.obscureText
           : obscureText // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+      error: freezed == error ? _value.error : error,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -145,13 +139,14 @@ class __$$SignInStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignInStateImpl implements _SignInState {
+class _$SignInStateImpl extends _SignInState {
   const _$SignInStateImpl(
       {required this.isEmailValid,
       required this.isPasswordValid,
       required this.obscureText,
-      this.errorMessage,
-      this.status = SignInStatus.initial});
+      this.error,
+      this.status = SignInStatus.initial})
+      : super._();
 
   @override
   final bool isEmailValid;
@@ -160,14 +155,14 @@ class _$SignInStateImpl implements _SignInState {
   @override
   final bool obscureText;
   @override
-  final String? errorMessage;
+  final Object? error;
   @override
   @JsonKey()
   final SignInStatus status;
 
   @override
   String toString() {
-    return 'SignInState(isEmailValid: $isEmailValid, isPasswordValid: $isPasswordValid, obscureText: $obscureText, errorMessage: $errorMessage, status: $status)';
+    return 'SignInState(isEmailValid: $isEmailValid, isPasswordValid: $isPasswordValid, obscureText: $obscureText, error: $error, status: $status)';
   }
 
   @override
@@ -181,14 +176,13 @@ class _$SignInStateImpl implements _SignInState {
                 other.isPasswordValid == isPasswordValid) &&
             (identical(other.obscureText, obscureText) ||
                 other.obscureText == obscureText) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
+            const DeepCollectionEquality().equals(other.error, error) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isEmailValid, isPasswordValid,
-      obscureText, errorMessage, status);
+      obscureText, const DeepCollectionEquality().hash(error), status);
 
   @JsonKey(ignore: true)
   @override
@@ -197,13 +191,14 @@ class _$SignInStateImpl implements _SignInState {
       __$$SignInStateImplCopyWithImpl<_$SignInStateImpl>(this, _$identity);
 }
 
-abstract class _SignInState implements SignInState {
+abstract class _SignInState extends SignInState {
   const factory _SignInState(
       {required final bool isEmailValid,
       required final bool isPasswordValid,
       required final bool obscureText,
-      final String? errorMessage,
+      final Object? error,
       final SignInStatus status}) = _$SignInStateImpl;
+  const _SignInState._() : super._();
 
   @override
   bool get isEmailValid;
@@ -212,7 +207,7 @@ abstract class _SignInState implements SignInState {
   @override
   bool get obscureText;
   @override
-  String? get errorMessage;
+  Object? get error;
   @override
   SignInStatus get status;
   @override
