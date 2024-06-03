@@ -12,7 +12,7 @@ class UpdateTaskByIdUseCaseImpl implements UpdateTaskByIdUseCase {
   final TaskRepository taskRepository;
 
   @override
-  Future<TaskModel> execute(String id, TaskModel task) async {
+  Future<void> execute(String id, TaskModel task) async {
     return taskRepository.updateTaskById(id, task);
   }
 }

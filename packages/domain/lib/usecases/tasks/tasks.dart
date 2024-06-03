@@ -13,7 +13,7 @@ abstract class GetAllTasksUseCase {
 }
 
 abstract class UpdateTaskByIdUseCase {
-  Future<TaskModel> execute(String id, TaskModel task);
+  Future<void> execute(String id, TaskModel task);
 }
 
 abstract class DeleteTaskByIdUseCase {
