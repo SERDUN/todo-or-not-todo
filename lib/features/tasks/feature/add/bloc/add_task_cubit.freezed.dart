@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'tasks_add_cubit.dart';
+part of 'add_task_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,36 +15,36 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$TasksAddState {
+mixin _$AddTaskState {
   String get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   TaskStatus get taskStatus => throw _privateConstructorUsedError;
-  TasksAddStatus get status => throw _privateConstructorUsedError;
+  AddTaskStatus get status => throw _privateConstructorUsedError;
   Object? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TasksAddStateCopyWith<TasksAddState> get copyWith =>
+  $AddTaskStateCopyWith<AddTaskState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TasksAddStateCopyWith<$Res> {
-  factory $TasksAddStateCopyWith(
-          TasksAddState value, $Res Function(TasksAddState) then) =
-      _$TasksAddStateCopyWithImpl<$Res, TasksAddState>;
+abstract class $AddTaskStateCopyWith<$Res> {
+  factory $AddTaskStateCopyWith(
+          AddTaskState value, $Res Function(AddTaskState) then) =
+      _$AddTaskStateCopyWithImpl<$Res, AddTaskState>;
   @useResult
   $Res call(
       {String title,
       String? description,
       TaskStatus taskStatus,
-      TasksAddStatus status,
+      AddTaskStatus status,
       Object? error});
 }
 
 /// @nodoc
-class _$TasksAddStateCopyWithImpl<$Res, $Val extends TasksAddState>
-    implements $TasksAddStateCopyWith<$Res> {
-  _$TasksAddStateCopyWithImpl(this._value, this._then);
+class _$AddTaskStateCopyWithImpl<$Res, $Val extends AddTaskState>
+    implements $AddTaskStateCopyWith<$Res> {
+  _$AddTaskStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -76,34 +76,34 @@ class _$TasksAddStateCopyWithImpl<$Res, $Val extends TasksAddState>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as TasksAddStatus,
+              as AddTaskStatus,
       error: freezed == error ? _value.error : error,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$TasksAddStateImplCopyWith<$Res>
-    implements $TasksAddStateCopyWith<$Res> {
-  factory _$$TasksAddStateImplCopyWith(
-          _$TasksAddStateImpl value, $Res Function(_$TasksAddStateImpl) then) =
-      __$$TasksAddStateImplCopyWithImpl<$Res>;
+abstract class _$$AddTaskStateImplCopyWith<$Res>
+    implements $AddTaskStateCopyWith<$Res> {
+  factory _$$AddTaskStateImplCopyWith(
+          _$AddTaskStateImpl value, $Res Function(_$AddTaskStateImpl) then) =
+      __$$AddTaskStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String title,
       String? description,
       TaskStatus taskStatus,
-      TasksAddStatus status,
+      AddTaskStatus status,
       Object? error});
 }
 
 /// @nodoc
-class __$$TasksAddStateImplCopyWithImpl<$Res>
-    extends _$TasksAddStateCopyWithImpl<$Res, _$TasksAddStateImpl>
-    implements _$$TasksAddStateImplCopyWith<$Res> {
-  __$$TasksAddStateImplCopyWithImpl(
-      _$TasksAddStateImpl _value, $Res Function(_$TasksAddStateImpl) _then)
+class __$$AddTaskStateImplCopyWithImpl<$Res>
+    extends _$AddTaskStateCopyWithImpl<$Res, _$AddTaskStateImpl>
+    implements _$$AddTaskStateImplCopyWith<$Res> {
+  __$$AddTaskStateImplCopyWithImpl(
+      _$AddTaskStateImpl _value, $Res Function(_$AddTaskStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$TasksAddStateImplCopyWithImpl<$Res>
     Object? status = null,
     Object? error = freezed,
   }) {
-    return _then(_$TasksAddStateImpl(
+    return _then(_$AddTaskStateImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -131,7 +131,7 @@ class __$$TasksAddStateImplCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as TasksAddStatus,
+              as AddTaskStatus,
       error: freezed == error ? _value.error : error,
     ));
   }
@@ -139,12 +139,12 @@ class __$$TasksAddStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TasksAddStateImpl extends _TasksAddState {
-  const _$TasksAddStateImpl(
+class _$AddTaskStateImpl extends _AddTaskState {
+  const _$AddTaskStateImpl(
       {this.title = '',
       this.description = '',
       this.taskStatus = TaskStatus.open,
-      this.status = TasksAddStatus.initial,
+      this.status = AddTaskStatus.initial,
       this.error})
       : super._();
 
@@ -159,20 +159,20 @@ class _$TasksAddStateImpl extends _TasksAddState {
   final TaskStatus taskStatus;
   @override
   @JsonKey()
-  final TasksAddStatus status;
+  final AddTaskStatus status;
   @override
   final Object? error;
 
   @override
   String toString() {
-    return 'TasksAddState(title: $title, description: $description, taskStatus: $taskStatus, status: $status, error: $error)';
+    return 'AddTaskState(title: $title, description: $description, taskStatus: $taskStatus, status: $status, error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TasksAddStateImpl &&
+            other is _$AddTaskStateImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -189,18 +189,18 @@ class _$TasksAddStateImpl extends _TasksAddState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TasksAddStateImplCopyWith<_$TasksAddStateImpl> get copyWith =>
-      __$$TasksAddStateImplCopyWithImpl<_$TasksAddStateImpl>(this, _$identity);
+  _$$AddTaskStateImplCopyWith<_$AddTaskStateImpl> get copyWith =>
+      __$$AddTaskStateImplCopyWithImpl<_$AddTaskStateImpl>(this, _$identity);
 }
 
-abstract class _TasksAddState extends TasksAddState {
-  const factory _TasksAddState(
+abstract class _AddTaskState extends AddTaskState {
+  const factory _AddTaskState(
       {final String title,
       final String? description,
       final TaskStatus taskStatus,
-      final TasksAddStatus status,
-      final Object? error}) = _$TasksAddStateImpl;
-  const _TasksAddState._() : super._();
+      final AddTaskStatus status,
+      final Object? error}) = _$AddTaskStateImpl;
+  const _AddTaskState._() : super._();
 
   @override
   String get title;
@@ -209,11 +209,11 @@ abstract class _TasksAddState extends TasksAddState {
   @override
   TaskStatus get taskStatus;
   @override
-  TasksAddStatus get status;
+  AddTaskStatus get status;
   @override
   Object? get error;
   @override
   @JsonKey(ignore: true)
-  _$$TasksAddStateImplCopyWith<_$TasksAddStateImpl> get copyWith =>
+  _$$AddTaskStateImplCopyWith<_$AddTaskStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

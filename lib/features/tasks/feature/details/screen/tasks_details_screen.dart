@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../app/route/route.dart';
-import '../../consts.dart';
+import 'package:todo_or_not_todo/app/route/route.dart';
+import 'package:todo_or_not_todo/features/consts.dart';
+
 import '../bloc/tasks_details_bloc.dart';
 
 class TasksDetailsScreen extends StatefulWidget {
