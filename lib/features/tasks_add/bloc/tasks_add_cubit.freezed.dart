@@ -20,6 +20,7 @@ mixin _$TasksAddState {
   String? get description => throw _privateConstructorUsedError;
   TaskStatus get taskStatus => throw _privateConstructorUsedError;
   TasksAddStatus get status => throw _privateConstructorUsedError;
+  Object? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TasksAddStateCopyWith<TasksAddState> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $TasksAddStateCopyWith<$Res> {
       {String title,
       String? description,
       TaskStatus taskStatus,
-      TasksAddStatus status});
+      TasksAddStatus status,
+      Object? error});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$TasksAddStateCopyWithImpl<$Res, $Val extends TasksAddState>
     Object? description = freezed,
     Object? taskStatus = null,
     Object? status = null,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -74,6 +77,7 @@ class _$TasksAddStateCopyWithImpl<$Res, $Val extends TasksAddState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TasksAddStatus,
+      error: freezed == error ? _value.error : error,
     ) as $Val);
   }
 }
@@ -90,7 +94,8 @@ abstract class _$$TasksAddStateImplCopyWith<$Res>
       {String title,
       String? description,
       TaskStatus taskStatus,
-      TasksAddStatus status});
+      TasksAddStatus status,
+      Object? error});
 }
 
 /// @nodoc
@@ -108,6 +113,7 @@ class __$$TasksAddStateImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? taskStatus = null,
     Object? status = null,
+    Object? error = freezed,
   }) {
     return _then(_$TasksAddStateImpl(
       title: null == title
@@ -126,6 +132,7 @@ class __$$TasksAddStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TasksAddStatus,
+      error: freezed == error ? _value.error : error,
     ));
   }
 }
@@ -137,7 +144,8 @@ class _$TasksAddStateImpl extends _TasksAddState {
       {this.title = '',
       this.description = '',
       this.taskStatus = TaskStatus.open,
-      this.status = TasksAddStatus.initial})
+      this.status = TasksAddStatus.initial,
+      this.error})
       : super._();
 
   @override
@@ -152,10 +160,12 @@ class _$TasksAddStateImpl extends _TasksAddState {
   @override
   @JsonKey()
   final TasksAddStatus status;
+  @override
+  final Object? error;
 
   @override
   String toString() {
-    return 'TasksAddState(title: $title, description: $description, taskStatus: $taskStatus, status: $status)';
+    return 'TasksAddState(title: $title, description: $description, taskStatus: $taskStatus, status: $status, error: $error)';
   }
 
   @override
@@ -168,12 +178,13 @@ class _$TasksAddStateImpl extends _TasksAddState {
                 other.description == description) &&
             (identical(other.taskStatus, taskStatus) ||
                 other.taskStatus == taskStatus) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, description, taskStatus, status);
+  int get hashCode => Object.hash(runtimeType, title, description, taskStatus,
+      status, const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
@@ -187,7 +198,8 @@ abstract class _TasksAddState extends TasksAddState {
       {final String title,
       final String? description,
       final TaskStatus taskStatus,
-      final TasksAddStatus status}) = _$TasksAddStateImpl;
+      final TasksAddStatus status,
+      final Object? error}) = _$TasksAddStateImpl;
   const _TasksAddState._() : super._();
 
   @override
@@ -198,6 +210,8 @@ abstract class _TasksAddState extends TasksAddState {
   TaskStatus get taskStatus;
   @override
   TasksAddStatus get status;
+  @override
+  Object? get error;
   @override
   @JsonKey(ignore: true)
   _$$TasksAddStateImplCopyWith<_$TasksAddStateImpl> get copyWith =>

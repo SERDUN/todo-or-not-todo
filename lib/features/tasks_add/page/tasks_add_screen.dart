@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:domain/domain.dart';
+
+import 'package:todo_or_not_todo/extensions/extensions.dart';
 
 import '../bloc/tasks_add_cubit.dart';
 
@@ -21,7 +24,12 @@ class _TasksAddscreenState extends State<TasksAddscreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add new task'),
-        actions: [TextButton(onPressed: () {}, child: const Text('Save'))],
+        actions: [
+          TextButton(
+            onPressed: bloc.save,
+            child: const Text('Save'),
+          ),
+        ],
       ),
       body: BlocConsumer<TasksAddCubit, TasksAddState>(
         builder: (context, TasksAddState state) => SafeArea(
@@ -81,7 +89,7 @@ class _TasksAddscreenState extends State<TasksAddscreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                // TODO(Serdun): finish implementation of sub task
+                // TODO(Serdun): Implement subtask, replace list
                 Column(
                   children: [
                     InkWell(
@@ -104,6 +112,7 @@ class _TasksAddscreenState extends State<TasksAddscreen> {
                           children: [
                             Icon(Icons.check_box),
                             SizedBox(width: 16),
+                            // TODO(Serdun): Implement subtask, replace list
                             Text('Add auth screen'),
                           ],
                         ),
@@ -117,11 +126,14 @@ class _TasksAddscreenState extends State<TasksAddscreen> {
                           children: [
                             Icon(Icons.check_box),
                             SizedBox(width: 16),
+                            // TODO(Serdun): Implement subtask, replace list
                             Text('Add auth screen'),
                           ],
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        // TODO(Serdun): Implement open task
+                      },
                     )
                   ],
                 )
@@ -129,8 +141,21 @@ class _TasksAddscreenState extends State<TasksAddscreen> {
             ),
           ),
         ),
-        listener: (BuildContext context, TasksAddState state) {},
+        listener: _listenState,
       ),
     );
   }
+
+  void _listenState(BuildContext context, TasksAddState state) {
+    // TODO(Serdun): Add string local resources
+    if (state.isSuccess) _popSuccessfulScreen(context, state.title);
+    if (state.isFailure) _showFailure(context, state.error!);
+  }
+
+  void _popSuccessfulScreen(BuildContext context, String taskTitle) => context
+    // TODO(Serdun): Add localization
+    ..showSuccessSnackBar('Task $taskTitle successfully created')
+    ..pop();
+
+  void _showFailure(BuildContext context, Object error) => context.showErrorSnackBar(error.toString());
 }
