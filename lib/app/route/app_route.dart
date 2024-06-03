@@ -73,6 +73,7 @@ class AppRoute {
                               create: (context) => TasksBloc(
                                 serviceLocator.get(),
                                 serviceLocator.get(),
+                                serviceLocator.get(),
                               ),
                               child: const TasksScreen(),
                             ),

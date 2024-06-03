@@ -1,14 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:todo_or_not_todo/app/consts.dart';
 import 'package:todo_or_not_todo/extensions/extensions.dart';
-
 import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/features/consts.dart';
-
 import '../bloc/tasks_bloc.dart';
 
 class TasksScreen extends StatefulWidget {
@@ -36,49 +33,45 @@ class _TasksScreenState extends State<TasksScreen> {
                   )
                 else
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: state.tasks?.length ?? 0,
+                    child: ReorderableListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: state.tasks.length,
+                      onReorder: (int oldIndex, int newIndex) {
+                        if (newIndex > oldIndex) {
+                          newIndex -= 1;
+                        }
+                        context.read<TasksBloc>().updatePosition(oldIndex, newIndex);
+                      },
                       itemBuilder: (context, index) {
-                        final task = state.tasks![index];
-                        return GestureDetector(
-                          onTap: () => _pushToTaskDetailsScreen(
-                            context,
-                            id: 1,
-                          ),
-                          child: Card(
-                            margin: const EdgeInsets.symmetric(vertical: paddingVertical),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(cardBorderRadius),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(cardPadding),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${task.title} id:${task.id}',
-                                          style: Theme.of(context).textTheme.labelMedium,
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          task.content,
-                                          style: Theme.of(context).textTheme.labelSmall,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  InkWell(
-                                    child: const Icon(Icons.delete),
-                                    onTap: () => context.read<TasksBloc>().delete(task.id),
-                                  )
-                                ],
+                        final task = state.tasks[index];
+                        return Padding(
+                            key: ValueKey(task.id),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0), // Adjust vertical margin as needed
+                            child: Card(
+                              key: ValueKey(task.id),
+                              margin: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(cardBorderRadius),
                               ),
-                            ),
-                          ),
-                        );
+                              child: ListTile(
+                                title: Text(
+                                  '${task.title} id:${task.id} position:${task.position}',
+                                  style: Theme.of(context).textTheme.labelMedium,
+                                ),
+                                subtitle: Text(
+                                  task.content,
+                                  style: Theme.of(context).textTheme.labelSmall,
+                                ),
+                                trailing: InkWell(
+                                  child: const Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 16),
+                                    child: Icon(Icons.delete),
+                                  ),
+                                  onTap: () => context.read<TasksBloc>().delete(task.id),
+                                ),
+                                onTap: () => _pushToTaskDetailsScreen(context, id: task.id),
+                              ),
+                            ));
                       },
                     ),
                   ),
@@ -88,7 +81,6 @@ class _TasksScreenState extends State<TasksScreen> {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               context.pushNamed(Routes.taskAdd.name).then(context.read<TasksBloc>().fetch);
-              // TODO(Kovalchuck): Implement the function
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
             child: Icon(
@@ -110,10 +102,10 @@ class _TasksScreenState extends State<TasksScreen> {
 
   void _pushToTaskDetailsScreen(
     BuildContext context, {
-    required int id,
+    required String id,
   }) async {
     await context.pushNamed(Routes.taskDetails.name, queryParameters: {
-      queryIdText: id.toString(),
+      queryIdText: id,
     });
   }
 }
