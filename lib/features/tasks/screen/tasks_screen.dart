@@ -42,7 +42,7 @@ class _TasksScreenState extends State<TasksScreen> {
                         return GestureDetector(
                           onTap: () => _pushToTaskDetailsScreen(
                             context,
-                            id:1,
+                            id: 1,
                           ),
                           child: Card(
                             margin: const EdgeInsets.symmetric(vertical: paddingVertical),
@@ -76,6 +76,7 @@ class _TasksScreenState extends State<TasksScreen> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
+              context.pushNamed(Routes.taskAdd.name);
               // TODO(Kovalchuck): Implement the function
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
