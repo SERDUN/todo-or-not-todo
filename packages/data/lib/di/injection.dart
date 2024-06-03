@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../datasources/datasources.dart';
+import 'package:data/datasources/datasources.dart';
 
 @InjectableInit.microPackage()
 void initMicroPackage() {}
