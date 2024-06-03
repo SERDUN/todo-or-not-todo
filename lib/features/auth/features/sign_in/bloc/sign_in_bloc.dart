@@ -17,20 +17,23 @@ class SignInBloc extends Cubit<SignInState> {
 
   final LoginUseCase loginUseCase;
 
-  // TODO(Kovalchuck): Implement the function
   Future<void> signIn(String email, String password) async {
+    // TODO(Serdun): do correct validation
     emit(state.copyWith(status: SignInStatus.loading));
     if (email.isNotEmpty && password.isNotEmpty) {
       try {
         await loginUseCase.execute(email, password);
         emit(state.copyWith(status: SignInStatus.success));
       } catch (e) {
-        emit(state.copyWith(error: e));
+        emit(state.copyWith(
+          error: e,
+          status: SignInStatus.initial,
+        ));
       }
     } else {
       emit(state.copyWith(
         error: Exception('Inputs not valid'),
-        status: SignInStatus.success,
+        status: SignInStatus.initial,
       ));
     }
   }

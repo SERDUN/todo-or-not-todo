@@ -16,8 +16,8 @@ class SignUpBloc extends Cubit<SignUpState> {
 
   final RegisterUseCase registerUseCase;
 
-  // TODO(Kovalchuck): TODO: Implement the function
   Future<void> signUp(String email, String password) async {
+    // TODO(Serdun): do correct validation
     if (state.isPasswordValid && state.isEmailValid) {
       if (email.isNotEmpty && password.isNotEmpty) {
         emit(state.copyWith(status: SignUpStatus.loading));
@@ -25,13 +25,21 @@ class SignUpBloc extends Cubit<SignUpState> {
           await registerUseCase.execute(email, password);
           emit(state.copyWith(status: SignUpStatus.success));
         } catch (e) {
-          emit(state.copyWith(error: e));
+          emit(state.copyWith(
+            error: e,
+            status: SignUpStatus.initial,
+          ));
         }
+      } else {
+        emit(state.copyWith(
+          error: Exception('Inputs not valid'),
+          status: SignUpStatus.initial,
+        ));
       }
     } else {
       emit(state.copyWith(
         error: Exception('Inputs not valid'),
-        status: SignUpStatus.success,
+        status: SignUpStatus.initial,
       ));
     }
   }
