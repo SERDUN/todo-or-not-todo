@@ -32,8 +32,9 @@ class AppRoute {
             final isAuthorized = await _isUserAuthorized();
             if (!isAuthorized) {
               return '/${Routes.signIn.name}';
+            } else {
+              return '/${Routes.tasks.name}'; // Redirect to tasks if authorized
             }
-            return null; // No redirect if authorized
           },
         ),
         GoRoute(
