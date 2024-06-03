@@ -54,12 +54,12 @@ class RemoteDatasource {
 
   Future<TodoDTO> updateTodoById(String id, TodoDTO todo) async {
     final options = await _getOptionsWithToken();
-    final response = await httpClient.put<Map<String, dynamic>>(
+    final response = await httpClient.patch<Map<String, dynamic>>(
       '/todo/$id',
-      data: todo.toJson(),
+      data: todo.toJsonWithoutEmpty(),
       options: options,
     );
-    return TodoDTO.fromJson(response.data!);
+    return TodoDTO(id: '', title: '', details: '', userId: '', createdAt: '');
   }
 
   Future<void> deleteTodoById(String id) async {

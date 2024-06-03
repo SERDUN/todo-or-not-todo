@@ -31,10 +31,10 @@ class TasksRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<TaskModel> updateTaskById(String id, TaskModel task) async {
+  Future<void> updateTaskById(String id, TaskModel task) async {
     final dto = TaskMapper.toDTO(task);
     final updatedDto = await remoteDatasource.updateTodoById(id, dto);
-    return TaskMapper.fromDTO(updatedDto);
+    return Future.value();
   }
 
   @override
@@ -51,16 +51,18 @@ class TaskMapper {
       title: dto.title,
       content: dto.details,
       deadline: DateTime.parse(dto.createdAt),
+      position: dto.position,
     );
   }
 
   static TodoDTO toDTO(TaskModel model) {
     return TodoDTO(
-      id: model.id.toString(),
+      id: model.id,
       title: model.title,
       details: model.content,
       userId: '',
       createdAt: model.deadline?.toIso8601String() ?? DateTime.now().toIso8601String(),
+      position: model.position,
     );
   }
 }

@@ -25,6 +25,7 @@ mixin _$TodoDTO {
   String get details => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
+  int? get position => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +42,8 @@ abstract class $TodoDTOCopyWith<$Res> {
       String title,
       String details,
       String userId,
-      String createdAt});
+      String createdAt,
+      int? position});
 }
 
 /// @nodoc
@@ -62,6 +64,7 @@ class _$TodoDTOCopyWithImpl<$Res, $Val extends TodoDTO>
     Object? details = null,
     Object? userId = null,
     Object? createdAt = null,
+    Object? position = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -84,6 +87,10 @@ class _$TodoDTOCopyWithImpl<$Res, $Val extends TodoDTO>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
+      position: freezed == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -100,7 +107,8 @@ abstract class _$$TodoDTOImplCopyWith<$Res> implements $TodoDTOCopyWith<$Res> {
       String title,
       String details,
       String userId,
-      String createdAt});
+      String createdAt,
+      int? position});
 }
 
 /// @nodoc
@@ -119,6 +127,7 @@ class __$$TodoDTOImplCopyWithImpl<$Res>
     Object? details = null,
     Object? userId = null,
     Object? createdAt = null,
+    Object? position = freezed,
   }) {
     return _then(_$TodoDTOImpl(
       id: null == id
@@ -141,19 +150,25 @@ class __$$TodoDTOImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
+      position: freezed == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$TodoDTOImpl implements _TodoDTO {
+class _$TodoDTOImpl extends _TodoDTO {
   const _$TodoDTOImpl(
       {required this.id,
       required this.title,
       required this.details,
       required this.userId,
-      required this.createdAt});
+      required this.createdAt,
+      this.position})
+      : super._();
 
   factory _$TodoDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$TodoDTOImplFromJson(json);
@@ -168,10 +183,12 @@ class _$TodoDTOImpl implements _TodoDTO {
   final String userId;
   @override
   final String createdAt;
+  @override
+  final int? position;
 
   @override
   String toString() {
-    return 'TodoDTO(id: $id, title: $title, details: $details, userId: $userId, createdAt: $createdAt)';
+    return 'TodoDTO(id: $id, title: $title, details: $details, userId: $userId, createdAt: $createdAt, position: $position)';
   }
 
   @override
@@ -184,13 +201,15 @@ class _$TodoDTOImpl implements _TodoDTO {
             (identical(other.details, details) || other.details == details) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.position, position) ||
+                other.position == position));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, title, details, userId, createdAt);
+      Object.hash(runtimeType, id, title, details, userId, createdAt, position);
 
   @JsonKey(ignore: true)
   @override
@@ -206,13 +225,15 @@ class _$TodoDTOImpl implements _TodoDTO {
   }
 }
 
-abstract class _TodoDTO implements TodoDTO {
+abstract class _TodoDTO extends TodoDTO {
   const factory _TodoDTO(
       {required final String id,
       required final String title,
       required final String details,
       required final String userId,
-      required final String createdAt}) = _$TodoDTOImpl;
+      required final String createdAt,
+      final int? position}) = _$TodoDTOImpl;
+  const _TodoDTO._() : super._();
 
   factory _TodoDTO.fromJson(Map<String, dynamic> json) = _$TodoDTOImpl.fromJson;
 
@@ -226,6 +247,8 @@ abstract class _TodoDTO implements TodoDTO {
   String get userId;
   @override
   String get createdAt;
+  @override
+  int? get position;
   @override
   @JsonKey(ignore: true)
   _$$TodoDTOImplCopyWith<_$TodoDTOImpl> get copyWith =>
