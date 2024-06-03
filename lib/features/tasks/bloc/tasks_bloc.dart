@@ -23,11 +23,11 @@ class TasksBloc extends Cubit<TasksState> {
 
   Future<void> _getTasks() async {
     emit(state.copyWith(status: TasksStatus.loading));
-    // try {
+    try {
       final tasks = await getAllTasksUseCase.execute();
       emit(state.copyWith(status: TasksStatus.success, tasks: tasks));
-    // } catch (e) {
-    //   emit(state.copyWith(status: TasksStatus.error,exception: e));
-    // }
+    } catch (e) {
+      emit(state.copyWith(status: TasksStatus.error, exception: e));
+    }
   }
 }

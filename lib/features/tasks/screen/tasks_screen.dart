@@ -92,7 +92,7 @@ class _TasksScreenState extends State<TasksScreen> {
 
   void _listenState(BuildContext context, TasksState state) {
     if (state.status == TasksStatus.error) {
-      context.showErrorSnackBar(state.exception.toString());
+      context.showErrorSnackBar(context.parseError(state.exception! as Exception));
     }
   }
 

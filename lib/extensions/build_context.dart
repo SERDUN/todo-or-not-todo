@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 
+class NetworkException implements Exception {}
+
+class ServerException implements Exception {}
+
+class AuthenticationException implements Exception {}
+
 extension BuildContextSnackBar on BuildContext {
+  String parseError(Exception error) {
+    String errorMessage;
+
+    if (error is NetworkException) {
+      errorMessage = 'Network error occurred. Please check your connection.';
+    } else if (error is ServerException) {
+      errorMessage = 'Server error occurred. Please try again later.';
+    } else if (error is AuthenticationException) {
+      errorMessage = 'Authentication error. Please check your credentials.';
+    } else {
+      errorMessage = 'An unexpected error occurred: ${error.toString()}';
+    }
+
+    return errorMessage;
+  }
+
   void removeCurrentSnackBar() {
     ScaffoldMessenger.of(this).removeCurrentSnackBar();
   }
