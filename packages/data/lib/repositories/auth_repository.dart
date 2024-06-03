@@ -32,4 +32,9 @@ class AuthRepositoryImpl implements AuthRepository {
     final token = await localKeysDatasource.getToken();
     return Future.value(token != null && token.isNotEmpty ? UserLoginStatus.authorized : UserLoginStatus.notAuthorize);
   }
+
+  @override
+  Future<void> logout() {
+    return localKeysDatasource.removeToken();
+  }
 }

@@ -88,7 +88,7 @@ class AppRoute {
                     GoRoute(
                       path: '/profile',
                       builder: (BuildContext context, GoRouterState state) => BlocProvider(
-                        create: (BuildContext context) => ProfileCubit(),
+                        create: (BuildContext context) => ProfileCubit(serviceLocator.get()),
                         child: const ProfileScreen(),
                       ),
                     ),

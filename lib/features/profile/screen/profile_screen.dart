@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:todo_or_not_todo/app/route/route.dart';
 
 import '../bloc/profile_cubit.dart';
 
@@ -10,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
+    return BlocConsumer<ProfileCubit, ProfileState>(
       builder: (context, stater) => Scaffold(
         appBar: AppBar(
           title: const Text('Profile'),
@@ -39,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: context.read<ProfileCubit>().logout,
                   child: const Text('Logout'),
                 ),
               ),
@@ -47,6 +49,11 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ),
+      listener: (BuildContext context, ProfileState state) {
+        if (state.status == ProfileStatus.logout) {
+          context.goNamed(Routes.signIn.name);
+        }
+      },
     );
   }
 }
