@@ -21,26 +21,26 @@ class RemoteDatasource {
   }
 
   Future<TodoDTO> createTodo(TodoDTO todo) async {
-    final response = await httpClient.post<Map<String, dynamic>>('/todos', data: todo.toJson());
+    final response = await httpClient.post<Map<String, dynamic>>('/todo', data: todo.toJson());
     return TodoDTO.fromJson(response.data!);
   }
 
   Future<TodoDTO> getTodoById(String id) async {
-    final response = await httpClient.get<Map<String, dynamic>>('/todos/$id');
+    final response = await httpClient.get<Map<String, dynamic>>('/todo/$id');
     return TodoDTO.fromJson(response.data!);
   }
 
   Future<List<TodoDTO>> getAllTodos() async {
-    final response = await httpClient.get<List<dynamic>>('/todos');
+    final response = await httpClient.get<List<dynamic>>('/todo');
     return (response.data!).map((e) => TodoDTO.fromJson(e as Map<String, dynamic>)).toList();
   }
 
   Future<TodoDTO> updateTodoById(String id, TodoDTO todo) async {
-    final response = await httpClient.put<Map<String, dynamic>>('/todos/$id', data: todo.toJson());
+    final response = await httpClient.put<Map<String, dynamic>>('/todo/$id', data: todo.toJson());
     return TodoDTO.fromJson(response.data!);
   }
 
   Future<void> deleteTodoById(String id) async {
-    await httpClient.delete<Map<String, dynamic>>('/todos/$id');
+    await httpClient.delete<Map<String, dynamic>>('/todo/$id');
   }
 }
