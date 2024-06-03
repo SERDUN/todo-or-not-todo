@@ -480,6 +480,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Forgot password'**
   String get forgotPassword;
+
+  /// Error message shown when a required field is left blank.
+  ///
+  /// In en, this message translates to:
+  /// **'This field cannot be blank'**
+  String get validationBlankError;
+
+  /// Error message shown when the password does not meet the specified requirements.
+  ///
+  /// In en, this message translates to:
+  /// **'The password does not meet the requirements'**
+  String get feature_auth_Input_invalid_password_not_meet_requirements;
+
+  /// Error message shown when the email address format is invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'The email address is not valid'**
+  String get feature_auth_Input_invalid_email_address;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

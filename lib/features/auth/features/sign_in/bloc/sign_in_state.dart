@@ -9,8 +9,8 @@ enum SignInStatus {
 @freezed
 class SignInState with _$SignInState {
   const factory SignInState({
-    required bool isEmailValid,
-    required bool isPasswordValid,
+    AuthEmailInput? emailInput,
+    AuthPasswordInput? passwordInput,
     Object? error,
     @Default(SignInStatus.initial) SignInStatus status,
   }) = _SignInState;
@@ -18,4 +18,25 @@ class SignInState with _$SignInState {
   const SignInState._();
 
   bool get isError => error != null;
+
+  bool get isAllFieldsValid {
+    final passwordInputEmpty = passwordInput == null;
+    final emailInputEmpty = emailInput == null;
+
+    if (passwordInputEmpty || emailInputEmpty) {
+      return false;
+    } else {
+      return Formz.validate([passwordInput!, emailInput!]);
+    }
+  }
+
+  SignInState copyWithValidate({
+    AuthEmailInput? emailInput,
+    AuthPasswordInput? passwordInput,
+  }) {
+    return SignInState(
+      emailInput: emailInput ?? this.emailInput,
+      passwordInput: passwordInput ?? this.passwordInput,
+    );
+  }
 }

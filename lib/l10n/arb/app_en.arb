@@ -66,5 +66,17 @@
     "yourEmail": "Your email",
     "createAccount": "Create account",
     "alreadyHaveAccountText": "Already have account",
-    "forgotPassword": "Forgot password"
+    "forgotPassword": "Forgot password",
+          "validationBlankError": "This field cannot be blank",
+      "@validationBlankError": {
+        "description": "Error message shown when a required field is left blank."
+      },
+      "feature_auth_Input_invalid_password_not_meet_requirements": "The password does not meet the requirements",
+      "@feature_auth_Input_invalid_password_not_meet_requirements": {
+        "description": "Error message shown when the password does not meet the specified requirements."
+      },
+      "feature_auth_Input_invalid_email_address": "The email address is not valid",
+      "@feature_auth_Input_invalid_email_address": {
+        "description": "Error message shown when the email address format is invalid."
+      }
 }
