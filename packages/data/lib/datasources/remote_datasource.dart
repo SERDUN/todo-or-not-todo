@@ -4,11 +4,14 @@ import 'package:injectable/injectable.dart';
 import 'package:data/dtos/auth/auth.dart';
 import 'package:data/dtos/todo/todo.dart';
 
+import 'local_keys_datasource.dart';
+
 @injectable
 class RemoteDatasource {
-  RemoteDatasource(this.httpClient);
+  RemoteDatasource(this.httpClient, this.localKeysDatasource);
 
   final Dio httpClient;
+  final LocalKeysDatasource localKeysDatasource;
 
   Future<AuthResponseDto> login(LoginDto login) async {
     final response = await httpClient.post<Map<String, dynamic>>('/auth/login', data: login.toJson());
@@ -21,26 +24,57 @@ class RemoteDatasource {
   }
 
   Future<TodoDTO> createTodo(TodoDTO todo) async {
-    final response = await httpClient.post<Map<String, dynamic>>('/todo', data: todo.toJson());
+    final options = await _getOptionsWithToken();
+    final response = await httpClient.post<Map<String, dynamic>>(
+      '/todo',
+      data: todo.toJson(),
+      options: options,
+    );
     return TodoDTO.fromJson(response.data!);
   }
 
   Future<TodoDTO> getTodoById(String id) async {
-    final response = await httpClient.get<Map<String, dynamic>>('/todo/$id');
+    final options = await _getOptionsWithToken();
+    final response = await httpClient.get<Map<String, dynamic>>(
+      '/todo/$id',
+      options: options,
+    );
     return TodoDTO.fromJson(response.data!);
   }
 
   Future<List<TodoDTO>> getAllTodos() async {
-    final response = await httpClient.get<List<dynamic>>('/todo');
+    final options = await _getOptionsWithToken();
+    final response = await httpClient.get<List<dynamic>>(
+      '/todo',
+      options: options,
+    );
+
     return (response.data!).map((e) => TodoDTO.fromJson(e as Map<String, dynamic>)).toList();
   }
 
   Future<TodoDTO> updateTodoById(String id, TodoDTO todo) async {
-    final response = await httpClient.put<Map<String, dynamic>>('/todo/$id', data: todo.toJson());
+    final options = await _getOptionsWithToken();
+    final response = await httpClient.put<Map<String, dynamic>>(
+      '/todo/$id',
+      data: todo.toJson(),
+      options: options,
+    );
     return TodoDTO.fromJson(response.data!);
   }
 
   Future<void> deleteTodoById(String id) async {
-    await httpClient.delete<Map<String, dynamic>>('/todo/$id');
+    final options = await _getOptionsWithToken();
+    await httpClient.delete<Map<String, dynamic>>(
+      '/todo/$id',
+      options: options,
+    );
+  }
+
+  Future<Options?> _getOptionsWithToken() async {
+    final token = await localKeysDatasource.getToken();
+    if (token != null) {
+      return Options(headers: {'Authorization': 'Bearer $token'});
+    }
+    return null;
   }
 }
