@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TasksState {
   TasksStatus get status => throw _privateConstructorUsedError;
   List<TaskModel>? get tasks => throw _privateConstructorUsedError;
+  Object? get exception => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TasksStateCopyWith<TasksState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $TasksStateCopyWith<$Res> {
           TasksState value, $Res Function(TasksState) then) =
       _$TasksStateCopyWithImpl<$Res, TasksState>;
   @useResult
-  $Res call({TasksStatus status, List<TaskModel>? tasks});
+  $Res call({TasksStatus status, List<TaskModel>? tasks, Object? exception});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
   $Res call({
     Object? status = null,
     Object? tasks = freezed,
+    Object? exception = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -58,6 +60,7 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<TaskModel>?,
+      exception: freezed == exception ? _value.exception : exception,
     ) as $Val);
   }
 }
@@ -70,7 +73,7 @@ abstract class _$$TasksStateImplCopyWith<$Res>
       __$$TasksStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({TasksStatus status, List<TaskModel>? tasks});
+  $Res call({TasksStatus status, List<TaskModel>? tasks, Object? exception});
 }
 
 /// @nodoc
@@ -86,6 +89,7 @@ class __$$TasksStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? tasks = freezed,
+    Object? exception = freezed,
   }) {
     return _then(_$TasksStateImpl(
       status: null == status
@@ -96,6 +100,7 @@ class __$$TasksStateImplCopyWithImpl<$Res>
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<TaskModel>?,
+      exception: freezed == exception ? _value.exception : exception,
     ));
   }
 }
@@ -104,7 +109,9 @@ class __$$TasksStateImplCopyWithImpl<$Res>
 
 class _$TasksStateImpl implements _TasksState {
   const _$TasksStateImpl(
-      {this.status = TasksStatus.initial, final List<TaskModel>? tasks})
+      {this.status = TasksStatus.initial,
+      final List<TaskModel>? tasks,
+      this.exception})
       : _tasks = tasks;
 
   @override
@@ -121,8 +128,11 @@ class _$TasksStateImpl implements _TasksState {
   }
 
   @override
+  final Object? exception;
+
+  @override
   String toString() {
-    return 'TasksState(status: $status, tasks: $tasks)';
+    return 'TasksState(status: $status, tasks: $tasks, exception: $exception)';
   }
 
   @override
@@ -131,12 +141,16 @@ class _$TasksStateImpl implements _TasksState {
         (other.runtimeType == runtimeType &&
             other is _$TasksStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks));
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            const DeepCollectionEquality().equals(other.exception, exception));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, status, const DeepCollectionEquality().hash(_tasks));
+      runtimeType,
+      status,
+      const DeepCollectionEquality().hash(_tasks),
+      const DeepCollectionEquality().hash(exception));
 
   @JsonKey(ignore: true)
   @override
@@ -148,12 +162,15 @@ class _$TasksStateImpl implements _TasksState {
 abstract class _TasksState implements TasksState {
   const factory _TasksState(
       {final TasksStatus status,
-      final List<TaskModel>? tasks}) = _$TasksStateImpl;
+      final List<TaskModel>? tasks,
+      final Object? exception}) = _$TasksStateImpl;
 
   @override
   TasksStatus get status;
   @override
   List<TaskModel>? get tasks;
+  @override
+  Object? get exception;
   @override
   @JsonKey(ignore: true)
   _$$TasksStateImplCopyWith<_$TasksStateImpl> get copyWith =>
