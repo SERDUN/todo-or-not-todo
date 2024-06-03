@@ -1,42 +1,30 @@
 import 'package:flutter/material.dart';
 
-import '../consts.dart';
+import 'dimension_circular_progress_indicator.dart';
 
 class CustomEnterButton extends StatelessWidget {
   const CustomEnterButton({
-    required this.onPressed,
     required this.text,
     required this.buttonSize,
     super.key,
-    this.isLoading = false,
+    this.progress = false,
+    this.onPressed,
   });
 
-  final VoidCallback onPressed;
   final String text;
-  final bool isLoading;
+  final bool progress;
   final double buttonSize;
+
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        minimumSize: Size.fromHeight(buttonSize),
-        backgroundColor: Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(buttonBorderRadius),
-        ),
+    return ConstrainedBox(
+      constraints: const BoxConstraints.tightFor(width: double.infinity),
+      child: ElevatedButton(
+        onPressed: progress ? null : onPressed,
+        child: progress ? const DimensionCircularProgressIndicator(dimension: 24) : Text(text),
       ),
-      child: isLoading
-          ? CircularProgressIndicator(
-              color: Theme.of(context).indicatorColor,
-            )
-          : Text(
-              text,
-              style: TextStyle(
-                color: Theme.of(context).focusColor,
-              ),
-            ),
     );
   }
 }
