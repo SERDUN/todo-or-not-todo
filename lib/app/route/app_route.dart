@@ -88,8 +88,8 @@ class AppRoute {
                             name: Routes.taskAdd.name,
                             path: Routes.taskAdd.name,
                             builder: (BuildContext context, GoRouterState state) => BlocProvider(
-                              create: (context) => TasksAddCubit(serviceLocator.get()),
-                              child: TasksAddscreen(),
+                              create: (context) => AddTaskCubit(serviceLocator.get()),
+                              child: AddTaskScreen(),
                             ),
                           ),
                         ])

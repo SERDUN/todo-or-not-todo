@@ -1,13 +1,14 @@
-import 'package:bloc/bloc.dart';
-import 'package:domain/domain.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:bloc/bloc.dart';
 
-part 'tasks_add_state.dart';
+import 'package:domain/domain.dart';
 
-part 'tasks_add_cubit.freezed.dart';
+part 'add_task_state.dart';
 
-class TasksAddCubit extends Cubit<TasksAddState> {
-  TasksAddCubit(this.createTaskUseCase) : super(const TasksAddState());
+part 'add_task_cubit.freezed.dart';
+
+class AddTaskCubit extends Cubit<AddTaskState> {
+  AddTaskCubit(this.createTaskUseCase) : super(const AddTaskState());
 
   final CreateTaskUseCase createTaskUseCase;
 
@@ -21,7 +22,7 @@ class TasksAddCubit extends Cubit<TasksAddState> {
     try {
       // TODO(Serdun): remove id
       await createTaskUseCase.execute(TaskModel(id: '', title: state.title, content: state.description ?? ''));
-      emit(state.copyWith(status: TasksAddStatus.success));
+      emit(state.copyWith(status: AddTaskStatus.success));
     } catch (e) {
       emit(state.copyWith(error: e));
     }

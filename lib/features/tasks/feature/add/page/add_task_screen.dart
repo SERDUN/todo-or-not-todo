@@ -7,17 +7,17 @@ import 'package:domain/domain.dart';
 
 import 'package:todo_or_not_todo/extensions/extensions.dart';
 
-import '../bloc/tasks_add_cubit.dart';
+import '../bloc/bloc.dart';
 
-class TasksAddscreen extends StatefulWidget {
+class AddTaskScreen extends StatefulWidget {
   @override
-  _TasksAddscreenState createState() => _TasksAddscreenState();
+  _AddTaskScreenState createState() => _AddTaskScreenState();
 }
 
-class _TasksAddscreenState extends State<TasksAddscreen> {
+class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<TasksAddCubit>(context);
+    final bloc = BlocProvider.of<AddTaskCubit>(context);
 
     final theme = Theme.of(context).textTheme;
 
@@ -31,8 +31,8 @@ class _TasksAddscreenState extends State<TasksAddscreen> {
           ),
         ],
       ),
-      body: BlocConsumer<TasksAddCubit, TasksAddState>(
-        builder: (context, TasksAddState state) => SafeArea(
+      body: BlocConsumer<AddTaskCubit, AddTaskState>(
+        builder: (context, AddTaskState state) => SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -146,7 +146,7 @@ class _TasksAddscreenState extends State<TasksAddscreen> {
     );
   }
 
-  void _listenState(BuildContext context, TasksAddState state) {
+  void _listenState(BuildContext context, AddTaskState state) {
     // TODO(Serdun): Add string local resources
     if (state.isSuccess) _popSuccessfulScreen(context, state.title);
     if (state.isFailure) _showFailure(context, state.error!);
