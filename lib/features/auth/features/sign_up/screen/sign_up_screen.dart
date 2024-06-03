@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -26,28 +25,10 @@ class SignUpScreen extends StatelessWidget {
 
     return BlocConsumer<SignUpBloc, SignUpState>(
       builder: (context, state) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return AuthPageContainer(
+            title: context.l10n.signUpText,
+            body: Column(
               children: [
-                RichText(
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: context.l10n.signUpText,
-                        style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: spacingLarge,
-                ),
                 Column(
                   children: [
                     CustomTextField(
@@ -76,41 +57,23 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Spacer(), // Spacer
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: CustomEnterButton(
-                    onPressed: () => bloc.signUp(_email.text, _password.text),
-                    text: context.l10n.signUpText,
-                    isLoading: state.status == SignUpStatus.loading,
-                    buttonSize: buttonHeight,
-                  ),
-                ),
                 const SizedBox(height: spacingMedium),
-                const SizedBox(height: spacingMedium),
-                Align(
-                  child: RichText(
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '${context.l10n.alreadyHaveAccountText}? ',
-                          style: Theme.of(context).textTheme.titleMedium!.copyWith(),
-                        ),
-                        TextSpan(
-                          recognizer: TapGestureRecognizer()..onTap = () => _pushToSignInScreen(context),
-                          text: context.l10n.loginText,
-                          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
-          ),
-        );
+            bottom: Column(children: [
+              CustomEnterButton(
+                onPressed: () => bloc.signUp(_email.text, _password.text),
+                text: context.l10n.signUpText,
+                progress: state.status == SignUpStatus.loading,
+                buttonSize: buttonHeight,
+              ),
+              const SizedBox(height: spacingSmall),
+              AuthScreenSwitcher(
+                infoTitle: context.l10n.signUpText,
+                activeTitle: context.l10n.loginText,
+                onTap: () => _pushToSignInScreen(context),
+              )
+            ]));
       },
       listener: (context, state) {
         if (state.status == SignUpStatus.success) {

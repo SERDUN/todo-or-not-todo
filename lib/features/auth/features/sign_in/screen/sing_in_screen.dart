@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -25,103 +24,64 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<SignInBloc>(context);
 
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return BlocConsumer<SignInBloc, SignInState>(
       builder: (context, state) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: context.l10n.loginText,
-                        style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    ],
+        return AuthPageContainer(
+          title: context.l10n.loginText,
+          body: Column(
+            children: [
+              Column(
+                children: [
+                  CustomTextField(
+                    controller: _email,
+                    labelText: context.l10n.emailLabel,
+                    hintText: context.l10n.emailHint,
+                    isValid: state.isEmailValid,
+                    onChanged: bloc.isEmailValid,
+                    errorText: context.l10n.emailError,
                   ),
-                ),
-                const SizedBox(
-                  height: spacingLarge,
-                ),
-                Column(
-                  children: [
-                    CustomTextField(
-                      controller: _email,
-                      labelText: context.l10n.emailLabel,
-                      hintText: context.l10n.emailHint,
-                      isValid: state.isEmailValid,
-                      onChanged: bloc.isEmailValid,
-                      errorText: context.l10n.emailError,
+                  const SizedBox(height: spacingSmall),
+                  CustomTextField(
+                    controller: _password,
+                    labelText: context.l10n.passwordLabel,
+                    hintText: '',
+                    obscureText: state.obscureText,
+                    isValid: state.isPasswordValid,
+                    visibilityIcon: Icon(
+                      state.obscureText ? Icons.visibility : Icons.visibility_off,
                     ),
-                    const SizedBox(height: spacingSmall),
-                    CustomTextField(
-                      controller: _password,
-                      labelText: context.l10n.passwordLabel,
-                      hintText: '',
-                      obscureText: state.obscureText,
-                      isValid: state.isPasswordValid,
-                      visibilityIcon: Icon(
-                        state.obscureText ? Icons.visibility : Icons.visibility_off,
-                      ),
-                      onVisibilityToggle: () {
-                        state.obscureText ? bloc.hidePassword() : bloc.showPassword();
-                      },
-                      errorText: context.l10n.passwordError,
-                    ),
-                  ],
-                ),
-                const Spacer(), // Spacer
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                  child: CustomEnterButton(
-                    onPressed: () {
-                      bloc.signIn(
-                        _email.text,
-                        _password.text,
-                      );
+                    onVisibilityToggle: () {
+                      state.obscureText ? bloc.hidePassword() : bloc.showPassword();
                     },
-                    text: context.l10n.loginText,
-                    isLoading: state.status == SignInStatus.loading,
-                    buttonSize: buttonHeight,
+                    errorText: context.l10n.passwordError,
                   ),
-                ),
-                const SizedBox(
-                  height: spacingMedium,
-                ),
-                const SizedBox(
-                  height: spacingMedium,
-                ),
-                Align(
-                  child: RichText(
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '${context.l10n.doNotHaveAccountText}? ',
-                          style: Theme.of(context).textTheme.titleMedium!.copyWith(),
-                        ),
-                        TextSpan(
-                          recognizer: TapGestureRecognizer()..onTap = () => _pushToSignUpScreen(context),
-                          text: context.l10n.signUpText,
-                          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                ],
+              ),
+              const SizedBox(height: spacingSmall),
+            ],
           ),
+          bottom: Column(children: [
+            CustomEnterButton(
+              onPressed: () {
+                bloc.signIn(
+                  _email.text,
+                  _password.text,
+                );
+              },
+              text: context.l10n.loginText,
+              progress: state.status == SignInStatus.loading,
+              buttonSize: buttonHeight,
+            ),
+            const SizedBox(height: spacingSmall),
+            AuthScreenSwitcher(
+              infoTitle: context.l10n.doNotHaveAccountText,
+              activeTitle: context.l10n.signUpText,
+              onTap: () => _pushToSignUpScreen(context),
+            )
+          ]),
         );
       },
       listener: (context, state) {
