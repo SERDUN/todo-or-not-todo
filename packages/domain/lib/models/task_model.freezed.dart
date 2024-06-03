@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TaskModel {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   int? get position => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $TaskModelCopyWith<$Res> {
       _$TaskModelCopyWithImpl<$Res, TaskModel>;
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String title,
       String content,
       int? position,
@@ -69,7 +69,7 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -107,7 +107,7 @@ abstract class _$$TaskModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String title,
       String content,
       int? position,
@@ -139,7 +139,7 @@ class __$$TaskModelImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -181,7 +181,7 @@ class _$TaskModelImpl implements _TaskModel {
       this.priority});
 
   @override
-  final int id;
+  final String id;
   @override
   final String title;
   @override
@@ -230,7 +230,7 @@ class _$TaskModelImpl implements _TaskModel {
 
 abstract class _TaskModel implements TaskModel {
   const factory _TaskModel(
-      {required final int id,
+      {required final String id,
       required final String title,
       required final String content,
       final int? position,
@@ -239,7 +239,7 @@ abstract class _TaskModel implements TaskModel {
       final TaskPriority? priority}) = _$TaskModelImpl;
 
   @override
-  int get id;
+  String get id;
   @override
   String get title;
   @override
