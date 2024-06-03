@@ -11,7 +11,7 @@ enum TasksStatus {
 class TasksState with _$TasksState {
   const factory TasksState({
     @Default(TasksStatus.initial) TasksStatus status,
-    List<TaskModel>? tasks,
+    @Default([]) List<TaskModel> tasks,
     Object? exception,
   }) = _TasksState;
 }

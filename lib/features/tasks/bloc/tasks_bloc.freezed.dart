@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TasksState {
   TasksStatus get status => throw _privateConstructorUsedError;
-  List<TaskModel>? get tasks => throw _privateConstructorUsedError;
+  List<TaskModel> get tasks => throw _privateConstructorUsedError;
   Object? get exception => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +31,7 @@ abstract class $TasksStateCopyWith<$Res> {
           TasksState value, $Res Function(TasksState) then) =
       _$TasksStateCopyWithImpl<$Res, TasksState>;
   @useResult
-  $Res call({TasksStatus status, List<TaskModel>? tasks, Object? exception});
+  $Res call({TasksStatus status, List<TaskModel> tasks, Object? exception});
 }
 
 /// @nodoc
@@ -48,7 +48,7 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
   @override
   $Res call({
     Object? status = null,
-    Object? tasks = freezed,
+    Object? tasks = null,
     Object? exception = freezed,
   }) {
     return _then(_value.copyWith(
@@ -56,10 +56,10 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TasksStatus,
-      tasks: freezed == tasks
+      tasks: null == tasks
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
-              as List<TaskModel>?,
+              as List<TaskModel>,
       exception: freezed == exception ? _value.exception : exception,
     ) as $Val);
   }
@@ -73,7 +73,7 @@ abstract class _$$TasksStateImplCopyWith<$Res>
       __$$TasksStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({TasksStatus status, List<TaskModel>? tasks, Object? exception});
+  $Res call({TasksStatus status, List<TaskModel> tasks, Object? exception});
 }
 
 /// @nodoc
@@ -88,7 +88,7 @@ class __$$TasksStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? tasks = freezed,
+    Object? tasks = null,
     Object? exception = freezed,
   }) {
     return _then(_$TasksStateImpl(
@@ -96,10 +96,10 @@ class __$$TasksStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TasksStatus,
-      tasks: freezed == tasks
+      tasks: null == tasks
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
-              as List<TaskModel>?,
+              as List<TaskModel>,
       exception: freezed == exception ? _value.exception : exception,
     ));
   }
@@ -110,21 +110,20 @@ class __$$TasksStateImplCopyWithImpl<$Res>
 class _$TasksStateImpl implements _TasksState {
   const _$TasksStateImpl(
       {this.status = TasksStatus.initial,
-      final List<TaskModel>? tasks,
+      final List<TaskModel> tasks = const [],
       this.exception})
       : _tasks = tasks;
 
   @override
   @JsonKey()
   final TasksStatus status;
-  final List<TaskModel>? _tasks;
+  final List<TaskModel> _tasks;
   @override
-  List<TaskModel>? get tasks {
-    final value = _tasks;
-    if (value == null) return null;
+  @JsonKey()
+  List<TaskModel> get tasks {
     if (_tasks is EqualUnmodifiableListView) return _tasks;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_tasks);
   }
 
   @override
@@ -162,13 +161,13 @@ class _$TasksStateImpl implements _TasksState {
 abstract class _TasksState implements TasksState {
   const factory _TasksState(
       {final TasksStatus status,
-      final List<TaskModel>? tasks,
+      final List<TaskModel> tasks,
       final Object? exception}) = _$TasksStateImpl;
 
   @override
   TasksStatus get status;
   @override
-  List<TaskModel>? get tasks;
+  List<TaskModel> get tasks;
   @override
   Object? get exception;
   @override
