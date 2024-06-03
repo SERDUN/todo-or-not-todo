@@ -198,4 +198,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get forgotPassword => 'Forgot password';
+
+  @override
+  String get validationBlankError => 'This field cannot be blank';
+
+  @override
+  String get feature_auth_Input_invalid_password_not_meet_requirements => 'The password does not meet the requirements';
+
+  @override
+  String get feature_auth_Input_invalid_email_address => 'The email address is not valid';
 }

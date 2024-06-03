@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo_or_not_todo/features/auth/extensions/extensions.dart';
 
 import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/l10n/l10n.dart';
 
 import '../../../consts.dart';
+import '../../../extensions/auth_email_input.dart';
 import '../../../widgets/widgets.dart';
 
 import '../bloc/sign_up_bloc.dart';
@@ -29,40 +31,26 @@ class SignUpScreen extends StatelessWidget {
             title: context.l10n.signUpText,
             body: Column(
               children: [
-                Column(
-                  children: [
-                    CustomTextField(
-                      controller: _email,
-                      labelText: context.l10n.emailLabel,
-                      hintText: context.l10n.emailHint,
-                      isValid: state.isEmailValid,
-                      onChanged: bloc.isEmailValid,
-                      errorText: context.l10n.emailError,
-                    ),
-                    const SizedBox(height: spacingSmall),
-                    CustomTextField(
-                      controller: _password,
-                      labelText: context.l10n.passwordLabel,
-                      hintText: '',
-                      obscureText: state.obscureText,
-                      isValid: state.isPasswordValid,
-                      onChanged: bloc.isPasswordValid,
-                      visibilityIcon: Icon(
-                        state.obscureText ? Icons.visibility : Icons.visibility_off,
-                      ),
-                      onVisibilityToggle: () {
-                        state.obscureText ? bloc.hidePassword() : bloc.showPassword();
-                      },
-                      errorText: context.l10n.passwordError,
-                    ),
-                  ],
+                CustomTextField(
+                  controller: _email,
+                  labelText: context.l10n.emailLabel,
+                  hintText: context.l10n.emailHint,
+                  errorText: state.emailInput?.errorL10n(context),
+                  onChanged: bloc.authEmailChanged,
                 ),
-                const SizedBox(height: spacingMedium),
+                const SizedBox(height: spacingSmall),
+                CustomTextField(
+                  onChanged: bloc.authPasswordChanged,
+                  labelText: context.l10n.passwordLabel,
+                  hintText: '',
+                  obscureText: true,
+                  errorText: state.passwordInput?.errorL10n(context),
+                ),
               ],
             ),
             bottom: Column(children: [
               CustomEnterButton(
-                onPressed: () => bloc.signUp(_email.text, _password.text),
+                onPressed: state.isAllFieldsValid ? bloc.trySignUp : null,
                 text: context.l10n.signUpText,
                 progress: state.status == SignUpStatus.loading,
                 buttonSize: buttonHeight,
@@ -79,13 +67,12 @@ class SignUpScreen extends StatelessWidget {
         if (state.status == SignUpStatus.success) {
           context.goNamed(Routes.main.name);
         }
-        if (state.status == SignUpStatus.error) {
+        if (state.isError) {
           final snackBar = SnackBar(
             content: Text(context.l10n.errorMessage),
             backgroundColor: Theme.of(context).colorScheme.error,
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          bloc.setInitialEnum();
         }
       },
     );
