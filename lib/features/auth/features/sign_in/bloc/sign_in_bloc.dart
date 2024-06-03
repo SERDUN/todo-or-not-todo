@@ -13,7 +13,6 @@ class SignInBloc extends Cubit<SignInState> {
       : super(const SignInState(
           isEmailValid: true,
           isPasswordValid: true,
-          obscureText: true,
         ));
 
   final LoginUseCase loginUseCase;
@@ -40,13 +39,5 @@ class SignInBloc extends Cubit<SignInState> {
     final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
     final isValid = emailRegex.hasMatch(email);
     emit(state.copyWith(isEmailValid: isValid));
-  }
-
-  void showPassword() {
-    emit(state.copyWith(obscureText: true));
-  }
-
-  void hidePassword() {
-    emit(state.copyWith(obscureText: false));
   }
 }

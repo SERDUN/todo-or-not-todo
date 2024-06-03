@@ -12,7 +12,6 @@ class SignUpBloc extends Cubit<SignUpState> {
       : super(const SignUpState(
           isEmailValid: true,
           isPasswordValid: true,
-          obscureText: true,
         ));
 
   final RegisterUseCase registerUseCase;
@@ -52,14 +51,6 @@ class SignUpBloc extends Cubit<SignUpState> {
     } else {
       emit(state.copyWith(isPasswordValid: true));
     }
-  }
-
-  void showPassword() {
-    emit(state.copyWith(obscureText: true));
-  }
-
-  void hidePassword() {
-    emit(state.copyWith(obscureText: false));
   }
 
   void setInitialEnum() {

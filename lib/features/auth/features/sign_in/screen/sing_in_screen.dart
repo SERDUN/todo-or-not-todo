@@ -48,14 +48,8 @@ class SignInScreen extends StatelessWidget {
                     controller: _password,
                     labelText: context.l10n.passwordLabel,
                     hintText: '',
-                    obscureText: state.obscureText,
+                    obscureText: true,
                     isValid: state.isPasswordValid,
-                    visibilityIcon: Icon(
-                      state.obscureText ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    onVisibilityToggle: () {
-                      state.obscureText ? bloc.hidePassword() : bloc.showPassword();
-                    },
                     errorText: context.l10n.passwordError,
                   ),
                 ],

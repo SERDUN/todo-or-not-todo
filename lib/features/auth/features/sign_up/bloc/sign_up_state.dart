@@ -11,7 +11,6 @@ class SignUpState with _$SignUpState {
   const factory SignUpState({
     required bool isEmailValid,
     required bool isPasswordValid,
-    required bool obscureText,
     Object? error,
     @Default(SignUpStatus.initial) SignUpStatus status,
   }) = _SignUpState;

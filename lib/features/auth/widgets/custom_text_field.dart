@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../consts.dart';
-
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   const CustomTextField({
     required this.controller,
     required this.labelText,
@@ -12,7 +10,6 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.obscureText = false,
     this.onVisibilityToggle,
-    this.visibilityIcon,
     this.onChanged,
   });
 
@@ -21,31 +18,52 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final bool isValid;
+  final String errorText;
+
   final ValueChanged<String>? onChanged;
   final VoidCallback? onVisibilityToggle;
-  final Icon? visibilityIcon;
-  final String errorText;
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  bool _isObscureText = false;
+
+  @override
+  void initState() {
+    _isObscureText = widget.obscureText;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final obscureText = widget.obscureText
+        ? IconButton(
+            icon: Icon(_getObscureIcon()),
+            onPressed: _onVisibilityToggle,
+          )
+        : null;
+
     return TextField(
-      controller: controller,
-      obscureText: obscureText,
+      controller: widget.controller,
+      obscureText: _isObscureText,
       decoration: InputDecoration(
-        labelText: labelText,
-        hintText: hintText,
-        errorText: isValid ? null : errorText,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-        suffixIcon: visibilityIcon != null
-            ? IconButton(
-                icon: visibilityIcon!,
-                onPressed: onVisibilityToggle,
-              )
-            : null,
+        labelText: widget.labelText,
+        hintText: widget.hintText,
+        errorText: widget.isValid ? null : widget.errorText,
+        suffixIcon: obscureText,
       ),
-      onChanged: onChanged,
+      onChanged: widget.onChanged,
     );
+  }
+
+  IconData _getObscureIcon() {
+    return _isObscureText ? Icons.visibility_off : Icons.visibility;
+  }
+
+  void _onVisibilityToggle() {
+    _isObscureText = !_isObscureText;
+    setState(() {});
   }
 }
