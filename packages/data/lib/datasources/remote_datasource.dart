@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:data/dtos/auth/auth.dart';
-import 'package:data/dtos/todo/todo.dart';
+import 'package:data/dtos/dtos.dart';
 
 import 'local_keys_datasource.dart';
 
@@ -27,7 +26,8 @@ class RemoteDatasource {
     final options = await _getOptionsWithToken();
     final response = await httpClient.post<Map<String, dynamic>>(
       '/todo',
-      data: todo.toJson(),
+      // TODO(Serdun): Work around for correct work with api, fix on server side.
+      data: todo.toJson()..remove('id'),
       options: options,
     );
     return TodoDTO.fromJson(response.data!);

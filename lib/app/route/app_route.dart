@@ -67,20 +67,32 @@ class AppRoute {
                 StatefulShellBranch(
                   routes: <RouteBase>[
                     GoRoute(
-                      name: Routes.tasks.name,
-                      path: '/${Routes.tasks.name}',
-                      builder: (BuildContext context, GoRouterState state) => BlocProvider(
-                        create: (context) => TasksBloc(serviceLocator.get()),
-                        child: const TasksScreen(),
-                      ),
-                      redirect: (context, state) async {
-                        final isAuthorized = await _isUserAuthorized();
-                        if (!isAuthorized) {
-                          return '/${Routes.signIn.name}';
-                        }
-                        return null; // No redirect if authorized
-                      },
-                    )
+                        name: Routes.tasks.name,
+                        path: '/${Routes.tasks.name}',
+                        builder: (BuildContext context, GoRouterState state) => BlocProvider(
+                              create: (context) => TasksBloc(
+                                serviceLocator.get(),
+                                serviceLocator.get(),
+                              ),
+                              child: const TasksScreen(),
+                            ),
+                        redirect: (context, state) async {
+                          final isAuthorized = await _isUserAuthorized();
+                          if (!isAuthorized) {
+                            return '/${Routes.signIn.name}';
+                          }
+                          return null; // No redirect if authorized
+                        },
+                        routes: [
+                          GoRoute(
+                            name: Routes.taskAdd.name,
+                            path: Routes.taskAdd.name,
+                            builder: (BuildContext context, GoRouterState state) => BlocProvider(
+                              create: (context) => TasksAddCubit(serviceLocator.get()),
+                              child: TasksAddscreen(),
+                            ),
+                          ),
+                        ])
                   ],
                 ),
                 StatefulShellBranch(

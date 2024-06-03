@@ -42,7 +42,7 @@ class _TasksScreenState extends State<TasksScreen> {
                         return GestureDetector(
                           onTap: () => _pushToTaskDetailsScreen(
                             context,
-                            id:1,
+                            id: 1,
                           ),
                           child: Card(
                             margin: const EdgeInsets.symmetric(vertical: paddingVertical),
@@ -51,18 +51,28 @@ class _TasksScreenState extends State<TasksScreen> {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(cardPadding),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              child: Row(
                                 children: [
-                                  Text(
-                                    task.title,
-                                    style: Theme.of(context).textTheme.labelMedium,
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${task.title} id:${task.id}',
+                                          style: Theme.of(context).textTheme.labelMedium,
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          task.content,
+                                          style: Theme.of(context).textTheme.labelSmall,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    task.content,
-                                    style: Theme.of(context).textTheme.labelSmall,
-                                  ),
+                                  InkWell(
+                                    child: const Icon(Icons.delete),
+                                    onTap: () => context.read<TasksBloc>().delete(task.id),
+                                  )
                                 ],
                               ),
                             ),
@@ -76,6 +86,7 @@ class _TasksScreenState extends State<TasksScreen> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
+              context.pushNamed(Routes.taskAdd.name).then(context.read<TasksBloc>().fetch);
               // TODO(Kovalchuck): Implement the function
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
@@ -99,8 +110,8 @@ class _TasksScreenState extends State<TasksScreen> {
   void _pushToTaskDetailsScreen(
     BuildContext context, {
     required int id,
-  }) {
-    context.goNamed(Routes.taskDetails.name, queryParameters: {
+  }) async {
+    await context.pushNamed(Routes.taskDetails.name, queryParameters: {
       queryIdText: id.toString(),
     });
   }
