@@ -87,7 +87,10 @@ class AppRoute {
                   routes: <RouteBase>[
                     GoRoute(
                       path: '/profile',
-                      builder: (BuildContext context, GoRouterState state) => const ProfileScreen(),
+                      builder: (BuildContext context, GoRouterState state) => BlocProvider(
+                        create: (BuildContext context) => ProfileCubit(),
+                        child: const ProfileScreen(),
+                      ),
                     ),
                   ],
                 ),
