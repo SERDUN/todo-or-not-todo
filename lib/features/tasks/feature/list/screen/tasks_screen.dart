@@ -6,8 +6,9 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_or_not_todo/app/consts.dart';
 import 'package:todo_or_not_todo/extensions/extensions.dart';
 
-import '../../../app/route/route.dart';
-import '../../consts.dart';
+import 'package:todo_or_not_todo/app/route/route.dart';
+import 'package:todo_or_not_todo/features/consts.dart';
+
 import '../bloc/tasks_bloc.dart';
 
 class TasksScreen extends StatefulWidget {
