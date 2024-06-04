@@ -67,33 +67,24 @@ class AppRoute {
                 StatefulShellBranch(
                   routes: <RouteBase>[
                     GoRoute(
-                        name: Routes.tasks.name,
-                        path: '/${Routes.tasks.name}',
-                        builder: (BuildContext context, GoRouterState state) => BlocProvider(
-                              create: (context) => TasksBloc(
-                                serviceLocator.get(),
-                                serviceLocator.get(),
-                                serviceLocator.get(),
-                              ),
-                              child: const TasksScreen(),
-                            ),
-                        redirect: (context, state) async {
-                          final isAuthorized = await _isUserAuthorized();
-                          if (!isAuthorized) {
-                            return '/${Routes.signIn.name}';
-                          }
-                          return null; // No redirect if authorized
-                        },
-                        routes: [
-                          GoRoute(
-                            name: Routes.taskAdd.name,
-                            path: Routes.taskAdd.name,
-                            builder: (BuildContext context, GoRouterState state) => BlocProvider(
-                              create: (context) => AddTaskCubit(serviceLocator.get()),
-                              child: AddTaskScreen(),
-                            ),
-                          ),
-                        ])
+                      name: Routes.tasks.name,
+                      path: '/${Routes.tasks.name}',
+                      builder: (BuildContext context, GoRouterState state) => BlocProvider(
+                        create: (context) => TasksBloc(
+                          serviceLocator.get(),
+                          serviceLocator.get(),
+                          serviceLocator.get(),
+                        ),
+                        child: const TasksScreen(),
+                      ),
+                      redirect: (context, state) async {
+                        final isAuthorized = await _isUserAuthorized();
+                        if (!isAuthorized) {
+                          return '/${Routes.signIn.name}';
+                        }
+                        return null; // No redirect if authorized
+                      },
+                    )
                   ],
                 ),
                 StatefulShellBranch(
@@ -110,6 +101,21 @@ class AppRoute {
               ],
             ),
           ],
+        ),
+        GoRoute(
+          name: Routes.taskAdd.name,
+          path: '/${Routes.taskAdd.name}',
+          builder: (BuildContext context, GoRouterState state) {
+            final queryId = state.uri.queryParameters[QueriesKeys.queryIdText];
+            return BlocProvider(
+              create: (context) => AddTaskCubit(
+                serviceLocator.get(),
+                serviceLocator.get(),
+                queryId ?? '',
+              ),
+              child: AddTaskScreen(),
+            );
+          },
         ),
         GoRoute(
           name: Routes.taskDetails.name,

@@ -20,4 +20,6 @@ class TasksDetailsState with _$TasksDetailsState {
   bool get isFailure => failure != null;
 
   bool get isProgress => status == TasksDetailsStatus.initial || status == TasksDetailsStatus.loading;
+
+  List<String> get subTask => task?.subTask ?? [];
 }

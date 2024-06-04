@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddTaskState {
+  String get parentTaskId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   TaskStatus get taskStatus => throw _privateConstructorUsedError;
@@ -35,7 +36,8 @@ abstract class $AddTaskStateCopyWith<$Res> {
       _$AddTaskStateCopyWithImpl<$Res, AddTaskState>;
   @useResult
   $Res call(
-      {String title,
+      {String parentTaskId,
+      String title,
       String? description,
       TaskStatus taskStatus,
       TaskPriority taskPriority,
@@ -56,6 +58,7 @@ class _$AddTaskStateCopyWithImpl<$Res, $Val extends AddTaskState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? parentTaskId = null,
     Object? title = null,
     Object? description = freezed,
     Object? taskStatus = null,
@@ -64,6 +67,10 @@ class _$AddTaskStateCopyWithImpl<$Res, $Val extends AddTaskState>
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
+      parentTaskId: null == parentTaskId
+          ? _value.parentTaskId
+          : parentTaskId // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -98,7 +105,8 @@ abstract class _$$AddTaskStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String title,
+      {String parentTaskId,
+      String title,
       String? description,
       TaskStatus taskStatus,
       TaskPriority taskPriority,
@@ -117,6 +125,7 @@ class __$$AddTaskStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? parentTaskId = null,
     Object? title = null,
     Object? description = freezed,
     Object? taskStatus = null,
@@ -125,6 +134,10 @@ class __$$AddTaskStateImplCopyWithImpl<$Res>
     Object? error = freezed,
   }) {
     return _then(_$AddTaskStateImpl(
+      parentTaskId: null == parentTaskId
+          ? _value.parentTaskId
+          : parentTaskId // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -154,7 +167,8 @@ class __$$AddTaskStateImplCopyWithImpl<$Res>
 
 class _$AddTaskStateImpl extends _AddTaskState {
   const _$AddTaskStateImpl(
-      {this.title = '',
+      {this.parentTaskId = '',
+      this.title = '',
       this.description = '',
       this.taskStatus = TaskStatus.open,
       this.taskPriority = TaskPriority.minor,
@@ -162,6 +176,9 @@ class _$AddTaskStateImpl extends _AddTaskState {
       this.error})
       : super._();
 
+  @override
+  @JsonKey()
+  final String parentTaskId;
   @override
   @JsonKey()
   final String title;
@@ -182,7 +199,7 @@ class _$AddTaskStateImpl extends _AddTaskState {
 
   @override
   String toString() {
-    return 'AddTaskState(title: $title, description: $description, taskStatus: $taskStatus, taskPriority: $taskPriority, status: $status, error: $error)';
+    return 'AddTaskState(parentTaskId: $parentTaskId, title: $title, description: $description, taskStatus: $taskStatus, taskPriority: $taskPriority, status: $status, error: $error)';
   }
 
   @override
@@ -190,6 +207,8 @@ class _$AddTaskStateImpl extends _AddTaskState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddTaskStateImpl &&
+            (identical(other.parentTaskId, parentTaskId) ||
+                other.parentTaskId == parentTaskId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -202,8 +221,15 @@ class _$AddTaskStateImpl extends _AddTaskState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, description, taskStatus,
-      taskPriority, status, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(
+      runtimeType,
+      parentTaskId,
+      title,
+      description,
+      taskStatus,
+      taskPriority,
+      status,
+      const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
@@ -214,7 +240,8 @@ class _$AddTaskStateImpl extends _AddTaskState {
 
 abstract class _AddTaskState extends AddTaskState {
   const factory _AddTaskState(
-      {final String title,
+      {final String parentTaskId,
+      final String title,
       final String? description,
       final TaskStatus taskStatus,
       final TaskPriority taskPriority,
@@ -222,6 +249,8 @@ abstract class _AddTaskState extends AddTaskState {
       final Object? error}) = _$AddTaskStateImpl;
   const _AddTaskState._() : super._();
 
+  @override
+  String get parentTaskId;
   @override
   String get title;
   @override

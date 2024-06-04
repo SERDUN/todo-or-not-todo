@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/extensions/extensions.dart';
 import 'package:todo_or_not_todo/features/consts.dart';
+import 'package:todo_or_not_todo/features/tasks/widgets/widgets.dart';
 
 import '../bloc/tasks_details_bloc.dart';
 
@@ -24,6 +25,7 @@ class _TasksDetailsScreenState extends State<TasksDetailsScreen> {
     final bloc = BlocProvider.of<TasksDetailsBloc>(context);
 
     final theme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
@@ -84,6 +86,25 @@ class _TasksDetailsScreenState extends State<TasksDetailsScreen> {
                       style: theme.labelLarge,
                     ),
                   ),
+                  Divider(
+                    color: colorScheme.onSurface.withOpacity(.1),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        SubTaskAdd(onPressed: () {}),
+                        const SizedBox(height: 16),
+                        SubTasks(
+                          tasks: state.subTask,
+                          onTab: (it) => _openSubTask(context, it),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
                 ],
               ),
             ),
@@ -93,6 +114,8 @@ class _TasksDetailsScreenState extends State<TasksDetailsScreen> {
       ),
     );
   }
+
+  void _openSubTask(BuildContext context, String id) {}
 
   void _listenState(BuildContext context, TasksDetailsState state) {
     // TODO(Serdun): Add string local resources
