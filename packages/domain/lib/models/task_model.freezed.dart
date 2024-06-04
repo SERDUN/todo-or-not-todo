@@ -23,6 +23,7 @@ mixin _$TaskModel {
   TaskStatus? get status => throw _privateConstructorUsedError;
   DateTime? get deadline => throw _privateConstructorUsedError;
   TaskPriority? get priority => throw _privateConstructorUsedError;
+  List<String> get subTask => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskModelCopyWith<TaskModel> get copyWith =>
@@ -41,7 +42,8 @@ abstract class $TaskModelCopyWith<$Res> {
       int? position,
       TaskStatus? status,
       DateTime? deadline,
-      TaskPriority? priority});
+      TaskPriority? priority,
+      List<String> subTask});
 }
 
 /// @nodoc
@@ -64,6 +66,7 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
     Object? status = freezed,
     Object? deadline = freezed,
     Object? priority = freezed,
+    Object? subTask = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -94,6 +97,10 @@ class _$TaskModelCopyWithImpl<$Res, $Val extends TaskModel>
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
               as TaskPriority?,
+      subTask: null == subTask
+          ? _value.subTask
+          : subTask // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -113,7 +120,8 @@ abstract class _$$TaskModelImplCopyWith<$Res>
       int? position,
       TaskStatus? status,
       DateTime? deadline,
-      TaskPriority? priority});
+      TaskPriority? priority,
+      List<String> subTask});
 }
 
 /// @nodoc
@@ -134,6 +142,7 @@ class __$$TaskModelImplCopyWithImpl<$Res>
     Object? status = freezed,
     Object? deadline = freezed,
     Object? priority = freezed,
+    Object? subTask = null,
   }) {
     return _then(_$TaskModelImpl(
       id: null == id
@@ -164,6 +173,10 @@ class __$$TaskModelImplCopyWithImpl<$Res>
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
               as TaskPriority?,
+      subTask: null == subTask
+          ? _value._subTask
+          : subTask // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -178,7 +191,9 @@ class _$TaskModelImpl implements _TaskModel {
       this.position,
       this.status,
       this.deadline,
-      this.priority});
+      this.priority,
+      final List<String> subTask = const []})
+      : _subTask = subTask;
 
   @override
   final String id;
@@ -194,10 +209,18 @@ class _$TaskModelImpl implements _TaskModel {
   final DateTime? deadline;
   @override
   final TaskPriority? priority;
+  final List<String> _subTask;
+  @override
+  @JsonKey()
+  List<String> get subTask {
+    if (_subTask is EqualUnmodifiableListView) return _subTask;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_subTask);
+  }
 
   @override
   String toString() {
-    return 'TaskModel(id: $id, title: $title, content: $content, position: $position, status: $status, deadline: $deadline, priority: $priority)';
+    return 'TaskModel(id: $id, title: $title, content: $content, position: $position, status: $status, deadline: $deadline, priority: $priority, subTask: $subTask)';
   }
 
   @override
@@ -214,12 +237,21 @@ class _$TaskModelImpl implements _TaskModel {
             (identical(other.deadline, deadline) ||
                 other.deadline == deadline) &&
             (identical(other.priority, priority) ||
-                other.priority == priority));
+                other.priority == priority) &&
+            const DeepCollectionEquality().equals(other._subTask, _subTask));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, title, content, position, status, deadline, priority);
+      runtimeType,
+      id,
+      title,
+      content,
+      position,
+      status,
+      deadline,
+      priority,
+      const DeepCollectionEquality().hash(_subTask));
 
   @JsonKey(ignore: true)
   @override
@@ -236,7 +268,8 @@ abstract class _TaskModel implements TaskModel {
       final int? position,
       final TaskStatus? status,
       final DateTime? deadline,
-      final TaskPriority? priority}) = _$TaskModelImpl;
+      final TaskPriority? priority,
+      final List<String> subTask}) = _$TaskModelImpl;
 
   @override
   String get id;
@@ -252,6 +285,8 @@ abstract class _TaskModel implements TaskModel {
   DateTime? get deadline;
   @override
   TaskPriority? get priority;
+  @override
+  List<String> get subTask;
   @override
   @JsonKey(ignore: true)
   _$$TaskModelImplCopyWith<_$TaskModelImpl> get copyWith =>

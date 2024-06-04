@@ -14,5 +14,6 @@ abstract class TaskModel with _$TaskModel {
     TaskStatus? status,
     DateTime? deadline,
     TaskPriority? priority,
+    @Default([]) List<String> subTask,
   }) = _TaskModel;
 }
