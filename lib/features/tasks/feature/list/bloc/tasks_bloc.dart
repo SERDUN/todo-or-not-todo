@@ -15,7 +15,7 @@ class TasksBloc extends Cubit<TasksState> {
     this.getAllTasksUseCase,
     this.deleteTaskByIdUseCase,
     this.updateTaskByIdUseCase,
-  ) : super(const TasksState()) {
+  ) : super(const TasksState(taskStatus: TaskStatus.values)) {
     _init();
   }
 
@@ -35,6 +35,13 @@ class TasksBloc extends Cubit<TasksState> {
     emit(state.copyWith(status: TasksStatus.loading));
     await deleteTaskByIdUseCase.execute(id);
     unawaited(_getTasks());
+  }
+  Future<void> addFilteringTaskStatus(TaskStatus status) async {
+    emit(state.copyWith(taskStatus: List.from(state.taskStatus)..add(status)));
+  }
+
+  Future<void> removeFilteringTaskStatus(TaskStatus status) async {
+    emit(state.copyWith(taskStatus: List.from(state.taskStatus)..remove(status)));
   }
 
   Future<void> updatePosition(int oldIndex, int newIndex) async {

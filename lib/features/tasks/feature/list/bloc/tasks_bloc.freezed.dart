@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TasksState {
   TasksStatus get status => throw _privateConstructorUsedError;
+  List<TaskStatus> get taskStatus => throw _privateConstructorUsedError;
   List<TaskModel> get tasks => throw _privateConstructorUsedError;
   Object? get exception => throw _privateConstructorUsedError;
 
@@ -31,7 +32,11 @@ abstract class $TasksStateCopyWith<$Res> {
           TasksState value, $Res Function(TasksState) then) =
       _$TasksStateCopyWithImpl<$Res, TasksState>;
   @useResult
-  $Res call({TasksStatus status, List<TaskModel> tasks, Object? exception});
+  $Res call(
+      {TasksStatus status,
+      List<TaskStatus> taskStatus,
+      List<TaskModel> tasks,
+      Object? exception});
 }
 
 /// @nodoc
@@ -48,6 +53,7 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
   @override
   $Res call({
     Object? status = null,
+    Object? taskStatus = null,
     Object? tasks = null,
     Object? exception = freezed,
   }) {
@@ -56,6 +62,10 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TasksStatus,
+      taskStatus: null == taskStatus
+          ? _value.taskStatus
+          : taskStatus // ignore: cast_nullable_to_non_nullable
+              as List<TaskStatus>,
       tasks: null == tasks
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
@@ -73,7 +83,11 @@ abstract class _$$TasksStateImplCopyWith<$Res>
       __$$TasksStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({TasksStatus status, List<TaskModel> tasks, Object? exception});
+  $Res call(
+      {TasksStatus status,
+      List<TaskStatus> taskStatus,
+      List<TaskModel> tasks,
+      Object? exception});
 }
 
 /// @nodoc
@@ -88,6 +102,7 @@ class __$$TasksStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
+    Object? taskStatus = null,
     Object? tasks = null,
     Object? exception = freezed,
   }) {
@@ -96,6 +111,10 @@ class __$$TasksStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TasksStatus,
+      taskStatus: null == taskStatus
+          ? _value._taskStatus
+          : taskStatus // ignore: cast_nullable_to_non_nullable
+              as List<TaskStatus>,
       tasks: null == tasks
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
@@ -107,16 +126,28 @@ class __$$TasksStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TasksStateImpl implements _TasksState {
+class _$TasksStateImpl extends _TasksState {
   const _$TasksStateImpl(
       {this.status = TasksStatus.initial,
+      final List<TaskStatus> taskStatus = const [],
       final List<TaskModel> tasks = const [],
       this.exception})
-      : _tasks = tasks;
+      : _taskStatus = taskStatus,
+        _tasks = tasks,
+        super._();
 
   @override
   @JsonKey()
   final TasksStatus status;
+  final List<TaskStatus> _taskStatus;
+  @override
+  @JsonKey()
+  List<TaskStatus> get taskStatus {
+    if (_taskStatus is EqualUnmodifiableListView) return _taskStatus;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_taskStatus);
+  }
+
   final List<TaskModel> _tasks;
   @override
   @JsonKey()
@@ -131,7 +162,7 @@ class _$TasksStateImpl implements _TasksState {
 
   @override
   String toString() {
-    return 'TasksState(status: $status, tasks: $tasks, exception: $exception)';
+    return 'TasksState(status: $status, taskStatus: $taskStatus, tasks: $tasks, exception: $exception)';
   }
 
   @override
@@ -140,6 +171,8 @@ class _$TasksStateImpl implements _TasksState {
         (other.runtimeType == runtimeType &&
             other is _$TasksStateImpl &&
             (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality()
+                .equals(other._taskStatus, _taskStatus) &&
             const DeepCollectionEquality().equals(other._tasks, _tasks) &&
             const DeepCollectionEquality().equals(other.exception, exception));
   }
@@ -148,6 +181,7 @@ class _$TasksStateImpl implements _TasksState {
   int get hashCode => Object.hash(
       runtimeType,
       status,
+      const DeepCollectionEquality().hash(_taskStatus),
       const DeepCollectionEquality().hash(_tasks),
       const DeepCollectionEquality().hash(exception));
 
@@ -158,14 +192,18 @@ class _$TasksStateImpl implements _TasksState {
       __$$TasksStateImplCopyWithImpl<_$TasksStateImpl>(this, _$identity);
 }
 
-abstract class _TasksState implements TasksState {
+abstract class _TasksState extends TasksState {
   const factory _TasksState(
       {final TasksStatus status,
+      final List<TaskStatus> taskStatus,
       final List<TaskModel> tasks,
       final Object? exception}) = _$TasksStateImpl;
+  const _TasksState._() : super._();
 
   @override
   TasksStatus get status;
+  @override
+  List<TaskStatus> get taskStatus;
   @override
   List<TaskModel> get tasks;
   @override

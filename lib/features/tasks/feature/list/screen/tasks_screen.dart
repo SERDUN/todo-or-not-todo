@@ -1,11 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:todo_or_not_todo/app/consts.dart';
 import 'package:todo_or_not_todo/extensions/extensions.dart';
 import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/features/consts.dart';
+
 import '../bloc/tasks_bloc.dart';
 
 class TasksScreen extends StatefulWidget {
@@ -24,7 +26,27 @@ class _TasksScreenState extends State<TasksScreen> {
           body: Padding(
             padding: const EdgeInsets.all(paddingHorizontal),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // TODO(Serdun): add locale resource
+                const Text('Filtering:'),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 8,
+                  children: state.taskStatuses.map((status) {
+                    return FilterChip(
+                      label: Text(status.key),
+                      selected: state.taskStatus.contains(status),
+                      onSelected: (isSelected) {
+                        isSelected
+                            ? context.read<TasksBloc>().addFilteringTaskStatus(status)
+                            : context.read<TasksBloc>().removeFilteringTaskStatus(status);
+                      },
+                    );
+                  }).toList(),
+                ),
+                const Divider(),
+                const SizedBox(height: 8),
                 if (state.status == TasksStatus.loading)
                   Center(
                     child: CircularProgressIndicator(
@@ -35,7 +57,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   Expanded(
                     child: ReorderableListView.builder(
                       padding: EdgeInsets.zero,
-                      itemCount: state.tasks.length,
+                      itemCount: state.filteredTasks.length,
                       onReorder: (int oldIndex, int newIndex) {
                         if (newIndex > oldIndex) {
                           newIndex -= 1;
@@ -43,7 +65,7 @@ class _TasksScreenState extends State<TasksScreen> {
                         context.read<TasksBloc>().updatePosition(oldIndex, newIndex);
                       },
                       itemBuilder: (context, index) {
-                        final task = state.tasks[index];
+                        final task = state.filteredTasks[index];
                         return Padding(
                             key: ValueKey(task.id),
                             padding: const EdgeInsets.symmetric(vertical: 8.0), // Adjust vertical margin as needed
