@@ -1,8 +1,8 @@
 enum TaskPriority {
-  minor('Minor'),
-  major('Major'),
-  critical('Critical'),
-  blocked('Blocked'),
+  minor('minor'),
+  major('major'),
+  critical('critical'),
+  blocked('blocked'),
   trivial('Trivial');
 
   const TaskPriority(this.key);
