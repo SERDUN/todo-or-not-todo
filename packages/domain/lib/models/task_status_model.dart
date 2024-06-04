@@ -1,7 +1,7 @@
 enum TaskStatus {
   open('open'),
   toDo('to_do'),
-  inProgres('in_progres'),
+  inProgress('in_progress'),
   done('done');
 
   const TaskStatus(this.key);
