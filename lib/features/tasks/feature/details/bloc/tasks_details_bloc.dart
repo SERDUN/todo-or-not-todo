@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,6 +22,10 @@ class TasksDetailsBloc extends Cubit<TasksDetailsState> {
 
   final GetTaskByIdUseCase getTaskByIdUseCase;
 
+  FutureOr<void> fetch(dynamic value) async {
+    unawaited(getTask(taskId));
+  }
+
   void _init() {
     getTask(taskId);
   }
@@ -34,7 +40,7 @@ class TasksDetailsBloc extends Cubit<TasksDetailsState> {
         task: task,
       ));
     } catch (e) {
-      emit(state.copyWith(status: TasksDetailsStatus.error));
+      emit(state.copyWith(failure: e));
     }
   }
 }

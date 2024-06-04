@@ -5,10 +5,10 @@ import 'package:go_router/go_router.dart';
 
 import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/extensions/extensions.dart';
-import 'package:todo_or_not_todo/features/consts.dart';
 import 'package:todo_or_not_todo/features/tasks/widgets/widgets.dart';
 
 import '../bloc/tasks_details_bloc.dart';
+import '../widgets/widgets.dart';
 
 class TasksDetailsScreen extends StatefulWidget {
   const TasksDetailsScreen({
@@ -43,65 +43,21 @@ class _TasksDetailsScreenState extends State<TasksDetailsScreen> {
                     visible: state.isProgress,
                     child: const LinearProgressIndicator(),
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Title',
-                      style: theme.labelMedium,
+                  if (state.isSuccess) TaskDetails(taskModel: state.task!),
+                  if (state.isSuccess)
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          SubTaskAdd(onPressed: () => _navigateToAddSubTask(context, state.task!.id)),
+                          const SizedBox(height: 16),
+                          SubTasks(
+                            tasks: state.subTask,
+                            onTab: (it) => _navigateToDetailsTask(context, it),
+                          )
+                        ],
+                      ),
                     ),
-                    subtitle: Text(
-                      state.task?.title ?? '',
-                      style: theme.labelLarge,
-                    ),
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Description',
-                      style: theme.labelMedium,
-                    ),
-                    subtitle: Text(
-                      state.task?.content ?? '',
-                      style: theme.labelLarge,
-                    ),
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Status',
-                      style: theme.labelMedium,
-                    ),
-                    subtitle: Text(
-                      state.task?.status?.name ?? '',
-                      style: theme.labelLarge,
-                    ),
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Priority',
-                      style: theme.labelMedium,
-                    ),
-                    subtitle: Text(
-                      state.task?.priority?.name ?? '',
-                      style: theme.labelLarge,
-                    ),
-                  ),
-                  Divider(
-                    color: colorScheme.onSurface.withOpacity(.1),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        SubTaskAdd(onPressed: () {}),
-                        const SizedBox(height: 16),
-                        SubTasks(
-                          tasks: state.subTask,
-                          onTab: (it) => _openSubTask(context, it),
-                        )
-                      ],
-                    ),
-                  ),
                   const SizedBox(
                     height: 16,
                   ),
@@ -115,7 +71,11 @@ class _TasksDetailsScreenState extends State<TasksDetailsScreen> {
     );
   }
 
-  void _openSubTask(BuildContext context, String id) {}
+  void _navigateToAddSubTask(BuildContext context, String id) => context.pushNamed(Routes.taskAdd.name,
+      queryParameters: {QueriesKeys.queryIdText: id}).then(context.read<TasksDetailsBloc>().fetch);
+
+  void _navigateToDetailsTask(BuildContext context, String id) =>
+      context.pushNamed(Routes.taskDetails.name, queryParameters: {QueriesKeys.queryIdText: id});
 
   void _listenState(BuildContext context, TasksDetailsState state) {
     // TODO(Serdun): Add string local resources

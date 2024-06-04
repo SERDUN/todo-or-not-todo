@@ -3,7 +3,6 @@ part of 'tasks_details_bloc.dart';
 enum TasksDetailsStatus {
   initial,
   loading,
-  error,
   success,
 }
 
@@ -16,6 +15,8 @@ class TasksDetailsState with _$TasksDetailsState {
   }) = _TasksDetailsState;
 
   const TasksDetailsState._();
+
+  bool get isSuccess => status == TasksDetailsStatus.success;
 
   bool get isFailure => failure != null;
 
