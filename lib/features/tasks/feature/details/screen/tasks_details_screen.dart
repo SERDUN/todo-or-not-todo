@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/extensions/extensions.dart';
 import 'package:todo_or_not_todo/features/tasks/widgets/widgets.dart';
 
@@ -54,11 +56,11 @@ class _TasksDetailsScreenState extends State<TasksDetailsScreen> {
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         children: [
-                          SubTaskAdd(onPressed: () {}),
+                          SubTaskAdd(onPressed: () => _navigateToAddSubTask(context, state.task!.id)),
                           const SizedBox(height: 16),
                           SubTasks(
                             tasks: state.subTask,
-                            onTab: (it) => _openSubTask(context, it),
+                            onTab: (it) => _navigateToDetailsTask(context, it),
                           )
                         ],
                       ),
@@ -76,7 +78,11 @@ class _TasksDetailsScreenState extends State<TasksDetailsScreen> {
     );
   }
 
-  void _openSubTask(BuildContext context, String id) {}
+  void _navigateToAddSubTask(BuildContext context, String id) => context.pushNamed(Routes.taskAdd.name,
+      queryParameters: {QueriesKeys.queryIdText: id}).then(context.read<TasksDetailsBloc>().fetch);
+
+  void _navigateToDetailsTask(BuildContext context, String id) =>
+      context.pushNamed(Routes.taskDetails.name, queryParameters: {QueriesKeys.queryIdText: id});
 
   void _listenState(BuildContext context, TasksDetailsState state) {
     // TODO(Serdun): Add string local resources
