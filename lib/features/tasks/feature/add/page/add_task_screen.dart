@@ -39,6 +39,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
+                  // TODO(Serdun): Add localization
                   decoration: const InputDecoration(labelText: 'Title'),
                   onChanged: bloc.updateTitleField,
                   validator: (value) {
@@ -50,6 +51,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
+                  // TODO(Serdun): Add localization
                   decoration: const InputDecoration(labelText: 'Description'),
                   onChanged: bloc.updateDescriptionField,
                   validator: (value) {
@@ -62,15 +64,25 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
                   value: state.taskStatus.name,
-                  decoration: InputDecoration(labelText: state.taskStatus.name),
-                  items: state.taskStatuses
+                  decoration: const InputDecoration(labelText: 'Status'),
+                  items: state.allTaskStatuses
                       .map((it) => DropdownMenuItem<String>(value: it.name, child: Text(it.name)))
                       .toList(),
                   onChanged: (value) => bloc.updateTaskStatusField(TaskStatus.values.byName(value!)),
                 ),
                 const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  value: state.taskPriority.name,
+                  decoration: const InputDecoration(labelText: 'Priority'),
+                  items: state.allTaskPriority
+                      .map((it) => DropdownMenuItem<String>(value: it.name, child: Text(it.name)))
+                      .toList(),
+                  onChanged: (value) => bloc.updateTaskPriorityField(TaskPriority.values.byName(value!)),
+                ),
+                const SizedBox(height: 16),
                 Row(
                   children: [
+                    // TODO(Serdun): Add localization
                     Text('Sub tasks ', style: theme.titleMedium),
                     const Expanded(child: Divider()),
                     const SizedBox(width: 8),
@@ -79,6 +91,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         child: const Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
+                            // TODO(Serdun): Add localization
                             Text('Add subtask'),
                             const SizedBox(width: 8),
                             Icon(Icons.add_sharp),

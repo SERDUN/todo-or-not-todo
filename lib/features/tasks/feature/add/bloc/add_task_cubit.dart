@@ -18,10 +18,19 @@ class AddTaskCubit extends Cubit<AddTaskState> {
 
   void updateTaskStatusField(TaskStatus status) => emit(state.copyWith(taskStatus: status));
 
+  void updateTaskPriorityField(TaskPriority status) => emit(state.copyWith(taskPriority: status));
+
   Future<void> save() async {
     try {
       // TODO(Serdun): remove id
-      await createTaskUseCase.execute(TaskModel(id: '', title: state.title, content: state.description ?? ''));
+      await createTaskUseCase.execute(TaskModel(
+        id: '',
+        title: state.title,
+        content: state.description ?? '',
+        status: state.taskStatus,
+        priority: state.taskPriority,
+      ));
+
       emit(state.copyWith(status: AddTaskStatus.success));
     } catch (e) {
       emit(state.copyWith(error: e));

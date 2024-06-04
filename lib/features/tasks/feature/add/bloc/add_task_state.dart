@@ -12,13 +12,16 @@ class AddTaskState with _$AddTaskState {
     @Default('') String title,
     @Default('') String? description,
     @Default(TaskStatus.open) TaskStatus taskStatus,
+    @Default(TaskPriority.minor) TaskPriority taskPriority,
     @Default(AddTaskStatus.initial) AddTaskStatus status,
     Object? error,
   }) = _AddTaskState;
 
   const AddTaskState._();
 
-  List<TaskStatus> get taskStatuses => TaskStatus.values;
+  List<TaskStatus> get allTaskStatuses => TaskStatus.values;
+
+  List<TaskPriority> get allTaskPriority => TaskPriority.values;
 
   bool get isFailure => error != null;
 
