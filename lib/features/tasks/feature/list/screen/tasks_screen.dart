@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:todo_or_not_todo/app/consts.dart';
 import 'package:todo_or_not_todo/extensions/extensions.dart';
 import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/features/consts.dart';
@@ -91,7 +90,7 @@ class _TasksScreenState extends State<TasksScreen> {
                                   ),
                                   onTap: () => context.read<TasksBloc>().delete(task.id),
                                 ),
-                                onTap: () => _pushToTaskDetailsScreen(context, id: task.id),
+                                onTap: () => _goTaskDetailsScreen(context, task.id),
                               ),
                             ));
                       },
@@ -122,12 +121,6 @@ class _TasksScreenState extends State<TasksScreen> {
     }
   }
 
-  void _pushToTaskDetailsScreen(
-    BuildContext context, {
-    required String id,
-  }) async {
-    await context.pushNamed(Routes.taskDetails.name, queryParameters: {
-      queryIdText: id,
-    });
-  }
+  void _goTaskDetailsScreen(BuildContext context, String id) =>
+      context.pushNamed(Routes.taskDetails.name, queryParameters: {QueriesKeys.queryIdText: id});
 }
