@@ -34,7 +34,7 @@ class TasksDetailsBloc extends Cubit<TasksDetailsState> {
         task: task,
       ));
     } catch (e) {
-      emit(state.copyWith(status: TasksDetailsStatus.error));
+      emit(state.copyWith(failure: e));
     }
   }
 }
