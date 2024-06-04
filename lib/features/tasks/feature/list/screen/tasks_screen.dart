@@ -50,25 +50,28 @@ class _TasksScreenState extends State<TasksScreen> {
                   visible: state.isProgress,
                   child: const LinearProgressIndicator(),
                 ),
-                Expanded(
-                  child: ReorderableListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: state.filteredTasks.length,
-                    onReorder: _onUpdateItemPosition,
-                    itemBuilder: (context, index) => TaskItem(
-                        key: ValueKey(state.filteredTasks[index].id),
-                        task: state.filteredTasks[index],
-                        onDelete: (task) => context.read<TasksBloc>().delete(task.id),
-                        onTap: (task) => _goTaskDetailsScreen(context, task.id)),
-                  ),
-                )
+                if (state.isNoTasks)
+                  EmptyTaskWidget(
+                    onAddTask: () => _goAddTaskScreen(context),
+                  )
+                else
+                  Expanded(
+                    child: ReorderableListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: state.filteredTasks.length,
+                      onReorder: _onUpdateItemPosition,
+                      itemBuilder: (context, index) => TaskItem(
+                          key: ValueKey(state.filteredTasks[index].id),
+                          task: state.filteredTasks[index],
+                          onDelete: (task) => context.read<TasksBloc>().delete(task.id),
+                          onTap: (task) => _goTaskDetailsScreen(context, task.id)),
+                    ),
+                  )
               ],
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              context.pushNamed(Routes.taskAdd.name).then(context.read<TasksBloc>().fetch);
-            },
+            onPressed: () => _goAddTaskScreen(context),
             backgroundColor: Theme.of(context).colorScheme.primary,
             child: Icon(
               Icons.add,
@@ -97,4 +100,7 @@ class _TasksScreenState extends State<TasksScreen> {
 
   void _goTaskDetailsScreen(BuildContext context, String id) =>
       context.pushNamed(Routes.taskDetails.name, queryParameters: {QueriesKeys.queryIdText: id});
+
+  void _goAddTaskScreen(BuildContext context) =>
+      context.pushNamed(Routes.taskAdd.name).then(context.read<TasksBloc>().fetch);
 }
