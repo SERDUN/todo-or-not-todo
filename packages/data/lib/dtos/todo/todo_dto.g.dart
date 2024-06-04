@@ -13,6 +13,8 @@ _$TodoDTOImpl _$$TodoDTOImplFromJson(Map<String, dynamic> json) =>
       details: json['details'] as String,
       userId: json['userId'] as String,
       createdAt: json['createdAt'] as String,
+      priority: json['priority'] as String,
+      status: json['status'] as String,
       position: (json['position'] as num?)?.toInt(),
     );
 
@@ -23,5 +25,7 @@ Map<String, dynamic> _$$TodoDTOImplToJson(_$TodoDTOImpl instance) =>
       'details': instance.details,
       'userId': instance.userId,
       'createdAt': instance.createdAt,
+      'priority': instance.priority,
+      'status': instance.status,
       'position': instance.position,
     };

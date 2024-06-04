@@ -25,6 +25,8 @@ mixin _$TodoDTO {
   String get details => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
+  String get priority => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
   int? get position => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,6 +45,8 @@ abstract class $TodoDTOCopyWith<$Res> {
       String details,
       String userId,
       String createdAt,
+      String priority,
+      String status,
       int? position});
 }
 
@@ -64,6 +68,8 @@ class _$TodoDTOCopyWithImpl<$Res, $Val extends TodoDTO>
     Object? details = null,
     Object? userId = null,
     Object? createdAt = null,
+    Object? priority = null,
+    Object? status = null,
     Object? position = freezed,
   }) {
     return _then(_value.copyWith(
@@ -87,6 +93,14 @@ class _$TodoDTOCopyWithImpl<$Res, $Val extends TodoDTO>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
       position: freezed == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
@@ -108,6 +122,8 @@ abstract class _$$TodoDTOImplCopyWith<$Res> implements $TodoDTOCopyWith<$Res> {
       String details,
       String userId,
       String createdAt,
+      String priority,
+      String status,
       int? position});
 }
 
@@ -127,6 +143,8 @@ class __$$TodoDTOImplCopyWithImpl<$Res>
     Object? details = null,
     Object? userId = null,
     Object? createdAt = null,
+    Object? priority = null,
+    Object? status = null,
     Object? position = freezed,
   }) {
     return _then(_$TodoDTOImpl(
@@ -150,6 +168,14 @@ class __$$TodoDTOImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
       position: freezed == position
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
@@ -167,6 +193,8 @@ class _$TodoDTOImpl extends _TodoDTO {
       required this.details,
       required this.userId,
       required this.createdAt,
+      required this.priority,
+      required this.status,
       this.position})
       : super._();
 
@@ -184,11 +212,15 @@ class _$TodoDTOImpl extends _TodoDTO {
   @override
   final String createdAt;
   @override
+  final String priority;
+  @override
+  final String status;
+  @override
   final int? position;
 
   @override
   String toString() {
-    return 'TodoDTO(id: $id, title: $title, details: $details, userId: $userId, createdAt: $createdAt, position: $position)';
+    return 'TodoDTO(id: $id, title: $title, details: $details, userId: $userId, createdAt: $createdAt, priority: $priority, status: $status, position: $position)';
   }
 
   @override
@@ -202,14 +234,17 @@ class _$TodoDTOImpl extends _TodoDTO {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.priority, priority) ||
+                other.priority == priority) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.position, position) ||
                 other.position == position));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, details, userId, createdAt, position);
+  int get hashCode => Object.hash(runtimeType, id, title, details, userId,
+      createdAt, priority, status, position);
 
   @JsonKey(ignore: true)
   @override
@@ -232,6 +267,8 @@ abstract class _TodoDTO extends TodoDTO {
       required final String details,
       required final String userId,
       required final String createdAt,
+      required final String priority,
+      required final String status,
       final int? position}) = _$TodoDTOImpl;
   const _TodoDTO._() : super._();
 
@@ -247,6 +284,10 @@ abstract class _TodoDTO extends TodoDTO {
   String get userId;
   @override
   String get createdAt;
+  @override
+  String get priority;
+  @override
+  String get status;
   @override
   int? get position;
   @override

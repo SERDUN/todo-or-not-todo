@@ -12,6 +12,8 @@ class TodoDTO with _$TodoDTO {
     required String details,
     required String userId,
     required String createdAt,
+    required String priority,
+    required String status,
     int? position,
   }) = _TodoDTO;
 

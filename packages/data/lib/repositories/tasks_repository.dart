@@ -47,12 +47,13 @@ class TasksRepositoryImpl implements TaskRepository {
 class TaskMapper {
   static TaskModel fromDTO(TodoDTO dto) {
     return TaskModel(
-      id: dto.id,
-      title: dto.title,
-      content: dto.details,
-      deadline: DateTime.parse(dto.createdAt),
-      position: dto.position,
-    );
+        id: dto.id,
+        title: dto.title,
+        content: dto.details,
+        deadline: DateTime.parse(dto.createdAt),
+        position: dto.position,
+        status: TaskStatus.values.byName(dto.status),
+        priority: TaskPriority.values.byName(dto.priority));
   }
 
   static TodoDTO toDTO(TaskModel model) {
@@ -63,6 +64,8 @@ class TaskMapper {
       userId: '',
       createdAt: model.deadline?.toIso8601String() ?? DateTime.now().toIso8601String(),
       position: model.position,
+      status: model.status?.key ?? TaskStatus.open.key,
+      priority: model.priority?.key ?? TaskPriority.minor.key,
     );
   }
 }

@@ -59,7 +59,7 @@ class RemoteDatasource {
       data: todo.toJsonWithoutEmpty(),
       options: options,
     );
-    return TodoDTO(id: '', title: '', details: '', userId: '', createdAt: '');
+    return TodoDTO(id: '', title: '', details: '', userId: '', createdAt: '', priority: '', status: '');
   }
 
   Future<void> deleteTodoById(String id) async {
