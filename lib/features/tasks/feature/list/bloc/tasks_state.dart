@@ -21,6 +21,8 @@ class TasksState with _$TasksState {
 
   bool get isProgress => status == TasksStatus.initial || status == TasksStatus.loading;
 
+  bool get isNoTasks => status == TasksStatus.success && !isFailure && tasks.isEmpty;
+
   List<TaskStatus> get taskStatuses => TaskStatus.values;
 
   List<TaskModel> get filteredTasks => tasks.where((task) => taskStatus.contains(task.status)).toList();
