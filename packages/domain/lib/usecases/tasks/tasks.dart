@@ -1,5 +1,9 @@
 import 'package:domain/models/models.dart';
 
+abstract class SetSubTaskUseCase {
+  Future<void> execute(String taskId, TaskModel subTask);
+}
+
 abstract class CreateTaskUseCase {
   Future<TaskModel> execute(TaskModel task);
 }
