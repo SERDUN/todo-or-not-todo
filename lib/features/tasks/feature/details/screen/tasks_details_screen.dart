@@ -10,11 +10,9 @@ import '../bloc/tasks_details_bloc.dart';
 
 class TasksDetailsScreen extends StatefulWidget {
   const TasksDetailsScreen({
-    required this.id,
     super.key,
   });
 
-  final int id;
 
   @override
   State<TasksDetailsScreen> createState() => _TasksDetailsScreenState();
@@ -25,7 +23,6 @@ class _TasksDetailsScreenState extends State<TasksDetailsScreen> {
 
   @override
   void initState() {
-    _bloc.getTask(widget.id);
     super.initState();
   }
 

@@ -116,12 +116,9 @@ class AppRoute {
           path: '/${Routes.taskDetails.name}',
           builder: (BuildContext context, GoRouterState state) {
             final queryId = state.uri.queryParameters[QueriesKeys.queryIdText];
-            final id = int.tryParse(queryId!)!;
             return BlocProvider(
-              create: (context) => TasksDetailsBloc(),
-              child: TasksDetailsScreen(
-                id: id,
-              ),
+              create: (context) => TasksDetailsBloc(queryId!),
+              child: const TasksDetailsScreen(),
             );
           },
           redirect: (context, state) async {
