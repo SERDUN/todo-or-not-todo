@@ -41,14 +41,7 @@ class _TasksDetailsScreenState extends State<TasksDetailsScreen> {
                 children: [
                   Visibility(
                     visible: state.isProgress,
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(MediaQuery.of(context).size.width / 5),
-                        child: const CircularProgressIndicator(
-                          strokeWidth: 2,
-                        ),
-                      ),
-                    ),
+                    child: const LinearProgressIndicator(),
                   ),
                   if (state.isSuccess) TaskDetails(taskModel: state.task!),
                   if (state.isSuccess)
