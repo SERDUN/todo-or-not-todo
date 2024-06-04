@@ -16,6 +16,9 @@ _$TodoDTOImpl _$$TodoDTOImplFromJson(Map<String, dynamic> json) =>
       priority: json['priority'] as String,
       status: json['status'] as String,
       position: (json['position'] as num?)?.toInt(),
+      subTasks: (json['subTasks'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$TodoDTOImplToJson(_$TodoDTOImpl instance) =>
@@ -28,4 +31,5 @@ Map<String, dynamic> _$$TodoDTOImplToJson(_$TodoDTOImpl instance) =>
       'priority': instance.priority,
       'status': instance.status,
       'position': instance.position,
+      'subTasks': instance.subTasks,
     };

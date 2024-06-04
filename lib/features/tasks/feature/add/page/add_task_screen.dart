@@ -23,7 +23,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add new task'),
+        title: Text(bloc.state.parentTaskId.isEmpty ? 'Add new task' : 'Add sub task'),
         actions: [
           TextButton(
             onPressed: bloc.save,

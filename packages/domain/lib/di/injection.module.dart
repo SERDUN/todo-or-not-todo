@@ -12,12 +12,13 @@ import 'package:domain/usecases/auth/is_user_login_use_case.dart' as _i4;
 import 'package:domain/usecases/auth/login_use_case.dart' as _i10;
 import 'package:domain/usecases/auth/logout_use_case.dart' as _i9;
 import 'package:domain/usecases/auth/register_use_case.dart' as _i8;
-import 'package:domain/usecases/tasks/create_task_use_case.dart' as _i14;
+import 'package:domain/usecases/tasks/create_task_use_case.dart' as _i15;
 import 'package:domain/usecases/tasks/delete_task_use_case.dart' as _i11;
 import 'package:domain/usecases/tasks/get_all_tasks_use_case.dart' as _i7;
-import 'package:domain/usecases/tasks/get_task_by_id_use_case.dart' as _i12;
+import 'package:domain/usecases/tasks/get_task_by_id_use_case.dart' as _i13;
+import 'package:domain/usecases/tasks/set_sub_task_use_case.dart' as _i12;
 import 'package:domain/usecases/tasks/tasks.dart' as _i6;
-import 'package:domain/usecases/tasks/update_task_use_case.dart' as _i13;
+import 'package:domain/usecases/tasks/update_task_use_case.dart' as _i14;
 import 'package:injectable/injectable.dart' as _i1;
 
 class DomainPackageModule extends _i1.MicroPackageModule {
@@ -36,11 +37,13 @@ class DomainPackageModule extends _i1.MicroPackageModule {
         () => _i10.LoginUseCaseImpl(gh<_i5.AuthRepository>()));
     gh.factory<_i6.DeleteTaskByIdUseCase>(
         () => _i11.DeleteTaskByIdUseCaseImpl(gh<_i5.TaskRepository>()));
+    gh.factory<_i6.SetSubTaskUseCase>(
+        () => _i12.CreateTaskUseCaseImpl(gh<_i5.TaskRepository>()));
     gh.factory<_i6.GetTaskByIdUseCase>(
-        () => _i12.GetTaskByIdUseCaseImpl(gh<_i5.TaskRepository>()));
+        () => _i13.GetTaskByIdUseCaseImpl(gh<_i5.TaskRepository>()));
     gh.factory<_i6.UpdateTaskByIdUseCase>(
-        () => _i13.UpdateTaskByIdUseCaseImpl(gh<_i5.TaskRepository>()));
+        () => _i14.UpdateTaskByIdUseCaseImpl(gh<_i5.TaskRepository>()));
     gh.factory<_i6.CreateTaskUseCase>(
-        () => _i14.CreateTaskUseCaseImpl(gh<_i5.TaskRepository>()));
+        () => _i15.CreateTaskUseCaseImpl(gh<_i5.TaskRepository>()));
   }
 }

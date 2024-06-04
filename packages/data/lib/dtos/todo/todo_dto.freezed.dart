@@ -28,6 +28,7 @@ mixin _$TodoDTO {
   String get priority => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   int? get position => throw _privateConstructorUsedError;
+  List<String>? get subTasks => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +48,8 @@ abstract class $TodoDTOCopyWith<$Res> {
       String createdAt,
       String priority,
       String status,
-      int? position});
+      int? position,
+      List<String>? subTasks});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$TodoDTOCopyWithImpl<$Res, $Val extends TodoDTO>
     Object? priority = null,
     Object? status = null,
     Object? position = freezed,
+    Object? subTasks = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -105,6 +108,10 @@ class _$TodoDTOCopyWithImpl<$Res, $Val extends TodoDTO>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as int?,
+      subTasks: freezed == subTasks
+          ? _value.subTasks
+          : subTasks // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -124,7 +131,8 @@ abstract class _$$TodoDTOImplCopyWith<$Res> implements $TodoDTOCopyWith<$Res> {
       String createdAt,
       String priority,
       String status,
-      int? position});
+      int? position,
+      List<String>? subTasks});
 }
 
 /// @nodoc
@@ -146,6 +154,7 @@ class __$$TodoDTOImplCopyWithImpl<$Res>
     Object? priority = null,
     Object? status = null,
     Object? position = freezed,
+    Object? subTasks = freezed,
   }) {
     return _then(_$TodoDTOImpl(
       id: null == id
@@ -180,6 +189,10 @@ class __$$TodoDTOImplCopyWithImpl<$Res>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as int?,
+      subTasks: freezed == subTasks
+          ? _value._subTasks
+          : subTasks // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -195,8 +208,10 @@ class _$TodoDTOImpl extends _TodoDTO {
       required this.createdAt,
       required this.priority,
       required this.status,
-      this.position})
-      : super._();
+      this.position,
+      final List<String>? subTasks})
+      : _subTasks = subTasks,
+        super._();
 
   factory _$TodoDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$TodoDTOImplFromJson(json);
@@ -217,10 +232,19 @@ class _$TodoDTOImpl extends _TodoDTO {
   final String status;
   @override
   final int? position;
+  final List<String>? _subTasks;
+  @override
+  List<String>? get subTasks {
+    final value = _subTasks;
+    if (value == null) return null;
+    if (_subTasks is EqualUnmodifiableListView) return _subTasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'TodoDTO(id: $id, title: $title, details: $details, userId: $userId, createdAt: $createdAt, priority: $priority, status: $status, position: $position)';
+    return 'TodoDTO(id: $id, title: $title, details: $details, userId: $userId, createdAt: $createdAt, priority: $priority, status: $status, position: $position, subTasks: $subTasks)';
   }
 
   @override
@@ -238,13 +262,23 @@ class _$TodoDTOImpl extends _TodoDTO {
                 other.priority == priority) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.position, position) ||
-                other.position == position));
+                other.position == position) &&
+            const DeepCollectionEquality().equals(other._subTasks, _subTasks));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, details, userId,
-      createdAt, priority, status, position);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      details,
+      userId,
+      createdAt,
+      priority,
+      status,
+      position,
+      const DeepCollectionEquality().hash(_subTasks));
 
   @JsonKey(ignore: true)
   @override
@@ -269,7 +303,8 @@ abstract class _TodoDTO extends TodoDTO {
       required final String createdAt,
       required final String priority,
       required final String status,
-      final int? position}) = _$TodoDTOImpl;
+      final int? position,
+      final List<String>? subTasks}) = _$TodoDTOImpl;
   const _TodoDTO._() : super._();
 
   factory _TodoDTO.fromJson(Map<String, dynamic> json) = _$TodoDTOImpl.fromJson;
@@ -290,6 +325,8 @@ abstract class _TodoDTO extends TodoDTO {
   String get status;
   @override
   int? get position;
+  @override
+  List<String>? get subTasks;
   @override
   @JsonKey(ignore: true)
   _$$TodoDTOImplCopyWith<_$TodoDTOImpl> get copyWith =>

@@ -9,6 +9,7 @@ enum AddTaskStatus {
 @freezed
 class AddTaskState with _$AddTaskState {
   const factory AddTaskState({
+    @Default('') String parentTaskId,
     @Default('') String title,
     @Default('') String? description,
     @Default(TaskStatus.open) TaskStatus taskStatus,

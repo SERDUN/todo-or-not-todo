@@ -1,6 +1,8 @@
 import 'package:injectable/injectable.dart';
+
 import 'package:domain/models/models.dart';
 import 'package:domain/repositories/repositories.dart';
+
 import 'tasks.dart';
 
 @Injectable(as: GetAllTasksUseCase)
@@ -12,8 +14,13 @@ class GetAllTasksUseCaseImpl implements GetAllTasksUseCase {
   @override
   Future<List<TaskModel>> execute() async {
     final tasks = await _taskRepository.getAllTasks();
-    tasks.sort(_compareTasks);
-    return tasks;
+    final filteredTasks = _filterTasks(tasks)..sort(_compareTasks);
+    return filteredTasks;
+  }
+
+  List<TaskModel> _filterTasks(List<TaskModel> tasks) {
+    final subTaskIds = tasks.where((task) => task.subTask.isNotEmpty).expand((task) => task.subTask).toSet();
+    return tasks.where((task) => !subTaskIds.contains(task.id)).toList();
   }
 
   int _compareTasks(TaskModel a, TaskModel b) {

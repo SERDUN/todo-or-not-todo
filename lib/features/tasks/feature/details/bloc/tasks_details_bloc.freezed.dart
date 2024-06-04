@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TasksDetailsState {
   TaskModel? get task => throw _privateConstructorUsedError;
   TasksDetailsStatus get status => throw _privateConstructorUsedError;
+  Object? get failure => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TasksDetailsStateCopyWith<TasksDetailsState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $TasksDetailsStateCopyWith<$Res> {
           TasksDetailsState value, $Res Function(TasksDetailsState) then) =
       _$TasksDetailsStateCopyWithImpl<$Res, TasksDetailsState>;
   @useResult
-  $Res call({TaskModel? task, TasksDetailsStatus status});
+  $Res call({TaskModel? task, TasksDetailsStatus status, Object? failure});
 
   $TaskModelCopyWith<$Res>? get task;
 }
@@ -50,6 +51,7 @@ class _$TasksDetailsStateCopyWithImpl<$Res, $Val extends TasksDetailsState>
   $Res call({
     Object? task = freezed,
     Object? status = null,
+    Object? failure = freezed,
   }) {
     return _then(_value.copyWith(
       task: freezed == task
@@ -60,6 +62,7 @@ class _$TasksDetailsStateCopyWithImpl<$Res, $Val extends TasksDetailsState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TasksDetailsStatus,
+      failure: freezed == failure ? _value.failure : failure,
     ) as $Val);
   }
 
@@ -84,7 +87,7 @@ abstract class _$$TasksDetailsStateImplCopyWith<$Res>
       __$$TasksDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({TaskModel? task, TasksDetailsStatus status});
+  $Res call({TaskModel? task, TasksDetailsStatus status, Object? failure});
 
   @override
   $TaskModelCopyWith<$Res>? get task;
@@ -103,6 +106,7 @@ class __$$TasksDetailsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? task = freezed,
     Object? status = null,
+    Object? failure = freezed,
   }) {
     return _then(_$TasksDetailsStateImpl(
       task: freezed == task
@@ -113,25 +117,29 @@ class __$$TasksDetailsStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TasksDetailsStatus,
+      failure: freezed == failure ? _value.failure : failure,
     ));
   }
 }
 
 /// @nodoc
 
-class _$TasksDetailsStateImpl implements _TasksDetailsState {
+class _$TasksDetailsStateImpl extends _TasksDetailsState {
   const _$TasksDetailsStateImpl(
-      {this.task, this.status = TasksDetailsStatus.initial});
+      {this.task, this.status = TasksDetailsStatus.initial, this.failure})
+      : super._();
 
   @override
   final TaskModel? task;
   @override
   @JsonKey()
   final TasksDetailsStatus status;
+  @override
+  final Object? failure;
 
   @override
   String toString() {
-    return 'TasksDetailsState(task: $task, status: $status)';
+    return 'TasksDetailsState(task: $task, status: $status, failure: $failure)';
   }
 
   @override
@@ -140,11 +148,13 @@ class _$TasksDetailsStateImpl implements _TasksDetailsState {
         (other.runtimeType == runtimeType &&
             other is _$TasksDetailsStateImpl &&
             (identical(other.task, task) || other.task == task) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, task, status);
+  int get hashCode => Object.hash(
+      runtimeType, task, status, const DeepCollectionEquality().hash(failure));
 
   @JsonKey(ignore: true)
   @override
@@ -154,15 +164,19 @@ class _$TasksDetailsStateImpl implements _TasksDetailsState {
           this, _$identity);
 }
 
-abstract class _TasksDetailsState implements TasksDetailsState {
+abstract class _TasksDetailsState extends TasksDetailsState {
   const factory _TasksDetailsState(
       {final TaskModel? task,
-      final TasksDetailsStatus status}) = _$TasksDetailsStateImpl;
+      final TasksDetailsStatus status,
+      final Object? failure}) = _$TasksDetailsStateImpl;
+  const _TasksDetailsState._() : super._();
 
   @override
   TaskModel? get task;
   @override
   TasksDetailsStatus get status;
+  @override
+  Object? get failure;
   @override
   @JsonKey(ignore: true)
   _$$TasksDetailsStateImplCopyWith<_$TasksDetailsStateImpl> get copyWith =>
