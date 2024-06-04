@@ -117,7 +117,10 @@ class AppRoute {
           builder: (BuildContext context, GoRouterState state) {
             final queryId = state.uri.queryParameters[QueriesKeys.queryIdText];
             return BlocProvider(
-              create: (context) => TasksDetailsBloc(queryId!),
+              create: (context) => TasksDetailsBloc(
+                queryId!,
+                serviceLocator.get(),
+              ),
               child: const TasksDetailsScreen(),
             );
           },

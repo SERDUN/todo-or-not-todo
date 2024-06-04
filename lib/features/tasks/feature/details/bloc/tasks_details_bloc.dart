@@ -9,24 +9,30 @@ part 'tasks_details_state.dart';
 part 'tasks_details_bloc.freezed.dart';
 
 class TasksDetailsBloc extends Cubit<TasksDetailsState> {
-  TasksDetailsBloc(this.taskId) : super(const TasksDetailsState()) {
+  TasksDetailsBloc(
+    this.taskId,
+    this.getTaskByIdUseCase,
+  ) : super(const TasksDetailsState()) {
     _init();
   }
 
   final String taskId;
 
+  final GetTaskByIdUseCase getTaskByIdUseCase;
+
   void _init() {
     getTask(taskId);
   }
 
-  // TODO(Kovalchuck): Implement the function
-  void getTask(String id) {
+  Future<void> getTask(String id) async {
     emit(state.copyWith(status: TasksDetailsStatus.loading));
     try {
+      final task = await getTaskByIdUseCase.execute(taskId);
+
       emit(state.copyWith(
-        task: const TaskModel(title: 'Task 1', content: 'Content of Task 1', id: '1'),
+        status: TasksDetailsStatus.success,
+        task: task,
       ));
-      emit(state.copyWith(status: TasksDetailsStatus.success));
     } catch (e) {
       emit(state.copyWith(status: TasksDetailsStatus.error));
     }

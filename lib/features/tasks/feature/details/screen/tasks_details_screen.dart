@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:todo_or_not_todo/app/route/route.dart';
+import 'package:todo_or_not_todo/extensions/extensions.dart';
 import 'package:todo_or_not_todo/features/consts.dart';
 
 import '../bloc/tasks_details_bloc.dart';
@@ -13,100 +14,90 @@ class TasksDetailsScreen extends StatefulWidget {
     super.key,
   });
 
-
   @override
   State<TasksDetailsScreen> createState() => _TasksDetailsScreenState();
 }
 
 class _TasksDetailsScreenState extends State<TasksDetailsScreen> {
-  TasksDetailsBloc get _bloc => BlocProvider.of<TasksDetailsBloc>(context);
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TasksDetailsBloc, TasksDetailsState>(
-      builder: (context, state) {
-        return Scaffold(
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(paddingHorizontal),
+    final bloc = BlocProvider.of<TasksDetailsBloc>(context);
+
+    final theme = Theme.of(context).textTheme;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Task detail'),
+      ),
+      body: BlocConsumer<TasksDetailsBloc, TasksDetailsState>(
+        builder: (context, TasksDetailsState state) => SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Card(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconButton(
-                    onPressed: () => _pushToTasksScreen(context),
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    padding: const EdgeInsets.all(iconPadding),
+                  Visibility(
+                    visible: state.isProgress,
+                    child: const LinearProgressIndicator(),
                   ),
-                  if (state.status == TasksDetailsStatus.loading)
-                    Center(
-                      child: CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    )
-                  else if (state.task != null)
-                    Expanded(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(cardBorderRadius),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(cardPadding),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                state.task!.title,
-                                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: Theme.of(context).colorScheme.primary,
-                                    ),
-                              ),
-                              const SizedBox(height: 16),
-                              Text(
-                                state.task!.content,
-                                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  else
-                    Center(
-                      child: Text(
-                        'Task not found',
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Title',
+                      style: theme.labelMedium,
                     ),
+                    subtitle: Text(
+                      state.task?.title ?? '',
+                      style: theme.labelLarge,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Description',
+                      style: theme.labelMedium,
+                    ),
+                    subtitle: Text(
+                      state.task?.content ?? '',
+                      style: theme.labelLarge,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Status',
+                      style: theme.labelMedium,
+                    ),
+                    subtitle: Text(
+                      state.task?.status?.name ?? '',
+                      style: theme.labelLarge,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Priority',
+                      style: theme.labelMedium,
+                    ),
+                    subtitle: Text(
+                      state.task?.priority?.name ?? '',
+                      style: theme.labelLarge,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              // TODO(Kovalchuck): Implement the function
-            },
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            child: Icon(
-              Icons.edit,
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-          ),
-        );
-      },
-      listener: (context, state) {},
+        ),
+        listener: _listenState,
+      ),
     );
   }
 
-  void _pushToTasksScreen(BuildContext context) => context.goNamed(Routes.tasks.name);
+  void _listenState(BuildContext context, TasksDetailsState state) {
+    // TODO(Serdun): Add string local resources
+    if (state.isFailure) _showFailure(context, state.failure!);
+  }
+
+  void _showFailure(BuildContext context, Object error) => context.showErrorSnackBar(error.toString());
 }
