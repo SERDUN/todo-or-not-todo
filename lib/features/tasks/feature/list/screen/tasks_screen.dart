@@ -45,57 +45,53 @@ class _TasksScreenState extends State<TasksScreen> {
                   }).toList(),
                 ),
                 const Divider(),
-                const SizedBox(height: 8),
-                if (state.status == TasksStatus.loading)
-                  Center(
-                    child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  )
-                else
-                  Expanded(
-                    child: ReorderableListView.builder(
-                      padding: EdgeInsets.zero,
-                      itemCount: state.filteredTasks.length,
-                      onReorder: (int oldIndex, int newIndex) {
-                        if (newIndex > oldIndex) {
-                          newIndex -= 1;
-                        }
-                        context.read<TasksBloc>().updatePosition(oldIndex, newIndex);
-                      },
-                      itemBuilder: (context, index) {
-                        final task = state.filteredTasks[index];
-                        return Padding(
+                Visibility(
+                  visible: state.isProgress,
+                  child: const LinearProgressIndicator(),
+                ),
+                Expanded(
+                  child: ReorderableListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: state.filteredTasks.length,
+                    onReorder: (int oldIndex, int newIndex) {
+                      if (newIndex > oldIndex) {
+                        newIndex -= 1;
+                      }
+                      context.read<TasksBloc>().updatePosition(oldIndex, newIndex);
+                    },
+                    itemBuilder: (context, index) {
+                      final task = state.filteredTasks[index];
+                      return Padding(
+                          key: ValueKey(task.id),
+                          padding: const EdgeInsets.symmetric(vertical: 8.0), // Adjust vertical margin as needed
+                          child: Card(
                             key: ValueKey(task.id),
-                            padding: const EdgeInsets.symmetric(vertical: 8.0), // Adjust vertical margin as needed
-                            child: Card(
-                              key: ValueKey(task.id),
-                              margin: EdgeInsets.zero,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(cardBorderRadius),
+                            margin: EdgeInsets.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(cardBorderRadius),
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                '${task.title} id:${task.id} position:${task.position}',
+                                style: Theme.of(context).textTheme.labelMedium,
                               ),
-                              child: ListTile(
-                                title: Text(
-                                  '${task.title} id:${task.id} position:${task.position}',
-                                  style: Theme.of(context).textTheme.labelMedium,
-                                ),
-                                subtitle: Text(
-                                  task.content,
-                                  style: Theme.of(context).textTheme.labelSmall,
-                                ),
-                                trailing: InkWell(
-                                  child: const Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 16),
-                                    child: Icon(Icons.delete),
-                                  ),
-                                  onTap: () => context.read<TasksBloc>().delete(task.id),
-                                ),
-                                onTap: () => _goTaskDetailsScreen(context, task.id),
+                              subtitle: Text(
+                                task.content,
+                                style: Theme.of(context).textTheme.labelSmall,
                               ),
-                            ));
-                      },
-                    ),
+                              trailing: InkWell(
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Icon(Icons.delete),
+                                ),
+                                onTap: () => context.read<TasksBloc>().delete(task.id),
+                              ),
+                              onTap: () => _goTaskDetailsScreen(context, task.id),
+                            ),
+                          ));
+                    },
                   ),
+                ),
               ],
             ),
           ),

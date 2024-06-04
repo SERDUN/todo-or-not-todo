@@ -18,6 +18,8 @@ class TasksState with _$TasksState {
 
   const TasksState._();
 
+  bool get isProgress => status == TasksStatus.initial || status == TasksStatus.loading;
+
   List<TaskStatus> get taskStatuses => TaskStatus.values;
 
   List<TaskModel> get filteredTasks => tasks.where((task) => taskStatus.contains(task.status)).toList();
