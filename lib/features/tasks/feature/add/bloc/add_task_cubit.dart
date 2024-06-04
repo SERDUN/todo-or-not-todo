@@ -26,6 +26,8 @@ class AddTaskCubit extends Cubit<AddTaskState> {
   void updateTaskPriorityField(TaskPriority status) => emit(state.copyWith(taskPriority: status));
 
   Future<void> save() async {
+    emit(state.copyWith(status: AddTaskStatus.loading));
+
     try {
       if (state.parentTaskId.isNotEmpty) {
         await setSubTaskUseCase.execute(

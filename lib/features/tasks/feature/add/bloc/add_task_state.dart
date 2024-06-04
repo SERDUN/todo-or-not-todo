@@ -27,4 +27,6 @@ class AddTaskState with _$AddTaskState {
   bool get isFailure => error != null;
 
   bool get isSuccess => status == AddTaskStatus.success;
+
+  bool get isProgress => status == AddTaskStatus.loading;
 }

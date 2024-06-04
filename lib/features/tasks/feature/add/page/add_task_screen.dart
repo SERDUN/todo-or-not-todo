@@ -38,6 +38,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Visibility(
+                  visible: state.isProgress,
+                  child: const LinearProgressIndicator(),
+                ),
                 TextFormField(
                   // TODO(Serdun): Add localization
                   decoration: const InputDecoration(labelText: 'Title'),
