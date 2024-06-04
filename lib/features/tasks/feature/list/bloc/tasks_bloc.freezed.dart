@@ -19,7 +19,7 @@ mixin _$TasksState {
   TasksStatus get status => throw _privateConstructorUsedError;
   List<TaskStatus> get taskStatus => throw _privateConstructorUsedError;
   List<TaskModel> get tasks => throw _privateConstructorUsedError;
-  Object? get exception => throw _privateConstructorUsedError;
+  Object? get failure => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TasksStateCopyWith<TasksState> get copyWith =>
@@ -36,7 +36,7 @@ abstract class $TasksStateCopyWith<$Res> {
       {TasksStatus status,
       List<TaskStatus> taskStatus,
       List<TaskModel> tasks,
-      Object? exception});
+      Object? failure});
 }
 
 /// @nodoc
@@ -55,7 +55,7 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
     Object? status = null,
     Object? taskStatus = null,
     Object? tasks = null,
-    Object? exception = freezed,
+    Object? failure = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -70,7 +70,7 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<TaskModel>,
-      exception: freezed == exception ? _value.exception : exception,
+      failure: freezed == failure ? _value.failure : failure,
     ) as $Val);
   }
 }
@@ -87,7 +87,7 @@ abstract class _$$TasksStateImplCopyWith<$Res>
       {TasksStatus status,
       List<TaskStatus> taskStatus,
       List<TaskModel> tasks,
-      Object? exception});
+      Object? failure});
 }
 
 /// @nodoc
@@ -104,7 +104,7 @@ class __$$TasksStateImplCopyWithImpl<$Res>
     Object? status = null,
     Object? taskStatus = null,
     Object? tasks = null,
-    Object? exception = freezed,
+    Object? failure = freezed,
   }) {
     return _then(_$TasksStateImpl(
       status: null == status
@@ -119,7 +119,7 @@ class __$$TasksStateImplCopyWithImpl<$Res>
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<TaskModel>,
-      exception: freezed == exception ? _value.exception : exception,
+      failure: freezed == failure ? _value.failure : failure,
     ));
   }
 }
@@ -131,7 +131,7 @@ class _$TasksStateImpl extends _TasksState {
       {this.status = TasksStatus.initial,
       final List<TaskStatus> taskStatus = const [],
       final List<TaskModel> tasks = const [],
-      this.exception})
+      this.failure})
       : _taskStatus = taskStatus,
         _tasks = tasks,
         super._();
@@ -158,11 +158,11 @@ class _$TasksStateImpl extends _TasksState {
   }
 
   @override
-  final Object? exception;
+  final Object? failure;
 
   @override
   String toString() {
-    return 'TasksState(status: $status, taskStatus: $taskStatus, tasks: $tasks, exception: $exception)';
+    return 'TasksState(status: $status, taskStatus: $taskStatus, tasks: $tasks, failure: $failure)';
   }
 
   @override
@@ -174,7 +174,7 @@ class _$TasksStateImpl extends _TasksState {
             const DeepCollectionEquality()
                 .equals(other._taskStatus, _taskStatus) &&
             const DeepCollectionEquality().equals(other._tasks, _tasks) &&
-            const DeepCollectionEquality().equals(other.exception, exception));
+            const DeepCollectionEquality().equals(other.failure, failure));
   }
 
   @override
@@ -183,7 +183,7 @@ class _$TasksStateImpl extends _TasksState {
       status,
       const DeepCollectionEquality().hash(_taskStatus),
       const DeepCollectionEquality().hash(_tasks),
-      const DeepCollectionEquality().hash(exception));
+      const DeepCollectionEquality().hash(failure));
 
   @JsonKey(ignore: true)
   @override
@@ -197,7 +197,7 @@ abstract class _TasksState extends TasksState {
       {final TasksStatus status,
       final List<TaskStatus> taskStatus,
       final List<TaskModel> tasks,
-      final Object? exception}) = _$TasksStateImpl;
+      final Object? failure}) = _$TasksStateImpl;
   const _TasksState._() : super._();
 
   @override
@@ -207,7 +207,7 @@ abstract class _TasksState extends TasksState {
   @override
   List<TaskModel> get tasks;
   @override
-  Object? get exception;
+  Object? get failure;
   @override
   @JsonKey(ignore: true)
   _$$TasksStateImplCopyWith<_$TasksStateImpl> get copyWith =>

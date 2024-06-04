@@ -7,8 +7,8 @@ import 'package:domain/domain.dart';
 
 import 'package:todo_or_not_todo/features/features.dart';
 
-import '../consts.dart';
 import 'app_routes_enum.dart';
+import 'queries_keys.dart';
 
 class AppRoute {
   AppRoute(this.serviceLocator);
@@ -115,13 +115,10 @@ class AppRoute {
           name: Routes.taskDetails.name,
           path: '/${Routes.taskDetails.name}',
           builder: (BuildContext context, GoRouterState state) {
-            final queryId = state.uri.queryParameters[queryIdText];
-            final id = int.tryParse(queryId!)!;
+            final queryId = state.uri.queryParameters[QueriesKeys.queryIdText];
             return BlocProvider(
-              create: (context) => TasksDetailsBloc(),
-              child: TasksDetailsScreen(
-                id: id,
-              ),
+              create: (context) => TasksDetailsBloc(queryId!),
+              child: const TasksDetailsScreen(),
             );
           },
           redirect: (context, state) async {

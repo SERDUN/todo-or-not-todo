@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:todo_or_not_todo/app/consts.dart';
 import 'package:todo_or_not_todo/extensions/extensions.dart';
 import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/features/consts.dart';
 
 import '../bloc/tasks_bloc.dart';
+import '../widgets/widgets.dart';
 
 class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
@@ -46,57 +46,22 @@ class _TasksScreenState extends State<TasksScreen> {
                   }).toList(),
                 ),
                 const Divider(),
-                const SizedBox(height: 8),
-                if (state.status == TasksStatus.loading)
-                  Center(
-                    child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  )
-                else
-                  Expanded(
-                    child: ReorderableListView.builder(
-                      padding: EdgeInsets.zero,
-                      itemCount: state.filteredTasks.length,
-                      onReorder: (int oldIndex, int newIndex) {
-                        if (newIndex > oldIndex) {
-                          newIndex -= 1;
-                        }
-                        context.read<TasksBloc>().updatePosition(oldIndex, newIndex);
-                      },
-                      itemBuilder: (context, index) {
-                        final task = state.filteredTasks[index];
-                        return Padding(
-                            key: ValueKey(task.id),
-                            padding: const EdgeInsets.symmetric(vertical: 8.0), // Adjust vertical margin as needed
-                            child: Card(
-                              key: ValueKey(task.id),
-                              margin: EdgeInsets.zero,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(cardBorderRadius),
-                              ),
-                              child: ListTile(
-                                title: Text(
-                                  '${task.title} id:${task.id} position:${task.position}',
-                                  style: Theme.of(context).textTheme.labelMedium,
-                                ),
-                                subtitle: Text(
-                                  task.content,
-                                  style: Theme.of(context).textTheme.labelSmall,
-                                ),
-                                trailing: InkWell(
-                                  child: const Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 16),
-                                    child: Icon(Icons.delete),
-                                  ),
-                                  onTap: () => context.read<TasksBloc>().delete(task.id),
-                                ),
-                                onTap: () => _pushToTaskDetailsScreen(context, id: task.id),
-                              ),
-                            ));
-                      },
-                    ),
+                Visibility(
+                  visible: state.isProgress,
+                  child: const LinearProgressIndicator(),
+                ),
+                Expanded(
+                  child: ReorderableListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: state.filteredTasks.length,
+                    onReorder: _onUpdateItemPosition,
+                    itemBuilder: (context, index) => TaskItem(
+                        key: ValueKey(state.filteredTasks[index].id),
+                        task: state.filteredTasks[index],
+                        onDelete: (task) => context.read<TasksBloc>().delete(task.id),
+                        onTap: (task) => _goTaskDetailsScreen(context, task.id)),
                   ),
+                )
               ],
             ),
           ),
@@ -116,18 +81,20 @@ class _TasksScreenState extends State<TasksScreen> {
     );
   }
 
-  void _listenState(BuildContext context, TasksState state) {
-    if (state.status == TasksStatus.error) {
-      context.showErrorSnackBar(state.exception.toString());
+  void _onUpdateItemPosition(int newIndex, int oldIndex) {
+    var processNewIndex = newIndex;
+    if (processNewIndex > oldIndex) {
+      processNewIndex -= 1;
     }
+    context.read<TasksBloc>().updatePosition(oldIndex, processNewIndex);
   }
 
-  void _pushToTaskDetailsScreen(
-    BuildContext context, {
-    required String id,
-  }) async {
-    await context.pushNamed(Routes.taskDetails.name, queryParameters: {
-      queryIdText: id,
-    });
+  void _listenState(BuildContext context, TasksState state) {
+    if (state.isFailure) _showFailure(context, state.failure!);
   }
+
+  void _showFailure(BuildContext context, Object error) => context.showErrorSnackBar(error.parseExceptionMessage());
+
+  void _goTaskDetailsScreen(BuildContext context, String id) =>
+      context.pushNamed(Routes.taskDetails.name, queryParameters: {QueriesKeys.queryIdText: id});
 }

@@ -36,6 +36,7 @@ class TasksBloc extends Cubit<TasksState> {
     await deleteTaskByIdUseCase.execute(id);
     unawaited(_getTasks());
   }
+
   Future<void> addFilteringTaskStatus(TaskStatus status) async {
     emit(state.copyWith(taskStatus: List.from(state.taskStatus)..add(status)));
   }
@@ -46,18 +47,31 @@ class TasksBloc extends Cubit<TasksState> {
 
   Future<void> updatePosition(int oldIndex, int newIndex) async {
     final task = state.tasks[oldIndex];
-    emit(state.copyWith(status: TasksStatus.loading));
-    await updateTaskByIdUseCase.execute(task.id, TaskModel(id: '', title: '', content: '', position: newIndex));
+
+    final updatedTasks = List<TaskModel>.from(state.tasks)
+      ..removeAt(oldIndex)
+      ..insert(newIndex, task);
+
+    for (var i = 0; i < updatedTasks.length; i++) {
+      updatedTasks[i] = updatedTasks[i].copyWith(position: i);
+    }
+    emit(state.copyWith(
+      status: TasksStatus.loading,
+      tasks: updatedTasks,
+    ));
+
+    await updateTaskByIdUseCase.execute(task.id, task.copyWith(position: newIndex));
+
     unawaited(_getTasks());
   }
 
   Future<void> _getTasks() async {
     emit(state.copyWith(status: TasksStatus.loading));
-    // try {
-    final tasks = await getAllTasksUseCase.execute();
-    emit(state.copyWith(status: TasksStatus.success, tasks: tasks));
-    // } catch (e) {
-    //   emit(state.copyWith(status: TasksStatus.error,exception: e));
-    // }
+    try {
+      final tasks = await getAllTasksUseCase.execute();
+      emit(state.copyWith(status: TasksStatus.success, tasks: tasks));
+    } catch (e) {
+      emit(state.copyWith(failure: e));
+    }
   }
 }
