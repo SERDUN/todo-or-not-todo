@@ -15,6 +15,7 @@ class TodoDTO with _$TodoDTO {
     required String priority,
     required String status,
     int? position,
+    List<String>? subTasks,
   }) = _TodoDTO;
 
   const TodoDTO._();

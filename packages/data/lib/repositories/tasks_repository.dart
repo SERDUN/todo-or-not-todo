@@ -44,7 +44,7 @@ class TasksRepositoryImpl implements TaskRepository {
   }
 }
 
-// TODO(SERDUN): Add correct mapper
+// TODO(Serdun): Add correct mapper
 class TaskMapper {
   static TaskModel fromDTO(TodoDTO dto) {
     return TaskModel(
@@ -55,9 +55,11 @@ class TaskMapper {
       position: dto.position,
       status: TaskStatus.values.firstWhereOrNull((it) => it.key == dto.status),
       priority: TaskPriority.values.firstWhereOrNull((it) => it.key == dto.priority),
+      subTask: dto.subTasks ?? [],
     );
   }
-
+  
+// TODO(Serdun): Add correct mapper
   static TodoDTO toDTO(TaskModel model) {
     return TodoDTO(
       id: model.id,
@@ -68,6 +70,7 @@ class TaskMapper {
       position: model.position,
       status: model.status?.key ?? TaskStatus.open.key,
       priority: model.priority?.key ?? TaskPriority.minor.key,
+      subTasks: model.subTask,
     );
   }
 }
