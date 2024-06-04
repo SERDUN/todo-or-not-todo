@@ -112,10 +112,10 @@ class _TasksScreenState extends State<TasksScreen> {
   }
 
   void _listenState(BuildContext context, TasksState state) {
-    if (state.status == TasksStatus.error) {
-      context.showErrorSnackBar(state.exception.toString());
-    }
+    if (state.isFailure) _showFailure(context, state.failure!);
   }
+
+  void _showFailure(BuildContext context, Object error) => context.showErrorSnackBar(error.parseExceptionMessage());
 
   void _goTaskDetailsScreen(BuildContext context, String id) =>
       context.pushNamed(Routes.taskDetails.name, queryParameters: {QueriesKeys.queryIdText: id});

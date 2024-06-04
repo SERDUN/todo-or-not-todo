@@ -3,7 +3,6 @@ part of 'tasks_bloc.dart';
 enum TasksStatus {
   initial,
   loading,
-  error,
   success,
 }
 
@@ -13,10 +12,12 @@ class TasksState with _$TasksState {
     @Default(TasksStatus.initial) TasksStatus status,
     @Default([]) List<TaskStatus> taskStatus,
     @Default([]) List<TaskModel> tasks,
-    Object? exception,
+    Object? failure,
   }) = _TasksState;
 
   const TasksState._();
+
+  bool get isFailure => failure != null;
 
   bool get isProgress => status == TasksStatus.initial || status == TasksStatus.loading;
 
