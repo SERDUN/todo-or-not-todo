@@ -1,0 +1,4 @@
+enum UserLoginStatus {
+  authorized,
+  notAuthorize,
+}

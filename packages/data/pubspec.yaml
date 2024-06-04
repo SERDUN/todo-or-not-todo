@@ -12,10 +12,15 @@ dependencies:
   flutter:
     sdk: flutter
 
+  freezed_annotation: ^2.4.1
+  freezed: ^2.5.0
   http: ^1.2.1
   injectable: ^2.4.0
   get_it: ^7.6.7
   shared_preferences: ^2.2.3
+  dio: ^5.4.3+1
+  logger: ^2.3.0
+  collection: ^1.18.0
 
   domain:
     path: ../domain
@@ -28,6 +33,7 @@ dev_dependencies:
   flutter_gen_runner: ^5.4.0
   injectable_generator: ^2.6.1
   build_runner: ^2.4.8
+  json_serializable: ^6.8.0
 
 flutter:
   generate: true

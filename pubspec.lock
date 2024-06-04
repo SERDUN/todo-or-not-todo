@@ -323,6 +323,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  formz:
+    dependency: "direct main"
+    description:
+      name: formz
+      sha256: a58eb48d84685b7ffafac1d143bf47d585bf54c7db89fe81c175dfd6e53201c7
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0"
+  freezed:
+    dependency: "direct main"
+    description:
+      name: freezed
+      sha256: a434911f643466d78462625df76fd9eb13e57348ff43fe1f77bbe909522c67a1
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.2"
   freezed_annotation:
     dependency: "direct main"
     description:
@@ -388,7 +404,7 @@ packages:
     source: hosted
     version: "2.0.0"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
       sha256: "761a297c042deedc1ffbb156d6e2af13886bb305c2a343a4d972504cd67dd938"
@@ -499,8 +515,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  logging:
+  logger:
     dependency: "direct main"
+    description:
+      name: logger
+      sha256: af05cc8714f356fd1f3888fb6741cbe9fbe25cdb6eedbab80e1a6db21047d4a4
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
+  logging:
+    dependency: transitive
     description:
       name: logging
       sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
@@ -508,7 +532,7 @@ packages:
     source: hosted
     version: "1.2.0"
   logging_appenders:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: logging_appenders
       sha256: cc16fd4ecf92ae8b45294ad01849468475b65c4aadac57c2ed3e6cc3f91b557c
@@ -708,7 +732,7 @@ packages:
     source: hosted
     version: "4.1.0"
   shared_preferences:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: shared_preferences
       sha256: d3bbe5553a986e83980916ded2f0b435ef2e1893dfaa29d5a7a790d0eca12180
@@ -928,6 +952,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  validated:
+    dependency: "direct main"
+    description:
+      name: validated
+      sha256: f4da18b50fa2aeda8d2f6e55bdf73759593abe3f9dd4aeece4e98bf3438e6a9f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   vector_graphics_codec:
     dependency: transitive
     description:

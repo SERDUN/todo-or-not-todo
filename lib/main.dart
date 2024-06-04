@@ -6,8 +6,7 @@ void main() {
     (result) {
       return App(
         serviceLocator: result.serviceLocator,
-      );;
+      );
     },
   );
 }
-
