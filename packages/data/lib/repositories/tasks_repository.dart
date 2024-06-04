@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:data/dtos/todo/todo.dart';
@@ -47,13 +48,14 @@ class TasksRepositoryImpl implements TaskRepository {
 class TaskMapper {
   static TaskModel fromDTO(TodoDTO dto) {
     return TaskModel(
-        id: dto.id,
-        title: dto.title,
-        content: dto.details,
-        deadline: DateTime.parse(dto.createdAt),
-        position: dto.position,
-        status: TaskStatus.values.byName(dto.status),
-        priority: TaskPriority.values.byName(dto.priority));
+      id: dto.id,
+      title: dto.title,
+      content: dto.details,
+      deadline: DateTime.parse(dto.createdAt),
+      position: dto.position,
+      status: TaskStatus.values.firstWhereOrNull((it) => it.key == dto.status),
+      priority: TaskPriority.values.firstWhereOrNull((it) => it.key == dto.priority),
+    );
   }
 
   static TodoDTO toDTO(TaskModel model) {

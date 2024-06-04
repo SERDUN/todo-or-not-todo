@@ -19,6 +19,7 @@ mixin _$AddTaskState {
   String get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   TaskStatus get taskStatus => throw _privateConstructorUsedError;
+  TaskPriority get taskPriority => throw _privateConstructorUsedError;
   AddTaskStatus get status => throw _privateConstructorUsedError;
   Object? get error => throw _privateConstructorUsedError;
 
@@ -37,6 +38,7 @@ abstract class $AddTaskStateCopyWith<$Res> {
       {String title,
       String? description,
       TaskStatus taskStatus,
+      TaskPriority taskPriority,
       AddTaskStatus status,
       Object? error});
 }
@@ -57,6 +59,7 @@ class _$AddTaskStateCopyWithImpl<$Res, $Val extends AddTaskState>
     Object? title = null,
     Object? description = freezed,
     Object? taskStatus = null,
+    Object? taskPriority = null,
     Object? status = null,
     Object? error = freezed,
   }) {
@@ -73,6 +76,10 @@ class _$AddTaskStateCopyWithImpl<$Res, $Val extends AddTaskState>
           ? _value.taskStatus
           : taskStatus // ignore: cast_nullable_to_non_nullable
               as TaskStatus,
+      taskPriority: null == taskPriority
+          ? _value.taskPriority
+          : taskPriority // ignore: cast_nullable_to_non_nullable
+              as TaskPriority,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -94,6 +101,7 @@ abstract class _$$AddTaskStateImplCopyWith<$Res>
       {String title,
       String? description,
       TaskStatus taskStatus,
+      TaskPriority taskPriority,
       AddTaskStatus status,
       Object? error});
 }
@@ -112,6 +120,7 @@ class __$$AddTaskStateImplCopyWithImpl<$Res>
     Object? title = null,
     Object? description = freezed,
     Object? taskStatus = null,
+    Object? taskPriority = null,
     Object? status = null,
     Object? error = freezed,
   }) {
@@ -128,6 +137,10 @@ class __$$AddTaskStateImplCopyWithImpl<$Res>
           ? _value.taskStatus
           : taskStatus // ignore: cast_nullable_to_non_nullable
               as TaskStatus,
+      taskPriority: null == taskPriority
+          ? _value.taskPriority
+          : taskPriority // ignore: cast_nullable_to_non_nullable
+              as TaskPriority,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -144,6 +157,7 @@ class _$AddTaskStateImpl extends _AddTaskState {
       {this.title = '',
       this.description = '',
       this.taskStatus = TaskStatus.open,
+      this.taskPriority = TaskPriority.minor,
       this.status = AddTaskStatus.initial,
       this.error})
       : super._();
@@ -159,13 +173,16 @@ class _$AddTaskStateImpl extends _AddTaskState {
   final TaskStatus taskStatus;
   @override
   @JsonKey()
+  final TaskPriority taskPriority;
+  @override
+  @JsonKey()
   final AddTaskStatus status;
   @override
   final Object? error;
 
   @override
   String toString() {
-    return 'AddTaskState(title: $title, description: $description, taskStatus: $taskStatus, status: $status, error: $error)';
+    return 'AddTaskState(title: $title, description: $description, taskStatus: $taskStatus, taskPriority: $taskPriority, status: $status, error: $error)';
   }
 
   @override
@@ -178,13 +195,15 @@ class _$AddTaskStateImpl extends _AddTaskState {
                 other.description == description) &&
             (identical(other.taskStatus, taskStatus) ||
                 other.taskStatus == taskStatus) &&
+            (identical(other.taskPriority, taskPriority) ||
+                other.taskPriority == taskPriority) &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, title, description, taskStatus,
-      status, const DeepCollectionEquality().hash(error));
+      taskPriority, status, const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
@@ -198,6 +217,7 @@ abstract class _AddTaskState extends AddTaskState {
       {final String title,
       final String? description,
       final TaskStatus taskStatus,
+      final TaskPriority taskPriority,
       final AddTaskStatus status,
       final Object? error}) = _$AddTaskStateImpl;
   const _AddTaskState._() : super._();
@@ -208,6 +228,8 @@ abstract class _AddTaskState extends AddTaskState {
   String? get description;
   @override
   TaskStatus get taskStatus;
+  @override
+  TaskPriority get taskPriority;
   @override
   AddTaskStatus get status;
   @override
