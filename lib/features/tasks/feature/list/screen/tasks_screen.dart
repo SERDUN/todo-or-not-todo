@@ -8,6 +8,7 @@ import 'package:todo_or_not_todo/app/route/route.dart';
 import 'package:todo_or_not_todo/features/consts.dart';
 
 import '../bloc/tasks_bloc.dart';
+import '../widgets/widgets.dart';
 
 class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
@@ -53,45 +54,14 @@ class _TasksScreenState extends State<TasksScreen> {
                   child: ReorderableListView.builder(
                     padding: EdgeInsets.zero,
                     itemCount: state.filteredTasks.length,
-                    onReorder: (int oldIndex, int newIndex) {
-                      if (newIndex > oldIndex) {
-                        newIndex -= 1;
-                      }
-                      context.read<TasksBloc>().updatePosition(oldIndex, newIndex);
-                    },
-                    itemBuilder: (context, index) {
-                      final task = state.filteredTasks[index];
-                      return Padding(
-                          key: ValueKey(task.id),
-                          padding: const EdgeInsets.symmetric(vertical: 8.0), // Adjust vertical margin as needed
-                          child: Card(
-                            key: ValueKey(task.id),
-                            margin: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(cardBorderRadius),
-                            ),
-                            child: ListTile(
-                              title: Text(
-                                '${task.title} id:${task.id} position:${task.position}',
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
-                              subtitle: Text(
-                                task.content,
-                                style: Theme.of(context).textTheme.labelSmall,
-                              ),
-                              trailing: InkWell(
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 16),
-                                  child: Icon(Icons.delete),
-                                ),
-                                onTap: () => context.read<TasksBloc>().delete(task.id),
-                              ),
-                              onTap: () => _goTaskDetailsScreen(context, task.id),
-                            ),
-                          ));
-                    },
+                    onReorder: _onUpdateItemPosition,
+                    itemBuilder: (context, index) => TaskItem(
+                        key: ValueKey(state.filteredTasks[index].id),
+                        task: state.filteredTasks[index],
+                        onDelete: (task) => context.read<TasksBloc>().delete(task.id),
+                        onTap: (task) => _goTaskDetailsScreen(context, task.id)),
                   ),
-                ),
+                )
               ],
             ),
           ),
@@ -109,6 +79,14 @@ class _TasksScreenState extends State<TasksScreen> {
       },
       listener: _listenState,
     );
+  }
+
+  void _onUpdateItemPosition(int newIndex, int oldIndex) {
+    var processNewIndex = newIndex;
+    if (processNewIndex > oldIndex) {
+      processNewIndex -= 1;
+    }
+    context.read<TasksBloc>().updatePosition(oldIndex, processNewIndex);
   }
 
   void _listenState(BuildContext context, TasksState state) {
