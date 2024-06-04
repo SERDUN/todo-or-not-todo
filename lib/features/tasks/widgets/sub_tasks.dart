@@ -15,6 +15,7 @@ class SubTasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      shrinkWrap: true,
       itemCount: tasks.length,
       itemBuilder: (context, index) {
         final task = tasks[index];
