@@ -23,7 +23,7 @@ class ResponsiveWidget extends StatelessWidget {
 
     // Tablet
     if (ResponsiveBreakpoints.of(context).isTablet) {
-      return tablet ?? desktop ?? mobile!;
+      return tablet ?? mobile ?? desktop!;
     }
 
     // Mobile
