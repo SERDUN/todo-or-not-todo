@@ -1,5 +1,6 @@
-import 'package:todo_or_not_todo/app/app.dart';
 import 'package:todo_or_not_todo/bootstrap.dart';
+
+import 'app.dart';
 
 void main() {
   bootstrap(
