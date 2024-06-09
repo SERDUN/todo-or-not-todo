@@ -30,6 +30,7 @@ dependencies:
   logger: ^2.3.0
   formz: 0.7.0
   validated: ^2.0.0
+  responsive_framework: ^1.4.0
 
   domain:
     path: ./packages/domain
