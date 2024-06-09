@@ -139,7 +139,7 @@ packages:
   desktop:
     dependency: "direct main"
     description:
-      path: "packages/presenter/desktop"
+      path: "packages/presenter/responsive/desktop"
       relative: true
     source: path
     version: "1.0.0+1"
@@ -376,7 +376,7 @@ packages:
   mobile:
     dependency: "direct main"
     description:
-      path: "packages/presenter/mobile"
+      path: "packages/presenter/responsive/mobile"
       relative: true
     source: path
     version: "1.0.0+1"

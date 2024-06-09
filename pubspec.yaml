@@ -17,10 +17,10 @@ dependencies:
 
 
   mobile:
-    path: ./packages/presenter/mobile
+    path: ./packages/presenter/responsive/mobile
 
   desktop:
-    path: ./packages/presenter/desktop
+    path: ./packages/presenter/responsive/desktop
 
 dev_dependencies:
   very_good_analysis: ^5.1.0
