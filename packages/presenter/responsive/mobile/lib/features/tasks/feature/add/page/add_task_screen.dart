@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:domain/domain.dart';
-
-import 'package:mobile/extensions/extensions.dart';
+import 'package:common/common.dart';
 
 import '../bloc/bloc.dart';
 
