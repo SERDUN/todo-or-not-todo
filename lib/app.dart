@@ -5,6 +5,8 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 import 'package:mobile/app.dart' as mobile;
 
+import 'package:desktop/app.dart' as desktop;
+
 import 'package:todo_or_not_todo/widgets/widgets.dart';
 
 class App extends StatefulWidget {
@@ -26,8 +28,8 @@ class _AppState extends State<App> {
       return ResponsiveBreakpoints.builder(
         child: Builder(builder: (context) {
           return ResponsiveWidget(
-            desktop: Container(
-              color: Colors.red,
+            desktop: desktop.App(
+              serviceLocator: widget.serviceLocator,
             ),
             mobile: mobile.App(
               serviceLocator: widget.serviceLocator,
