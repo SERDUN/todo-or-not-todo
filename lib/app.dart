@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import 'package:mobile/app/app.dart';
+import 'package:mobile/app.dart' as mobile;
 
 import 'package:todo_or_not_todo/widgets/widgets.dart';
 
@@ -29,7 +29,7 @@ class _AppState extends State<App> {
             desktop: Container(
               color: Colors.red,
             ),
-            mobile: MobileApp(
+            mobile: mobile.App(
               serviceLocator: widget.serviceLocator,
             ),
           );

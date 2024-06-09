@@ -6,8 +6,8 @@ import 'package:mobile/l10n/l10n.dart';
 
 import '../route/app_route.dart';
 
-class MobileApp extends StatefulWidget {
-  const MobileApp({
+class App extends StatefulWidget {
+  const App({
     required this.serviceLocator,
     super.key,
   });
@@ -15,10 +15,10 @@ class MobileApp extends StatefulWidget {
   final GetIt serviceLocator;
 
   @override
-  State<MobileApp> createState() => _MobileAppState();
+  State<App> createState() => _AppState();
 }
 
-class _MobileAppState extends State<MobileApp> {
+class _AppState extends State<App> {
   late final route = AppRoute(widget.serviceLocator).build(context);
 
   @override

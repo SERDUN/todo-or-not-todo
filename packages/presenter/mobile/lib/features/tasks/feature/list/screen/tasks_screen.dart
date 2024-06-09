@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:mobile/extensions/extensions.dart';
-import 'package:mobile/app/route/route.dart';
+import 'package:mobile/route/route.dart';
 import 'package:mobile/features/consts.dart';
 
 import '../bloc/tasks_bloc.dart';
