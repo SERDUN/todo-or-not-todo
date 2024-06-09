@@ -212,7 +212,7 @@ packages:
   data:
     dependency: "direct main"
     description:
-      path: "../../../data"
+      path: "../../data"
       relative: true
     source: path
     version: "0.0.1"
@@ -235,7 +235,7 @@ packages:
   domain:
     dependency: "direct main"
     description:
-      path: "../../../domain"
+      path: "../../domain"
       relative: true
     source: path
     version: "0.0.1"
